@@ -10,45 +10,31 @@ TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
 SENT_LOG_FILE = "sent_alerts.json"
-RETENTION_DAYS = 7
 
-# Supported Free-Tier Competitions (PPL fixed)
 TARGET_COMPETITIONS = [
-    "PL",  # Premier League (England)
-    "ELC",  # Championship (England)
-    "PD",  # La Liga (Spain)
-    "SA",  # Serie A (Italy)
-    "BL1",  # Bundesliga (Germany)
-    "FL1",  # Ligue 1 (France)
-    "PPL",  # Primeira Liga (Portugal)
-    "DED",  # Eredivisie (Netherlands)
-    "CL",  # UEFA Champions League
-    "BSA",  # Brasileirão Série A
+    "PL",
+    "ELC",
+    "PD",
+    "SA",
+    "BL1",
+    "FL1",
+    "PPL",
+    "DED",
+    "CL",
+    "BSA",
 ]
 
-# Cache standings in memory so we don't re-fetch them constantly
 STANDINGS_CACHE = {}
 
 
-def load_and_clean_sent_alerts():
+def load_sent_alerts():
   if not os.path.exists(SENT_LOG_FILE):
     return {}
   try:
     with open(SENT_LOG_FILE, "r") as f:
-      data = json.load(f)
+      return json.load(f)
   except json.JSONDecodeError:
     return {}
-
-  current_time = datetime.now(timezone.utc)
-  valid_alerts = {}
-  for match_id, timestamp_str in data.items():
-    try:
-      alert_time = datetime.fromisoformat(timestamp_str)
-      if current_time - alert_time < timedelta(days=RETENTION_DAYS):
-        valid_alerts[match_id] = timestamp_str
-    except ValueError:
-      continue
-  return valid_alerts
 
 
 def save_sent_alerts(sent_alerts):
@@ -57,7 +43,6 @@ def save_sent_alerts(sent_alerts):
 
 
 def get_league_standings(comp_code):
-  """Fetch league standings to extract home/away attack and defense metrics."""
   if comp_code in STANDINGS_CACHE:
     return STANDINGS_CACHE[comp_code]
 
@@ -70,7 +55,6 @@ def get_league_standings(comp_code):
       data = res.json()
       standings = data.get("standings", [])
       if standings:
-        # Total table usually index 0
         table = standings[0].get("table", [])
         team_stats = {}
         for row in table:
@@ -91,10 +75,7 @@ def get_league_standings(comp_code):
 
 
 def calculate_dynamic_expected_goals(comp_code, home_team_id, away_team_id):
-  """Compute dynamic xG for home and away teams based on seasonal standings."""
   stats = get_league_standings(comp_code)
-
-  # Default fallbacks if standings data is unavailable
   home_exp = 1.45
   away_exp = 1.15
 
@@ -102,9 +83,12 @@ def calculate_dynamic_expected_goals(comp_code, home_team_id, away_team_id):
     home_stat = stats[home_team_id]
     away_stat = stats[away_team_id]
 
-    # Model expected goals using attack * defense metrics
-    home_exp = max(0.4, round((home_stat["avg_gf"] + away_stat["avg_ga"]) / 2, 2))
-    away_exp = max(0.3, round((away_stat["avg_gf"] + home_stat["avg_ga"]) / 2, 2))
+    home_exp = max(
+        0.4, round((home_stat["avg_gf"] + away_stat["avg_ga"]) / 2, 2)
+    )
+    away_exp = max(
+        0.3, round((away_stat["avg_gf"] + home_stat["avg_ga"]) / 2, 2)
+    )
 
   ht_home_exp = round(home_exp * 0.45, 2)
   ht_away_exp = round(away_exp * 0.45, 2)
@@ -161,23 +145,20 @@ def calculate_comprehensive_predictions(
       prob for (h, a), prob in ht_matrix.items() if h > 0 and a > 0
   )
 
-  btts_and_home = sum(
-      prob for (h, a), prob in ft_matrix.items() if h > a and h > 0 and a > 0
-  )
-  btts_and_away = sum(
-      prob for (h, a), prob in ft_matrix.items() if a > h and h > 0 and a > 0
-  )
-
   penalty_prob = min(round((home_exp + away_exp) * 0.09 * 100, 1), 35.0)
   header_goal_prob = min(round((home_exp + away_exp) * 0.18 * 100, 1), 65.0)
 
   value_picks = []
+  raw_picks = []
   if dc_1x * 100 >= 75.0:
     value_picks.append(f"Double Chance 1X ({round(dc_1x * 100, 1)}%)")
+    raw_picks.append("1X")
   if dc_x2 * 100 >= 75.0:
     value_picks.append(f"Double Chance X2 ({round(dc_x2 * 100, 1)}%)")
+    raw_picks.append("X2")
   if ft_over_1_5 * 100 >= 70.0:
     value_picks.append(f"Over 1.5 Goals ({round(ft_over_1_5 * 100, 1)}%)")
+    raw_picks.append("OVER_1.5")
 
   high_conf_str = (
       ", ".join(value_picks) if value_picks else "No high-confidence pick"
@@ -204,6 +185,7 @@ def calculate_comprehensive_predictions(
       "penalty_prob": penalty_prob,
       "header_goal_prob": header_goal_prob,
       "value_picks": high_conf_str,
+      "raw_picks": raw_picks,
   }
 
 
@@ -217,9 +199,84 @@ def send_telegram_alert(message):
   requests.post(url, json=payload)
 
 
-def main():
-  sent_alerts = load_and_clean_sent_alerts()
+def verify_completed_matches(sent_alerts):
+  """Checks finished matches from the last 3 days and posts win/loss results for alerts."""
+  today = datetime.now(timezone.utc).date()
+  date_from = (today - timedelta(days=3)).strftime("%Y-%m-%d")
+  date_to = today.strftime("%Y-%m-%d")
 
+  url = f"https://api.football-data.org/v4/matches?status=FINISHED&dateFrom={date_from}&dateTo={date_to}"
+  headers = {"X-Auth-Token": FOOTBALL_DATA_API_KEY}
+
+  try:
+    response = requests.get(url, headers=headers)
+    if response.status_code != 200:
+      print(f"Result Verification API Notice: HTTP {response.status_code}")
+      return
+
+    matches = response.json().get("matches", [])
+    for match in matches:
+      match_id = str(match.get("id"))
+
+      if match_id in sent_alerts:
+        data = sent_alerts[match_id]
+
+        if not isinstance(data, dict):
+          continue
+
+        if data.get("status") == "VERIFIED":
+          continue
+
+        raw_picks = data.get("picks", [])
+        if not raw_picks:
+          data["status"] = "VERIFIED"
+          continue
+
+        home_goals = match.get("score", {}).get("fullTime", {}).get("home")
+        away_goals = match.get("score", {}).get("fullTime", {}).get("away")
+
+        if home_goals is None or away_goals is None:
+          continue
+
+        home_team = match.get("homeTeam", {}).get("name")
+        away_team = match.get("awayTeam", {}).get("name")
+        total_goals = home_goals + away_goals
+
+        results_summary = []
+        for pick in raw_picks:
+          won = False
+          if pick == "1X" and (home_goals >= away_goals):
+            won = True
+          elif pick == "X2" and (away_goals >= home_goals):
+            won = True
+          elif pick == "OVER_1.5" and total_goals > 1.5:
+            won = True
+
+          status_icon = "✅ WIN" if won else "❌ LOSS"
+          results_summary.append(f"• Pick: *{pick}* -> {status_icon}")
+
+        msg = (
+            f"📊 *MATCH RESULT VERIFICATION* 📊\n\n"
+            f"⚔️ *Match:* {home_team} {home_goals} - {away_goals} {away_team}\n"
+            f"📝 *Predictions Outcome:*\n"
+            + "\n".join(results_summary)
+        )
+
+        send_telegram_alert(msg)
+        sent_alerts[match_id]["status"] = "VERIFIED"
+        time.sleep(6)
+
+  except Exception as e:
+    print(f"Error checking results: {e}")
+
+
+def main():
+  sent_alerts = load_sent_alerts()
+
+  # Step 1: Check past predictions outcomes
+  verify_completed_matches(sent_alerts)
+
+  # Step 2: Fetch upcoming matches
   url = "https://api.football-data.org/v4/matches"
   headers = {"X-Auth-Token": FOOTBALL_DATA_API_KEY}
 
@@ -235,7 +292,6 @@ def main():
     match_id = str(match.get("id"))
     comp_code = match.get("competition", {}).get("code")
 
-    # Filter out non-target leagues
     if TARGET_COMPETITIONS and comp_code not in TARGET_COMPETITIONS:
       continue
 
@@ -249,7 +305,6 @@ def main():
     competition = match.get("competition", {}).get("name", "League")
     match_date = match.get("utcDate", "")[:10]
 
-    # Dynamic xG calculation
     h_exp, a_exp, ht_h_exp, ht_a_exp = calculate_dynamic_expected_goals(
         comp_code, home_team_id, away_team_id
     )
@@ -287,14 +342,18 @@ def main():
     )
 
     send_telegram_alert(alert_msg)
-    sent_alerts[match_id] = datetime.now(timezone.utc).isoformat()
+
+    sent_alerts[match_id] = {
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "picks": res["raw_picks"],
+        "status": "PENDING",
+    }
     new_alerts_count += 1
 
-    # Pause 6 seconds to strictly adhere to 10 requests/min rate limit
     time.sleep(6)
 
   save_sent_alerts(sent_alerts)
-  print(f"Done. Sent {new_alerts_count} dynamic match prediction(s).")
+  print(f"Done. Sent {new_alerts_count} new match prediction(s).")
 
 
 if __name__ == "__main__":
