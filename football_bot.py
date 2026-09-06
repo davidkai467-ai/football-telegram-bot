@@ -2,6 +2,7 @@ from datetime import datetime, timedelta, timezone
 import json
 import math
 import os
+import time
 import requests
 
 FOOTBALL_DATA_API_KEY = os.getenv("FOOTBALL_DATA_API_KEY")
@@ -11,7 +12,7 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 SENT_LOG_FILE = "sent_alerts.json"
 RETENTION_DAYS = 7
 
-# Targeted Competition Codes (Football-Data.org supported tier codes)
+# Supported Free-Tier Competitions (PPL fixed)
 TARGET_COMPETITIONS = [
     "PL",  # Premier League (England)
     "ELC",  # Championship (England)
@@ -19,13 +20,14 @@ TARGET_COMPETITIONS = [
     "SA",  # Serie A (Italy)
     "BL1",  # Bundesliga (Germany)
     "FL1",  # Ligue 1 (France)
-    "PPD",  # Primeira Liga (Portugal)
+    "PPL",  # Primeira Liga (Portugal)
     "DED",  # Eredivisie (Netherlands)
     "CL",  # UEFA Champions League
-    "EL",  # UEFA Europa League
-    "CLI",  # Copa Libertadores
     "BSA",  # Brasileirão Série A
 ]
+
+# Cache standings in memory so we don't re-fetch them constantly
+STANDINGS_CACHE = {}
 
 
 def load_and_clean_sent_alerts():
@@ -52,6 +54,62 @@ def load_and_clean_sent_alerts():
 def save_sent_alerts(sent_alerts):
   with open(SENT_LOG_FILE, "w") as f:
     json.dump(sent_alerts, f, indent=2)
+
+
+def get_league_standings(comp_code):
+  """Fetch league standings to extract home/away attack and defense metrics."""
+  if comp_code in STANDINGS_CACHE:
+    return STANDINGS_CACHE[comp_code]
+
+  url = f"https://api.football-data.org/v4/competitions/{comp_code}/standings"
+  headers = {"X-Auth-Token": FOOTBALL_DATA_API_KEY}
+
+  try:
+    res = requests.get(url, headers=headers)
+    if res.status_code == 200:
+      data = res.json()
+      standings = data.get("standings", [])
+      if standings:
+        # Total table usually index 0
+        table = standings[0].get("table", [])
+        team_stats = {}
+        for row in table:
+          team_id = row.get("team", {}).get("id")
+          played = max(row.get("playedGames", 1), 1)
+          gf = row.get("goalsFor", 0)
+          ga = row.get("goalsAgainst", 0)
+          team_stats[team_id] = {
+              "avg_gf": gf / played,
+              "avg_ga": ga / played,
+          }
+        STANDINGS_CACHE[comp_code] = team_stats
+        return team_stats
+  except Exception as e:
+    print(f"Error fetching standings for {comp_code}: {e}")
+
+  return {}
+
+
+def calculate_dynamic_expected_goals(comp_code, home_team_id, away_team_id):
+  """Compute dynamic xG for home and away teams based on seasonal standings."""
+  stats = get_league_standings(comp_code)
+
+  # Default fallbacks if standings data is unavailable
+  home_exp = 1.45
+  away_exp = 1.15
+
+  if stats and home_team_id in stats and away_team_id in stats:
+    home_stat = stats[home_team_id]
+    away_stat = stats[away_team_id]
+
+    # Model expected goals using attack * defense metrics
+    home_exp = max(0.4, round((home_stat["avg_gf"] + away_stat["avg_ga"]) / 2, 2))
+    away_exp = max(0.3, round((away_stat["avg_gf"] + home_stat["avg_ga"]) / 2, 2))
+
+  ht_home_exp = round(home_exp * 0.45, 2)
+  ht_away_exp = round(away_exp * 0.45, 2)
+
+  return home_exp, away_exp, ht_home_exp, ht_away_exp
 
 
 def poisson_probability(k, lambd):
@@ -110,13 +168,6 @@ def calculate_comprehensive_predictions(
       prob for (h, a), prob in ft_matrix.items() if a > h and h > 0 and a > 0
   )
 
-  home_hcap_minus_1_5 = sum(
-      prob for (h, a), prob in ft_matrix.items() if (h - 1.5) > a
-  )
-  away_hcap_minus_1_5 = sum(
-      prob for (h, a), prob in ft_matrix.items() if (a - 1.5) > h
-  )
-
   penalty_prob = min(round((home_exp + away_exp) * 0.09 * 100, 1), 35.0)
   header_goal_prob = min(round((home_exp + away_exp) * 0.18 * 100, 1), 65.0)
 
@@ -150,10 +201,6 @@ def calculate_comprehensive_predictions(
       "ft_btts_yes": round(ft_btts_yes * 100, 1),
       "ft_btts_no": round(ft_btts_no * 100, 1),
       "ht_btts_yes": round(ht_btts_yes * 100, 1),
-      "btts_and_home": round(btts_and_home * 100, 1),
-      "btts_and_away": round(btts_and_away * 100, 1),
-      "home_hcap_1_5": round(home_hcap_minus_1_5 * 100, 1),
-      "away_hcap_1_5": round(away_hcap_minus_1_5 * 100, 1),
       "penalty_prob": penalty_prob,
       "header_goal_prob": header_goal_prob,
       "value_picks": high_conf_str,
@@ -184,36 +231,39 @@ def main():
   matches = response.json().get("matches", [])
   new_alerts_count = 0
 
-  HOME_EXP_GOALS = 1.45
-  AWAY_EXP_GOALS = 1.15
-  HT_HOME_EXP_GOALS = 0.65
-  HT_AWAY_EXP_GOALS = 0.50
-
   for match in matches:
     match_id = str(match.get("id"))
     comp_code = match.get("competition", {}).get("code")
 
-    # Filter out matches not in selected leagues
+    # Filter out non-target leagues
     if TARGET_COMPETITIONS and comp_code not in TARGET_COMPETITIONS:
       continue
 
     if match_id in sent_alerts:
       continue
 
+    home_team_id = match.get("homeTeam", {}).get("id")
+    away_team_id = match.get("awayTeam", {}).get("id")
     home_team = match.get("homeTeam", {}).get("name", "Home")
     away_team = match.get("awayTeam", {}).get("name", "Away")
     competition = match.get("competition", {}).get("name", "League")
     match_date = match.get("utcDate", "")[:10]
 
+    # Dynamic xG calculation
+    h_exp, a_exp, ht_h_exp, ht_a_exp = calculate_dynamic_expected_goals(
+        comp_code, home_team_id, away_team_id
+    )
+
     res = calculate_comprehensive_predictions(
-        HOME_EXP_GOALS, AWAY_EXP_GOALS, HT_HOME_EXP_GOALS, HT_AWAY_EXP_GOALS
+        h_exp, a_exp, ht_h_exp, ht_a_exp
     )
 
     alert_msg = (
         f"⚽ *ALL-MARKETS MATCH PREDICTION* ⚽\n\n"
         f"🏆 *League:* {competition}\n"
         f"⚔️ *Match:* {home_team} vs {away_team}\n"
-        f"📅 *Date:* {match_date}\n\n"
+        f"📅 *Date:* {match_date}\n"
+        f"📊 *Expected Goals (xG):* {h_exp} - {a_exp}\n\n"
         f"🔥 *HIGH-CONFIDENCE VALUE PICK:*\n"
         f"👉 *{res['value_picks']}*\n\n"
         f"🎯 *FULL TIME 1X2*\n"
@@ -240,8 +290,11 @@ def main():
     sent_alerts[match_id] = datetime.now(timezone.utc).isoformat()
     new_alerts_count += 1
 
+    # Pause 6 seconds to strictly adhere to 10 requests/min rate limit
+    time.sleep(6)
+
   save_sent_alerts(sent_alerts)
-  print(f"Done. Sent {new_alerts_count} multi-market prediction(s).")
+  print(f"Done. Sent {new_alerts_count} dynamic match prediction(s).")
 
 
 if __name__ == "__main__":
