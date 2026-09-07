@@ -145,20 +145,50 @@ def calculate_comprehensive_predictions(
       prob for (h, a), prob in ht_matrix.items() if h > 0 and a > 0
   )
 
+  # Added Handicap Probabilities
+  ft_home_plus_1_5 = sum(
+      prob for (h, a), prob in ft_matrix.items() if (h + 1.5) > a
+  )
+  ft_away_plus_1_5 = sum(
+      prob for (h, a), prob in ft_matrix.items() if (a + 1.5) > h
+  )
+  ft_home_minus_1_5 = sum(
+      prob for (h, a), prob in ft_matrix.items() if (h - 1.5) > a
+  )
+  ft_away_minus_1_5 = sum(
+      prob for (h, a), prob in ft_matrix.items() if (a - 1.5) > h
+  )
+  ht_home_plus_0_5 = sum(
+      prob for (h, a), prob in ht_matrix.items() if (h + 0.5) > a
+  )
+  ht_away_plus_0_5 = sum(
+      prob for (h, a), prob in ht_matrix.items() if (a + 0.5) > h
+  )
+
   penalty_prob = min(round((home_exp + away_exp) * 0.09 * 100, 1), 35.0)
   header_goal_prob = min(round((home_exp + away_exp) * 0.18 * 100, 1), 65.0)
 
   value_picks = []
   raw_picks = []
+
   if dc_1x * 100 >= 75.0:
     value_picks.append(f"Double Chance 1X ({round(dc_1x * 100, 1)}%)")
     raw_picks.append("1X")
   if dc_x2 * 100 >= 75.0:
     value_picks.append(f"Double Chance X2 ({round(dc_x2 * 100, 1)}%)")
     raw_picks.append("X2")
+
   if ft_over_1_5 * 100 >= 70.0:
     value_picks.append(f"Over 1.5 Goals ({round(ft_over_1_5 * 100, 1)}%)")
     raw_picks.append("OVER_1.5")
+
+  # High-confidence handicaps
+  if ft_home_plus_1_5 * 100 >= 80.0 and dc_1x * 100 < 75.0:
+    value_picks.append(f"Home +1.5 ({round(ft_home_plus_1_5 * 100, 1)}%)")
+    raw_picks.append("HOME_PLUS_1.5")
+  if ft_away_plus_1_5 * 100 >= 80.0 and dc_x2 * 100 < 75.0:
+    value_picks.append(f"Away +1.5 ({round(ft_away_plus_1_5 * 100, 1)}%)")
+    raw_picks.append("AWAY_PLUS_1.5")
 
   high_conf_str = (
       ", ".join(value_picks) if value_picks else "No high-confidence pick"
@@ -182,6 +212,12 @@ def calculate_comprehensive_predictions(
       "ft_btts_yes": round(ft_btts_yes * 100, 1),
       "ft_btts_no": round(ft_btts_no * 100, 1),
       "ht_btts_yes": round(ht_btts_yes * 100, 1),
+      "ft_home_plus_1_5": round(ft_home_plus_1_5 * 100, 1),
+      "ft_away_plus_1_5": round(ft_away_plus_1_5 * 100, 1),
+      "ft_home_minus_1_5": round(ft_home_minus_1_5 * 100, 1),
+      "ft_away_minus_1_5": round(ft_away_minus_1_5 * 100, 1),
+      "ht_home_plus_0_5": round(ht_home_plus_0_5 * 100, 1),
+      "ht_away_plus_0_5": round(ht_away_plus_0_5 * 100, 1),
       "penalty_prob": penalty_prob,
       "header_goal_prob": header_goal_prob,
       "value_picks": high_conf_str,
@@ -200,7 +236,6 @@ def send_telegram_alert(message):
 
 
 def verify_completed_matches(sent_alerts):
-  """Checks finished matches from the last 3 days and posts win/loss results for alerts."""
   today = datetime.now(timezone.utc).date()
   date_from = (today - timedelta(days=3)).strftime("%Y-%m-%d")
   date_to = today.strftime("%Y-%m-%d")
@@ -251,6 +286,10 @@ def verify_completed_matches(sent_alerts):
             won = True
           elif pick == "OVER_1.5" and total_goals > 1.5:
             won = True
+          elif pick == "HOME_PLUS_1.5" and ((home_goals + 1.5) > away_goals):
+            won = True
+          elif pick == "AWAY_PLUS_1.5" and ((away_goals + 1.5) > home_goals):
+            won = True
 
           status_icon = "✅ WIN" if won else "❌ LOSS"
           results_summary.append(f"• Pick: *{pick}* -> {status_icon}")
@@ -273,10 +312,8 @@ def verify_completed_matches(sent_alerts):
 def main():
   sent_alerts = load_sent_alerts()
 
-  # Step 1: Check past predictions outcomes
   verify_completed_matches(sent_alerts)
 
-  # Step 2: Fetch upcoming matches
   url = "https://api.football-data.org/v4/matches"
   headers = {"X-Auth-Token": FOOTBALL_DATA_API_KEY}
 
@@ -327,6 +364,10 @@ def main():
         f"• Away Win (2): *{res['ft_away']}%*\n\n"
         f"🛡️ *DOUBLE CHANCE*\n"
         f"• 1X: *{res['dc_1x']}%* | X2: *{res['dc_x2']}%* | 12: *{res['dc_12']}%*\n\n"
+        f"🚩 *HANDICAP MARKETS*\n"
+        f"• Home +1.5: *{res['ft_home_plus_1_5']}%* | Away +1.5: *{res['ft_away_plus_1_5']}%*\n"
+        f"• Home -1.5: *{res['ft_home_minus_1_5']}%* | Away -1.5: *{res['ft_away_minus_1_5']}%*\n"
+        f"• HT Home +0.5: *{res['ht_home_plus_0_5']}%* | HT Away +0.5: *{res['ht_away_plus_0_5']}%*\n\n"
         f"⏱️ *HALF TIME 1X2*\n"
         f"• HT Home: *{res['ht_home']}%* | HT Draw: *{res['ht_draw']}%* | HT Away: *{res['ht_away']}%*\n\n"
         f"⚽ *OVERS / UNDERS*\n"
