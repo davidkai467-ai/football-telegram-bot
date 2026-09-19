@@ -111,7 +111,7 @@
       "OVER_1.5",
       "HOME_PLUS_1.5"
     ],
-    "status": "PENDING"
+    "status": "VERIFIED"
   },
   "565804": {
     "timestamp": "2026-09-18T12:47:58.355805+00:00",
@@ -119,7 +119,7 @@
       "1X",
       "OVER_1.5"
     ],
-    "status": "PENDING"
+    "status": "VERIFIED"
   },
   "559682": {
     "timestamp": "2026-09-18T12:48:05.428781+00:00",
@@ -127,7 +127,7 @@
       "OVER_1.5",
       "HOME_PLUS_1.5"
     ],
-    "status": "PENDING"
+    "status": "VERIFIED"
   },
   "558596": {
     "timestamp": "2026-09-18T12:48:12.481397+00:00",
@@ -135,7 +135,7 @@
       "OVER_1.5",
       "AWAY_PLUS_1.5"
     ],
-    "status": "PENDING"
+    "status": "VERIFIED"
   },
   "561845": {
     "timestamp": "2026-09-18T12:48:19.468050+00:00",
@@ -144,7 +144,7 @@
       "HOME_PLUS_1.5",
       "AWAY_PLUS_1.5"
     ],
-    "status": "PENDING"
+    "status": "VERIFIED"
   },
   "560591": {
     "timestamp": "2026-09-18T12:48:26.604203+00:00",
@@ -152,13 +152,374 @@
       "OVER_1.5",
       "HOME_PLUS_1.5"
     ],
-    "status": "PENDING"
+    "status": "VERIFIED"
   },
   "564692": {
     "timestamp": "2026-09-18T12:48:33.516354+00:00",
     "picks": [
       "1X",
       "OVER_1.5"
+    ],
+    "status": "VERIFIED"
+  },
+  "560587": {
+    "timestamp": "2026-09-19T07:29:30.330862+00:00",
+    "picks": [
+      "HOME_PLUS_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "561852": {
+    "timestamp": "2026-09-19T07:29:37.186268+00:00",
+    "picks": [
+      "HOME_PLUS_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "561849": {
+    "timestamp": "2026-09-19T07:29:43.591853+00:00",
+    "picks": [
+      "OVER_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "561847": {
+    "timestamp": "2026-09-19T07:29:50.020400+00:00",
+    "picks": [
+      "OVER_1.5",
+      "HOME_PLUS_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "564693": {
+    "timestamp": "2026-09-19T07:29:56.786348+00:00",
+    "picks": [
+      "OVER_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "558598": {
+    "timestamp": "2026-09-19T07:30:03.679804+00:00",
+    "picks": [
+      "HOME_PLUS_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "558589": {
+    "timestamp": "2026-09-19T07:30:10.125066+00:00",
+    "picks": [
+      "OVER_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "565809": {
+    "timestamp": "2026-09-19T07:30:16.976530+00:00",
+    "picks": [
+      "X2",
+      "OVER_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "565811": {
+    "timestamp": "2026-09-19T07:30:23.457615+00:00",
+    "picks": [
+      "X2",
+      "OVER_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "565810": {
+    "timestamp": "2026-09-19T07:30:29.846467+00:00",
+    "picks": [
+      "X2",
+      "OVER_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "565808": {
+    "timestamp": "2026-09-19T07:30:36.288519+00:00",
+    "picks": [
+      "X2",
+      "OVER_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "561848": {
+    "timestamp": "2026-09-19T07:30:42.691877+00:00",
+    "picks": [
+      "OVER_1.5",
+      "HOME_PLUS_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "561856": {
+    "timestamp": "2026-09-19T07:30:49.192195+00:00",
+    "picks": [
+      "X2"
+    ],
+    "status": "PENDING"
+  },
+  "561846": {
+    "timestamp": "2026-09-19T07:30:55.632517+00:00",
+    "picks": [
+      "X2",
+      "OVER_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "560584": {
+    "timestamp": "2026-09-19T07:31:02.094276+00:00",
+    "picks": [
+      "OVER_1.5",
+      "HOME_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "561854": {
+    "timestamp": "2026-09-19T07:31:08.494879+00:00",
+    "picks": [
+      "OVER_1.5",
+      "HOME_PLUS_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "560586": {
+    "timestamp": "2026-09-19T07:31:15.046117+00:00",
+    "picks": [
+      "OVER_1.5",
+      "HOME_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "561855": {
+    "timestamp": "2026-09-19T07:31:21.447250+00:00",
+    "picks": [
+      "OVER_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "560588": {
+    "timestamp": "2026-09-19T07:31:27.873909+00:00",
+    "picks": [
+      "OVER_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "561853": {
+    "timestamp": "2026-09-19T07:31:34.261890+00:00",
+    "picks": [
+      "1X"
+    ],
+    "status": "PENDING"
+  },
+  "564691": {
+    "timestamp": "2026-09-19T07:31:40.700344+00:00",
+    "picks": [
+      "OVER_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "567312": {
+    "timestamp": "2026-09-19T07:31:47.582291+00:00",
+    "picks": [
+      "HOME_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "558889": {
+    "timestamp": "2026-09-19T07:31:54.443369+00:00",
+    "picks": [
+      "OVER_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "567311": {
+    "timestamp": "2026-09-19T07:32:00.847165+00:00",
+    "picks": [
+      "OVER_1.5",
+      "HOME_PLUS_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "559679": {
+    "timestamp": "2026-09-19T07:32:07.856412+00:00",
+    "picks": [
+      "OVER_1.5",
+      "HOME_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "558593": {
+    "timestamp": "2026-09-19T07:32:14.272620+00:00",
+    "picks": [
+      "OVER_1.5",
+      "HOME_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "564694": {
+    "timestamp": "2026-09-19T07:32:20.723928+00:00",
+    "picks": [
+      "OVER_1.5",
+      "HOME_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "560589": {
+    "timestamp": "2026-09-19T07:32:27.164574+00:00",
+    "picks": [
+      "1X"
+    ],
+    "status": "PENDING"
+  },
+  "565806": {
+    "timestamp": "2026-09-19T07:32:33.590264+00:00",
+    "picks": [
+      "X2",
+      "OVER_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "558890": {
+    "timestamp": "2026-09-19T07:32:40.040627+00:00",
+    "picks": [
+      "OVER_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "567318": {
+    "timestamp": "2026-09-19T07:32:46.441939+00:00",
+    "picks": [
+      "OVER_1.5",
+      "HOME_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "558887": {
+    "timestamp": "2026-09-19T07:32:52.834915+00:00",
+    "picks": [
+      "OVER_1.5",
+      "HOME_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "559681": {
+    "timestamp": "2026-09-19T07:32:59.300052+00:00",
+    "picks": [
+      "OVER_1.5",
+      "HOME_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "559680": {
+    "timestamp": "2026-09-19T07:33:05.689902+00:00",
+    "picks": [
+      "HOME_PLUS_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "559683": {
+    "timestamp": "2026-09-19T07:33:12.135678+00:00",
+    "picks": [
+      "OVER_1.5",
+      "HOME_PLUS_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "559677": {
+    "timestamp": "2026-09-19T07:33:18.591157+00:00",
+    "picks": [
+      "OVER_1.5",
+      "HOME_PLUS_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "558594": {
+    "timestamp": "2026-09-19T07:33:25.005886+00:00",
+    "picks": [
+      "X2",
+      "OVER_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "555011": {
+    "timestamp": "2026-09-19T07:33:31.812059+00:00",
+    "picks": [
+      "OVER_1.5",
+      "HOME_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "558886": {
+    "timestamp": "2026-09-19T07:33:38.216010+00:00",
+    "picks": [
+      "OVER_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "564690": {
+    "timestamp": "2026-09-19T07:33:44.627917+00:00",
+    "picks": [
+      "X2",
+      "OVER_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "567313": {
+    "timestamp": "2026-09-19T07:33:51.010084+00:00",
+    "picks": [
+      "OVER_1.5",
+      "HOME_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "555015": {
+    "timestamp": "2026-09-19T07:33:57.392940+00:00",
+    "picks": [
+      "OVER_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "555016": {
+    "timestamp": "2026-09-19T07:34:03.888493+00:00",
+    "picks": [
+      "OVER_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "555018": {
+    "timestamp": "2026-09-19T07:34:10.304562+00:00",
+    "picks": [
+      "OVER_1.5",
+      "AWAY_PLUS_1.5"
+    ],
+    "status": "PENDING"
+  },
+  "555017": {
+    "timestamp": "2026-09-19T07:34:16.709288+00:00",
+    "picks": [
+      "HOME_PLUS_1.5",
+      "AWAY_PLUS_1.5"
     ],
     "status": "PENDING"
   }
