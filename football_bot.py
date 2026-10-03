@@ -138,23 +138,34 @@ def generate_prediction_message(match):
     HANDICAP_THRESHOLD = 0.75
     BTTS_THRESHOLD = 0.60
 
-    high_confidence_picks = []
-    if prob_home_or_draw >= DC_THRESHOLD:
-        high_confidence_picks.append("1X")
-    if prob_away_or_draw >= DC_THRESHOLD:
-        high_confidence_picks.append("X2")
-    if prob_over_15 >= GOALS_CONFIDENCE_THRESHOLD:
-        high_confidence_picks.append("Over 1.5 Goals")
-    if prob_under_35 >= GOALS_CONFIDENCE_THRESHOLD:
-        high_confidence_picks.append("Under 3.5 Goals")
-    if prob_home_plus_15 >= HANDICAP_THRESHOLD:
-        high_confidence_picks.append("Home +1.5")
-    if prob_away_plus_15 >= HANDICAP_THRESHOLD:
-        high_confidence_picks.append("Away +1.5")
-    if prob_btts_yes >= BTTS_THRESHOLD:
-        high_confidence_picks.append("BTTS Yes")
+    # Picks formatting for Telegram display (includes percentages)
+    formatted_picks = []
+    # Verification identifiers (clean names for logic matching)
+    verification_keys = []
 
-    picks_str = ", ".join(high_confidence_picks) if high_confidence_picks else "None"
+    if prob_home_or_draw >= DC_THRESHOLD:
+        formatted_picks.append(f"1X ({prob_home_or_draw*100:.1f}%)")
+        verification_keys.append("1X")
+    if prob_away_or_draw >= DC_THRESHOLD:
+        formatted_picks.append(f"X2 ({prob_away_or_draw*100:.1f}%)")
+        verification_keys.append("X2")
+    if prob_over_15 >= GOALS_CONFIDENCE_THRESHOLD:
+        formatted_picks.append(f"Over 1.5 Goals ({prob_over_15*100:.1f}%)")
+        verification_keys.append("Over 1.5 Goals")
+    if prob_under_35 >= GOALS_CONFIDENCE_THRESHOLD:
+        formatted_picks.append(f"Under 3.5 Goals ({prob_under_35*100:.1f}%)")
+        verification_keys.append("Under 3.5 Goals")
+    if prob_home_plus_15 >= HANDICAP_THRESHOLD:
+        formatted_picks.append(f"Home +1.5 ({prob_home_plus_15*100:.1f}%)")
+        verification_keys.append("Home +1.5")
+    if prob_away_plus_15 >= HANDICAP_THRESHOLD:
+        formatted_picks.append(f"Away +1.5 ({prob_away_plus_15*100:.1f}%)")
+        verification_keys.append("Away +1.5")
+    if prob_btts_yes >= BTTS_THRESHOLD:
+        formatted_picks.append(f"BTTS Yes ({prob_btts_yes*100:.1f}%)")
+        verification_keys.append("BTTS Yes")
+
+    picks_str = ", ".join(formatted_picks) if formatted_picks else "None"
 
     msg = (
         f"⚽ *ALL-MARKETS MATCH PREDICTION*\n\n"
@@ -183,7 +194,7 @@ def generate_prediction_message(match):
         f"• Over 3.5: {prob_over_35*100:.1f}% | Under 3.5: {prob_under_35*100:.1f}%\n"
         f"• Over 4.5: {prob_over_45*100:.1f}% | Under 4.5: {prob_under_45*100:.1f}%\n"
     )
-    return msg, high_confidence_picks, home, away, league
+    return msg, verification_keys, home, away, league
 
 def verify_predictions(picks, home_goals, away_goals):
     results = []
