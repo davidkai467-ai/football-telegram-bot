@@ -1,7 +1,7 @@
 {
   "554940": {
     "timestamp": "2026-10-03T20:57:46.657628",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "CA Mineiro",
     "away": "RB Bragantino",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -11,6 +11,7 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-0"
   }
 }
