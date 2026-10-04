@@ -54,10 +54,12 @@ def fetch_upcoming_matches():
         return []
     
     headers = {"X-Auth-Token": FOOTBALL_DATA_API_KEY}
-    today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
-    tomorrow = (datetime.datetime.utcnow() + datetime.timedelta(days=1)).strftime("%Y-%m-%d")
     
-    url = f"https://api.football-data.org/v4/matches?dateFrom={today}&dateTo={tomorrow}"
+    # Expanded window: today through +3 days to catch all matches regardless of UTC boundary shifts
+    today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+    end_date = (datetime.datetime.utcnow() + datetime.timedelta(days=3)).strftime("%Y-%m-%d")
+    
+    url = f"https://api.football-data.org/v4/matches?dateFrom={today}&dateTo={end_date}"
     response = requests.get(url, headers=headers)
     
     if response.status_code != 200:
@@ -138,9 +140,7 @@ def generate_prediction_message(match):
     HANDICAP_THRESHOLD = 0.75
     BTTS_THRESHOLD = 0.60
 
-    # Picks formatting for Telegram display (includes percentages)
     formatted_picks = []
-    # Verification identifiers (clean names for logic matching)
     verification_keys = []
 
     if prob_home_or_draw >= DC_THRESHOLD:
@@ -263,7 +263,7 @@ def process_match_results(sent_alerts):
 def main():
     sent_alerts = load_sent_alerts()
 
-    # 1. Check for finished matches and send result summaries
+    # 1. Process results for finished games
     process_match_results(sent_alerts)
 
     # 2. Fetch and alert for new upcoming matches
