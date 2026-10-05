@@ -1,1 +1,72 @@
-{}
+{
+  "555022": {
+    "timestamp": "2026-10-05T03:28:41.182076",
+    "status": "SENT",
+    "home": "RB Bragantino",
+    "away": "Mirassol FC",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "Under 3.5 Goals",
+      "Home +1.5",
+      "Away +1.5"
+    ]
+  },
+  "555027": {
+    "timestamp": "2026-10-05T03:28:41.512474",
+    "status": "SENT",
+    "home": "Clube do Remo",
+    "away": "Gr\u00eamio FBPA",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "Under 3.5 Goals",
+      "Home +1.5",
+      "Away +1.5"
+    ]
+  },
+  "555025": {
+    "timestamp": "2026-10-05T03:28:41.875544",
+    "status": "SENT",
+    "home": "SC Internacional",
+    "away": "SC Corinthians Paulista",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "Under 3.5 Goals",
+      "Home +1.5",
+      "Away +1.5"
+    ]
+  },
+  "555029": {
+    "timestamp": "2026-10-05T03:28:42.225079",
+    "status": "SENT",
+    "home": "EC Vit\u00f3ria",
+    "away": "Chapecoense AF",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "Under 3.5 Goals",
+      "Home +1.5",
+      "Away +1.5"
+    ]
+  },
+  "555021": {
+    "timestamp": "2026-10-05T03:28:42.591092",
+    "status": "SENT",
+    "home": "Botafogo FR",
+    "away": "CR Vasco da Gama",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "Under 3.5 Goals",
+      "Home +1.5",
+      "Away +1.5"
+    ]
+  }
+}
