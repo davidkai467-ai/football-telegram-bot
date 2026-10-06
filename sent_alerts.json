@@ -1,1 +1,114 @@
-{}
+{
+  "555022": {
+    "timestamp": "2026-10-06T17:16:08.892420",
+    "status": "SENT",
+    "home": "RB Bragantino",
+    "away": "Mirassol FC",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "Under 3.5 Goals",
+      "Home +1.5",
+      "Away +1.5"
+    ]
+  },
+  "555025": {
+    "timestamp": "2026-10-06T17:16:09.350581",
+    "status": "SENT",
+    "home": "SC Internacional",
+    "away": "SC Corinthians Paulista",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "Under 3.5 Goals",
+      "Home +1.5",
+      "Away +1.5"
+    ]
+  },
+  "555027": {
+    "timestamp": "2026-10-06T17:16:09.819076",
+    "status": "SENT",
+    "home": "Clube do Remo",
+    "away": "Gr\u00eamio FBPA",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "Under 3.5 Goals",
+      "Home +1.5",
+      "Away +1.5"
+    ]
+  },
+  "555029": {
+    "timestamp": "2026-10-06T17:16:10.274633",
+    "status": "SENT",
+    "home": "EC Vit\u00f3ria",
+    "away": "Chapecoense AF",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "Under 3.5 Goals",
+      "Home +1.5",
+      "Away +1.5"
+    ]
+  },
+  "555021": {
+    "timestamp": "2026-10-06T17:16:10.700485",
+    "status": "SENT",
+    "home": "Botafogo FR",
+    "away": "CR Vasco da Gama",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "Under 3.5 Goals",
+      "Home +1.5",
+      "Away +1.5"
+    ]
+  },
+  "555023": {
+    "timestamp": "2026-10-06T17:16:11.145293",
+    "status": "SENT",
+    "home": "Cruzeiro EC",
+    "away": "S\u00e3o Paulo FC",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "Under 3.5 Goals",
+      "Home +1.5",
+      "Away +1.5"
+    ]
+  },
+  "555028": {
+    "timestamp": "2026-10-06T17:16:11.599920",
+    "status": "SENT",
+    "home": "Santos FC",
+    "away": "CR Flamengo",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "Under 3.5 Goals",
+      "Home +1.5",
+      "Away +1.5"
+    ]
+  },
+  "555020": {
+    "timestamp": "2026-10-06T17:16:12.033061",
+    "status": "SENT",
+    "home": "CA Paranaense",
+    "away": "CA Mineiro",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "Under 3.5 Goals",
+      "Home +1.5",
+      "Away +1.5"
+    ]
+  }
+}
