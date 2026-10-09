@@ -31,7 +31,7 @@
   },
   "565820": {
     "timestamp": "2026-10-09T16:29:01.767043",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Borussia Dortmund",
     "away": "SV Werder Bremen",
     "league": "Bundesliga",
@@ -41,11 +41,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "2-2"
   },
   "559669": {
     "timestamp": "2026-10-09T16:29:02.261564",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Racing Club de Lens",
     "away": "Olympique Lyonnais",
     "league": "Ligue 1",
@@ -55,11 +56,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "2-1"
   },
   "564706": {
     "timestamp": "2026-10-09T16:29:02.798588",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "M\u00e1laga CF",
     "away": "RCD Espanyol de Barcelona",
     "league": "Primera Division",
@@ -69,11 +71,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-1"
   },
   "561862": {
     "timestamp": "2026-10-09T16:29:03.281527",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "West Ham United FC",
     "away": "Queens Park Rangers FC",
     "league": "Championship",
@@ -83,7 +86,8 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-1"
   },
   "561860": {
     "timestamp": "2026-10-09T16:29:03.846670",
