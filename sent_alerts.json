@@ -1,7 +1,7 @@
 {
   "555026": {
     "timestamp": "2026-10-09T16:29:00.846279",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "SE Palmeiras",
     "away": "EC Bahia",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -11,11 +11,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-0"
   },
   "555024": {
     "timestamp": "2026-10-09T16:29:01.294522",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Fluminense FC",
     "away": "Coritiba FBC",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -25,7 +26,8 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "4-0"
   },
   "565820": {
     "timestamp": "2026-10-09T16:29:01.767043",
