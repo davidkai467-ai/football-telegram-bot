@@ -51,7 +51,6 @@ def fetch_upcoming_matches():
         return []
     
     headers = {"X-Auth-Token": FOOTBALL_DATA_API_KEY}
-    
     today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
     end_date = (datetime.datetime.utcnow() + datetime.timedelta(days=3)).strftime("%Y-%m-%d")
     
@@ -80,25 +79,100 @@ def fetch_match_details(match_id):
         return res.json()
     return None
 
+def poisson_prob(lmbda, k):
+    return (math.pow(lmbda, k) * math.exp(-lmbda)) / math.factorial(k)
+
+def dixon_coles_tau(x, y, home_xg, away_xg, rho=-0.11):
+    """
+    Dixon-Coles adjustment parameter (rho) for low scorelines:
+    (0,0), (1,0), (0,1), (1,1)
+    """
+    if x == 0 and y == 0:
+        return 1.0 - (home_xg * away_xg * rho)
+    elif x == 1 and y == 0:
+        return 1.0 + (away_xg * rho)
+    elif x == 0 and y == 1:
+        return 1.0 + (home_xg * rho)
+    elif x == 1 and y == 1:
+        return 1.0 - rho
+    else:
+        return 1.0
+
+def calculate_dynamic_xg(home_team, away_team):
+    """
+    Dynamic xG estimation with form adjustment multiplier based on recent match stats.
+    """
+    league_avg_home_goals = 1.48
+    league_avg_away_goals = 1.18
+
+    # Form/strength multipliers derived from recent performance metrics
+    home_form = home_team.get("form", "") or ""
+    away_form = away_team.get("form", "") or ""
+
+    def parse_form_multiplier(form_str):
+        if not form_str:
+            return 1.0
+        wins = form_str.count("W")
+        draws = form_str.count("D")
+        losses = form_str.count("L")
+        total = len(form_str) if len(form_str) > 0 else 1
+        pts_pct = (wins * 3 + draws * 1) / (total * 3)
+        # Scale between 0.88x and 1.12x
+        return 0.88 + (pts_pct * 0.24)
+
+    home_mult = parse_form_multiplier(home_form)
+    away_mult = parse_form_multiplier(away_form)
+
+    # Base xG boosted or softened by momentum form
+    home_xg = max(0.40, league_avg_home_goals * home_mult)
+    away_xg = max(0.30, league_avg_away_goals * away_mult)
+
+    return round(home_xg, 2), round(away_xg, 2)
+
 def generate_prediction_message(match):
     league = match.get("competition", {}).get("name", "Unknown League")
-    home = match.get("homeTeam", {}).get("name", "Home")
-    away = match.get("awayTeam", {}).get("name", "Away")
+    home_data = match.get("homeTeam", {})
+    away_data = match.get("awayTeam", {})
+    home = home_data.get("name", "Home")
+    away = away_data.get("name", "Away")
     utc_date = match.get("utcDate", "")[:10]
     
-    home_xg = 1.45
-    away_xg = 1.15
+    # 1. Calculate Dynamic xG with Form Adjustments
+    home_xg, away_xg = calculate_dynamic_xg(home_data, away_data)
 
-    # Target Probabilities
-    prob_home_or_draw = 0.72
-    prob_away_or_draw = 0.68
-    prob_over_15 = 0.74
-    prob_under_35 = 0.72
-    prob_home_plus_15 = 0.82
-    prob_away_plus_15 = 0.80
-    prob_btts_yes = 0.52
+    # 2. Build Dixon-Coles Adjusted Probability Matrix (Scores up to 7-7)
+    prob_matrix = {}
+    total_prob = 0.0
 
-    # Thresholds
+    for h in range(8):
+        for a in range(8):
+            p_raw = poisson_prob(home_xg, h) * poisson_prob(away_xg, a)
+            tau = dixon_coles_tau(h, a, home_xg, away_xg)
+            p_adj = max(0.0, p_raw * tau)
+            prob_matrix[(h, a)] = p_adj
+            total_prob += p_adj
+
+    # Normalize matrix to ensure total probability equals 1.0
+    for key in prob_matrix:
+        prob_matrix[key] /= total_prob
+
+    # 3. Aggregate Probabilities Across Markets
+    prob_home_win = sum(p for (h, a), p in prob_matrix.items() if h > a)
+    prob_draw = sum(p for (h, a), p in prob_matrix.items() if h == a)
+    prob_away_win = sum(p for (h, a), p in prob_matrix.items() if a > h)
+
+    prob_home_or_draw = prob_home_win + prob_draw
+    prob_away_or_draw = prob_away_win + prob_draw
+
+    prob_over_15 = sum(p for (h, a), p in prob_matrix.items() if (h + a) > 1.5)
+    prob_under_35 = sum(p for (h, a), p in prob_matrix.items() if (h + a) < 3.5)
+
+    prob_home_plus_15 = sum(p for (h, a), p in prob_matrix.items() if (h + 1.5) > a)
+    prob_away_plus_15 = sum(p for (h, a), p in prob_matrix.items() if (a + 1.5) > h)
+
+    prob_btts_yes = sum(p for (h, a), p in prob_matrix.items() if h > 0 and a > 0)
+
+    # Thresholds for High-Confidence Value Picks
     DC_THRESHOLD = 0.70
     GOALS_CONFIDENCE_THRESHOLD = 0.65
     HANDICAP_THRESHOLD = 0.75
@@ -126,7 +200,6 @@ def generate_prediction_message(match):
 
     picks_str = ", ".join(formatted_picks) if formatted_picks else "None"
 
-    # Select the pick with highest probability as Best Pick
     if candidates:
         top_pick = max(candidates, key=lambda x: x[1])
         best_pick_str = f"🎯 *BEST VALUE PICK:* {top_pick[2]}"
