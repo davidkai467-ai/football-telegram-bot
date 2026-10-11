@@ -165,7 +165,7 @@
   },
   "561858": {
     "timestamp": "2026-10-10T18:08:17.113573",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Sheffield United FC",
     "away": "Lincoln City FC",
     "league": "Championship",
@@ -175,11 +175,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "3-0"
   },
   "561865": {
     "timestamp": "2026-10-10T18:08:17.634489",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Blackburn Rovers FC",
     "away": "Cardiff City FC",
     "league": "Championship",
@@ -189,11 +190,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "2-1"
   },
   "560592": {
     "timestamp": "2026-10-10T18:08:18.161799",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Sunderland AFC",
     "away": "Brighton & Hove Albion FC",
     "league": "Premier League",
@@ -203,11 +205,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "0-2"
   },
   "561867": {
     "timestamp": "2026-10-10T18:08:18.674741",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Preston North End FC",
     "away": "Millwall FC",
     "league": "Championship",
@@ -217,11 +220,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "0-1"
   },
   "561868": {
     "timestamp": "2026-10-10T18:08:19.191099",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Middlesbrough FC",
     "away": "Wolverhampton Wanderers FC",
     "league": "Championship",
@@ -231,11 +235,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-0"
   },
   "560599": {
     "timestamp": "2026-10-10T18:08:19.717381",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Ipswich Town FC",
     "away": "Fulham FC",
     "league": "Premier League",
@@ -245,11 +250,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "2-1"
   },
   "561864": {
     "timestamp": "2026-10-10T18:08:20.259746",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Derby County FC",
     "away": "Wrexham AFC",
     "league": "Championship",
@@ -259,11 +265,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-1"
   },
   "560595": {
     "timestamp": "2026-10-10T18:08:20.778461",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Chelsea FC",
     "away": "AFC Bournemouth",
     "league": "Premier League",
@@ -273,11 +280,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "5-1"
   },
   "560601": {
     "timestamp": "2026-10-10T18:08:21.276004",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Aston Villa FC",
     "away": "Brentford FC",
     "league": "Premier League",
@@ -287,11 +295,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "2-2"
   },
   "561866": {
     "timestamp": "2026-10-10T18:08:21.760603",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Bolton Wanderers FC",
     "away": "Stoke City FC",
     "league": "Championship",
@@ -301,7 +310,8 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-2"
   },
   "561861": {
     "timestamp": "2026-10-10T18:08:22.275658",
