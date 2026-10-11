@@ -16,7 +16,7 @@
   },
   "558585": {
     "timestamp": "2026-10-11T08:12:05.952778",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Como 1907",
     "away": "AS Roma",
     "league": "Serie A",
@@ -26,11 +26,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "0-0"
   },
   "561859": {
     "timestamp": "2026-10-11T08:12:06.583723",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Southampton FC",
     "away": "Portsmouth FC",
     "league": "Championship",
@@ -40,11 +41,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-0"
   },
   "564703": {
     "timestamp": "2026-10-11T08:12:07.070628",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Elche CF",
     "away": "RC Celta de Vigo",
     "league": "Primera Division",
@@ -54,11 +56,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "0-0"
   },
   "560594": {
     "timestamp": "2026-10-11T08:12:07.573341",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Hull City AFC",
     "away": "Everton FC",
     "league": "Premier League",
@@ -68,11 +71,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "2-2"
   },
   "558581": {
     "timestamp": "2026-10-11T08:12:08.024004",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "US Lecce",
     "away": "Bologna FC 1909",
     "league": "Serie A",
@@ -82,11 +86,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-2"
   },
   "558583": {
     "timestamp": "2026-10-11T08:12:08.566065",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "SS Lazio",
     "away": "AC Monza",
     "league": "Serie A",
@@ -96,11 +101,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "3-1"
   },
   "560596": {
     "timestamp": "2026-10-11T08:12:09.032190",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Crystal Palace FC",
     "away": "Nottingham Forest FC",
     "league": "Premier League",
@@ -110,11 +116,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "3-1"
   },
   "559670": {
     "timestamp": "2026-10-11T08:12:09.538937",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "OGC Nice",
     "away": "RC Strasbourg Alsace",
     "league": "Ligue 1",
@@ -124,11 +131,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "2-1"
   },
   "565814": {
     "timestamp": "2026-10-11T08:12:10.001354",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "1. FC K\u00f6ln",
     "away": "Borussia M\u00f6nchengladbach",
     "league": "Bundesliga",
@@ -138,11 +146,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "2-1"
   },
   "564707": {
     "timestamp": "2026-10-11T08:12:10.503121",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Real Sociedad de F\u00fatbol",
     "away": "RC Deportivo La Coru\u00f1a",
     "league": "Primera Division",
@@ -152,7 +161,8 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "3-2"
   },
   "559667": {
     "timestamp": "2026-10-11T08:12:10.950589",
