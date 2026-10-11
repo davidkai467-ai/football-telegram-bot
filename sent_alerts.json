@@ -166,7 +166,7 @@
   },
   "559667": {
     "timestamp": "2026-10-11T08:12:10.950589",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Stade Rennais FC 1901",
     "away": "AJ Auxerre",
     "league": "Ligue 1",
@@ -176,11 +176,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "4-1"
   },
   "565816": {
     "timestamp": "2026-10-11T08:12:11.478810",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "SC Freiburg",
     "away": "FC Schalke 04",
     "league": "Bundesliga",
@@ -190,11 +191,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "2-1"
   },
   "560598": {
     "timestamp": "2026-10-11T08:12:11.934195",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Liverpool FC",
     "away": "Manchester City FC",
     "league": "Premier League",
@@ -204,11 +206,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "0-3"
   },
   "558580": {
     "timestamp": "2026-10-11T08:12:12.405661",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "US Sassuolo Calcio",
     "away": "AC Milan",
     "league": "Serie A",
@@ -218,11 +221,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-1"
   },
   "564701": {
     "timestamp": "2026-10-11T08:12:12.874638",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Real Betis Balompi\u00e9",
     "away": "CA Osasuna",
     "league": "Primera Division",
@@ -232,11 +236,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "5-2"
   },
   "558584": {
     "timestamp": "2026-10-11T08:12:13.327376",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Cagliari Calcio",
     "away": "Juventus FC",
     "league": "Serie A",
@@ -246,11 +251,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-1"
   },
   "559671": {
     "timestamp": "2026-10-11T08:12:13.782565",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "ES Troyes AC",
     "away": "Olympique de Marseille",
     "league": "Ligue 1",
@@ -260,11 +266,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "0-2"
   },
   "555030": {
     "timestamp": "2026-10-11T08:12:14.232219",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "CA Mineiro",
     "away": "Santos FC",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -274,11 +281,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "2-1"
   },
   "564705": {
     "timestamp": "2026-10-11T08:12:14.774030",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Real Racing Club de Santander",
     "away": "Valencia CF",
     "league": "Primera Division",
@@ -288,7 +296,8 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "2-2"
   },
   "555036": {
     "timestamp": "2026-10-11T08:12:15.262263",
