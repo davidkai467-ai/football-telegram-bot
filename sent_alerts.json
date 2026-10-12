@@ -361,7 +361,7 @@
   },
   "558579": {
     "timestamp": "2026-10-11T08:12:17.363798",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Atalanta BC",
     "away": "Venezia FC",
     "league": "Serie A",
@@ -371,11 +371,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "3-1"
   },
   "558587": {
     "timestamp": "2026-10-11T08:12:17.882134",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Torino FC",
     "away": "Udinese Calcio",
     "league": "Serie A",
@@ -385,11 +386,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "2-1"
   },
   "555034": {
     "timestamp": "2026-10-11T08:12:18.347668",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Coritiba FBC",
     "away": "Botafogo FR",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -399,11 +401,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-1"
   },
   "560597": {
     "timestamp": "2026-10-11T08:12:18.875411",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Coventry City FC",
     "away": "Newcastle United FC",
     "league": "Premier League",
@@ -413,11 +416,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "4-1"
   },
   "564704": {
     "timestamp": "2026-10-11T08:12:19.338545",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Levante UD",
     "away": "Sevilla FC",
     "league": "Primera Division",
@@ -427,7 +431,8 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "3-3"
   },
   "555033": {
     "timestamp": "2026-10-11T08:12:19.801994",
