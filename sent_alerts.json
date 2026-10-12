@@ -301,7 +301,7 @@
   },
   "555036": {
     "timestamp": "2026-10-11T08:12:15.262263",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Gr\u00eamio FBPA",
     "away": "SC Internacional",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -311,11 +311,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-1"
   },
   "555035": {
     "timestamp": "2026-10-11T08:12:15.737384",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "CR Flamengo",
     "away": "Fluminense FC",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -325,11 +326,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-0"
   },
   "555037": {
     "timestamp": "2026-10-11T08:12:16.210245",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "SE Palmeiras",
     "away": "SC Corinthians Paulista",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -339,11 +341,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "4-1"
   },
   "555031": {
     "timestamp": "2026-10-11T08:12:16.736511",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "EC Bahia",
     "away": "Mirassol FC",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -353,7 +356,8 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-0"
   },
   "558579": {
     "timestamp": "2026-10-11T08:12:17.363798",
