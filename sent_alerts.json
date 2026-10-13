@@ -466,7 +466,7 @@
   },
   "575342": {
     "timestamp": "2026-10-11T08:12:20.711299",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Sabah FK",
     "away": "SK Slavia Praha",
     "league": "UEFA Champions League",
@@ -476,11 +476,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "2-0"
   },
   "575341": {
     "timestamp": "2026-10-11T08:12:21.199463",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Racing Club de Lens",
     "away": "Sporting Clube de Portugal",
     "league": "UEFA Champions League",
@@ -490,7 +491,8 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "0-2"
   },
   "561871": {
     "timestamp": "2026-10-11T08:12:21.668174",
