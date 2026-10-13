@@ -450,7 +450,7 @@
   },
   "555032": {
     "timestamp": "2026-10-11T08:12:20.254297",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "RB Bragantino",
     "away": "Cruzeiro EC",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -460,7 +460,8 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "4-2"
   },
   "575342": {
     "timestamp": "2026-10-11T08:12:20.711299",
