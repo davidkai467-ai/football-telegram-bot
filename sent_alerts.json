@@ -751,7 +751,7 @@
   },
   "561879": {
     "timestamp": "2026-10-14T08:17:31.286245",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Norwich City FC",
     "away": "Southampton FC",
     "league": "Championship",
@@ -761,11 +761,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "0-1"
   },
   "561877": {
     "timestamp": "2026-10-14T08:17:31.695221",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Portsmouth FC",
     "away": "Sheffield United FC",
     "league": "Championship",
@@ -775,11 +776,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "3-2"
   },
   "561880": {
     "timestamp": "2026-10-14T08:17:32.082988",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Queens Park Rangers FC",
     "away": "Derby County FC",
     "league": "Championship",
@@ -789,11 +791,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "4-1"
   },
   "575354": {
     "timestamp": "2026-10-14T08:17:32.464315",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "FK Bod\u00f8/Glimt",
     "away": "Borussia Dortmund",
     "league": "UEFA Champions League",
@@ -803,11 +806,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-0"
   },
   "575356": {
     "timestamp": "2026-10-14T08:17:32.841494",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Real Betis Balompi\u00e9",
     "away": "FC Porto",
     "league": "UEFA Champions League",
@@ -817,11 +821,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "3-2"
   },
   "575352": {
     "timestamp": "2026-10-14T08:17:33.234231",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "AS Roma",
     "away": "Real Madrid CF",
     "league": "UEFA Champions League",
@@ -831,11 +836,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "3-4"
   },
   "575358": {
     "timestamp": "2026-10-14T08:17:33.630033",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "\u0160K Slovan Bratislava",
     "away": "VfB Stuttgart",
     "league": "UEFA Champions League",
@@ -845,11 +851,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "0-3"
   },
   "561878": {
     "timestamp": "2026-10-14T08:17:34.013805",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Lincoln City FC",
     "away": "West Ham United FC",
     "league": "Championship",
@@ -859,11 +866,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "0-6"
   },
   "575355": {
     "timestamp": "2026-10-14T08:17:34.401879",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Aston Villa FC",
     "away": "Fenerbah\u00e7e SK",
     "league": "UEFA Champions League",
@@ -873,11 +881,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "6-0"
   },
   "575357": {
     "timestamp": "2026-10-14T08:17:34.791677",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "FK Shakhtar Donetsk",
     "away": "PAE AEK",
     "league": "UEFA Champions League",
@@ -887,11 +896,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "3-1"
   },
   "575353": {
     "timestamp": "2026-10-14T08:17:35.181149",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Manchester City FC",
     "away": "Paris Saint-Germain FC",
     "league": "UEFA Champions League",
@@ -901,7 +911,8 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "2-4"
   },
   "565828": {
     "timestamp": "2026-10-14T08:17:35.571495",
