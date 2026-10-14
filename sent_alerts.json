@@ -721,7 +721,7 @@
   },
   "575350": {
     "timestamp": "2026-10-14T08:17:30.474048",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "LASK Linz",
     "away": "Liverpool FC",
     "league": "UEFA Champions League",
@@ -731,11 +731,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "3-6"
   },
   "575351": {
     "timestamp": "2026-10-14T08:17:30.885892",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Feyenoord Rotterdam",
     "away": "Como 1907",
     "league": "UEFA Champions League",
@@ -745,7 +746,8 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "3-2"
   },
   "561879": {
     "timestamp": "2026-10-14T08:17:31.286245",
