@@ -916,7 +916,7 @@
   },
   "565828": {
     "timestamp": "2026-10-14T08:17:35.571495",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Eintracht Frankfurt",
     "away": "1. FC K\u00f6ln",
     "league": "Bundesliga",
@@ -926,11 +926,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-0"
   },
   "559661": {
     "timestamp": "2026-10-14T08:17:35.973277",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Le Mans FC",
     "away": "Toulouse FC",
     "league": "Ligue 1",
@@ -940,11 +941,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "0-3"
   },
   "558573": {
     "timestamp": "2026-10-14T08:17:36.376507",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Frosinone Calcio",
     "away": "US Sassuolo Calcio",
     "league": "Serie A",
@@ -954,11 +956,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "4-2"
   },
   "564716": {
     "timestamp": "2026-10-14T08:17:36.773369",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "RC Deportivo La Coru\u00f1a",
     "away": "Levante UD",
     "league": "Primera Division",
@@ -968,11 +971,12 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-1"
   },
   "561883": {
     "timestamp": "2026-10-14T08:17:37.155017",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Burnley FC",
     "away": "Wolverhampton Wanderers FC",
     "league": "Championship",
@@ -982,7 +986,8 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "1-2"
   },
   "555047": {
     "timestamp": "2026-10-14T08:17:37.520692",
