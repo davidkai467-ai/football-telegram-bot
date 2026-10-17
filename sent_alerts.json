@@ -1,7 +1,7 @@
 {
   "560603": {
     "timestamp": "2026-10-17T19:32:28.300224",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Everton FC",
     "away": "Chelsea FC",
     "league": "Premier League",
@@ -9,11 +9,12 @@
       "1X",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "0-2"
   },
   "561884": {
     "timestamp": "2026-10-17T19:32:29.806520",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Millwall FC",
     "away": "Lincoln City FC",
     "league": "Championship",
@@ -21,11 +22,12 @@
       "1X",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "2-2"
   },
   "561887": {
     "timestamp": "2026-10-17T19:32:31.488459",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Middlesbrough FC",
     "away": "Cardiff City FC",
     "league": "Championship",
@@ -33,22 +35,24 @@
       "1X",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "2-2"
   },
   "561889": {
     "timestamp": "2026-10-17T19:32:32.850413",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Watford FC",
     "away": "Charlton Athletic FC",
     "league": "Championship",
     "picks": [
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "2-0"
   },
   "564710": {
     "timestamp": "2026-10-17T19:32:34.150547",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "RCD Espanyol de Barcelona",
     "away": "Club Atl\u00e9tico de Madrid",
     "league": "Primera Division",
@@ -57,11 +61,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "0-1"
   },
   "558575": {
     "timestamp": "2026-10-17T19:32:35.432309",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Venezia FC",
     "away": "SSC Napoli",
     "league": "Serie A",
@@ -70,11 +75,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "1-0"
   },
   "565821": {
     "timestamp": "2026-10-17T19:32:36.705272",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "1. FC Union Berlin",
     "away": "Borussia Dortmund",
     "league": "Bundesliga",
@@ -83,11 +89,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "0-0"
   },
   "565823": {
     "timestamp": "2026-10-17T19:32:38.399041",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "SV Werder Bremen",
     "away": "SC Paderborn 07",
     "league": "Bundesliga",
@@ -96,11 +103,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "2-2"
   },
   "565824": {
     "timestamp": "2026-10-17T19:32:39.687691",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "SV 07 Elversberg",
     "away": "FC Augsburg",
     "league": "Bundesliga",
@@ -109,11 +117,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "4-3"
   },
   "565822": {
     "timestamp": "2026-10-17T19:32:41.034078",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Hamburger SV",
     "away": "VfB Stuttgart",
     "league": "Bundesliga",
@@ -122,11 +131,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "1-0"
   },
   "565829": {
     "timestamp": "2026-10-17T19:32:42.479449",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "FC Schalke 04",
     "away": "1. FSV Mainz 05",
     "league": "Bundesliga",
@@ -135,7 +145,8 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "0-1"
   },
   "561890": {
     "timestamp": "2026-10-17T19:32:43.797036",
