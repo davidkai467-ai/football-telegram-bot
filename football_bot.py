@@ -88,6 +88,41 @@ def fetch_head_to_head(match_id):
         return res.json()
     return None
 
+def fetch_team_form_multiplier(team_id):
+    """
+    Fetches a team's last 5 finished matches to compute actual form multiplier.
+    """
+    if not FOOTBALL_DATA_API_KEY or not team_id:
+        return 1.0
+    headers = {"X-Auth-Token": FOOTBALL_DATA_API_KEY}
+    url = f"https://api.football-data.org/v4/teams/{team_id}/matches?status=FINISHED&limit=5"
+    res = requests.get(url, headers=headers)
+    if res.status_code != 200:
+        return 1.0
+    
+    data = res.json()
+    matches = data.get("matches", [])
+    if not matches:
+        return 1.0
+
+    pts = 0
+    for m in matches:
+        ft = m.get("score", {}).get("fullTime", {})
+        h_goals = ft.get("home", 0) or 0
+        a_goals = ft.get("away", 0) or 0
+        is_home = m.get("homeTeam", {}).get("id") == team_id
+        
+        if is_home:
+            if h_goals > a_goals: pts += 3
+            elif h_goals == a_goals: pts += 1
+        else:
+            if a_goals > h_goals: pts += 3
+            elif h_goals == a_goals: pts += 1
+
+    total_pts_possible = len(matches) * 3
+    pts_pct = pts / total_pts_possible if total_pts_possible > 0 else 0.5
+    return round(0.85 + (pts_pct * 0.30), 2)  # Range 0.85x to 1.15x
+
 def negative_binomial_prob(mu, k, dispersion=0.2):
     if mu <= 0:
         return 1.0 if k == 0 else 0.0
@@ -117,23 +152,15 @@ def calculate_dynamic_xg_with_h2h(match):
 
     home_team = match.get("homeTeam", {})
     away_team = match.get("awayTeam", {})
+    home_id = home_team.get("id")
+    away_id = away_team.get("id")
     match_id = match.get("id")
 
-    home_form = home_team.get("form", "") or ""
-    away_form = away_team.get("form", "") or ""
+    # Fetch real team form multipliers dynamically
+    home_mult = fetch_team_form_multiplier(home_id)
+    away_mult = fetch_team_form_multiplier(away_id)
 
-    def parse_form_multiplier(form_str):
-        if not form_str:
-            return 1.0
-        wins = form_str.count("W")
-        draws = form_str.count("D")
-        total = len(form_str) if len(form_str) > 0 else 1
-        pts_pct = (wins * 3 + draws * 1) / (total * 3)
-        return 0.88 + (pts_pct * 0.24)
-
-    home_mult = parse_form_multiplier(home_form)
-    away_mult = parse_form_multiplier(away_form)
-
+    # Fetch Head-to-Head
     h2h_data = fetch_head_to_head(match_id)
     h2h_home_boost = 1.0
     h2h_away_boost = 1.0
@@ -148,8 +175,8 @@ def calculate_dynamic_xg_with_h2h(match):
             home_h2h_ratio = home_wins / total_matches
             away_h2h_ratio = away_wins / total_matches
             
-            h2h_home_boost = 0.95 + (home_h2h_ratio * 0.10)
-            h2h_away_boost = 0.95 + (away_h2h_ratio * 0.10)
+            h2h_home_boost = 0.92 + (home_h2h_ratio * 0.16)
+            h2h_away_boost = 0.92 + (away_h2h_ratio * 0.16)
 
     home_xg = max(0.40, league_avg_home_goals * home_mult * h2h_home_boost)
     away_xg = max(0.30, league_avg_away_goals * away_mult * h2h_away_boost)
@@ -279,7 +306,6 @@ def verify_predictions(picks, best_pick, home_goals, away_goals):
         won = evaluate_single_pick(pick, home_goals, away_goals)
         status_emoji = "✅ WON" if won else "❌ LOST"
         
-        # Highlight if it's the Best Value Pick
         if best_pick and pick == best_pick:
             best_pick_result_str = f"🎯 *BEST VALUE PICK ({pick}):* {status_emoji}"
             results.append(f"• *{pick} (Best Pick)*: {status_emoji}")
