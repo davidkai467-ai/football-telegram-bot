@@ -1,7 +1,7 @@
 {
   "561887": {
     "timestamp": "2026-10-17T13:03:18.131664",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Middlesbrough FC",
     "away": "Cardiff City FC",
     "league": "Championship",
@@ -9,11 +9,12 @@
       "1X",
       "Over 1.5 Goals",
       "Under 3.5 Goals"
-    ]
+    ],
+    "score": "2-2"
   },
   "561889": {
     "timestamp": "2026-10-17T13:03:18.909774",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Watford FC",
     "away": "Charlton Athletic FC",
     "league": "Championship",
@@ -21,11 +22,12 @@
       "1X",
       "Over 1.5 Goals",
       "Under 3.5 Goals"
-    ]
+    ],
+    "score": "2-0"
   },
   "560603": {
     "timestamp": "2026-10-17T13:03:19.849325",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Everton FC",
     "away": "Chelsea FC",
     "league": "Premier League",
@@ -33,11 +35,12 @@
       "1X",
       "Over 1.5 Goals",
       "Under 3.5 Goals"
-    ]
+    ],
+    "score": "0-2"
   },
   "561884": {
     "timestamp": "2026-10-17T13:03:20.671071",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Millwall FC",
     "away": "Lincoln City FC",
     "league": "Championship",
@@ -45,11 +48,12 @@
       "1X",
       "Over 1.5 Goals",
       "Under 3.5 Goals"
-    ]
+    ],
+    "score": "2-2"
   },
   "564710": {
     "timestamp": "2026-10-17T13:03:21.763607",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "RCD Espanyol de Barcelona",
     "away": "Club Atl\u00e9tico de Madrid",
     "league": "Primera Division",
@@ -57,11 +61,12 @@
       "1X",
       "Over 1.5 Goals",
       "Under 3.5 Goals"
-    ]
+    ],
+    "score": "0-1"
   },
   "558575": {
     "timestamp": "2026-10-17T13:03:22.498030",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Venezia FC",
     "away": "SSC Napoli",
     "league": "Serie A",
@@ -69,11 +74,12 @@
       "1X",
       "Over 1.5 Goals",
       "Under 3.5 Goals"
-    ]
+    ],
+    "score": "1-0"
   },
   "565822": {
     "timestamp": "2026-10-17T13:03:23.250272",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Hamburger SV",
     "away": "VfB Stuttgart",
     "league": "Bundesliga",
@@ -81,11 +87,12 @@
       "1X",
       "Over 1.5 Goals",
       "Under 3.5 Goals"
-    ]
+    ],
+    "score": "1-0"
   },
   "565829": {
     "timestamp": "2026-10-17T13:03:23.988265",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "FC Schalke 04",
     "away": "1. FSV Mainz 05",
     "league": "Bundesliga",
@@ -93,11 +100,12 @@
       "1X",
       "Over 1.5 Goals",
       "Under 3.5 Goals"
-    ]
+    ],
+    "score": "0-1"
   },
   "565824": {
     "timestamp": "2026-10-17T13:03:24.709930",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "SV 07 Elversberg",
     "away": "FC Augsburg",
     "league": "Bundesliga",
@@ -105,11 +113,12 @@
       "1X",
       "Over 1.5 Goals",
       "Under 3.5 Goals"
-    ]
+    ],
+    "score": "4-3"
   },
   "565821": {
     "timestamp": "2026-10-17T13:03:25.460435",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "1. FC Union Berlin",
     "away": "Borussia Dortmund",
     "league": "Bundesliga",
@@ -117,11 +126,12 @@
       "1X",
       "Over 1.5 Goals",
       "Under 3.5 Goals"
-    ]
+    ],
+    "score": "0-0"
   },
   "565823": {
     "timestamp": "2026-10-17T13:03:26.165756",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "SV Werder Bremen",
     "away": "SC Paderborn 07",
     "league": "Bundesliga",
@@ -130,7 +140,8 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals",
       "12 & Over 1.5 Goals"
-    ]
+    ],
+    "score": "2-2"
   },
   "560602": {
     "timestamp": "2026-10-17T13:03:27.259617",
