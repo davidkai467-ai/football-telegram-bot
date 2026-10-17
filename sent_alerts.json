@@ -991,7 +991,7 @@
   },
   "555047": {
     "timestamp": "2026-10-14T08:17:37.520692",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Mirassol FC",
     "away": "SC Internacional",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -1001,7 +1001,8 @@
       "Under 3.5 Goals",
       "Home +1.5",
       "Away +1.5"
-    ]
+    ],
+    "score": "2-0"
   },
   "561887": {
     "timestamp": "2026-10-15T02:42:53.517074",
