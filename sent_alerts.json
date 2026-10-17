@@ -150,7 +150,7 @@
   },
   "561890": {
     "timestamp": "2026-10-17T19:32:43.797036",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Swansea City AFC",
     "away": "West Ham United FC",
     "league": "Championship",
@@ -159,11 +159,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "0-1"
   },
   "561886": {
     "timestamp": "2026-10-17T19:32:45.061164",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Birmingham City FC",
     "away": "Queens Park Rangers FC",
     "league": "Championship",
@@ -172,11 +173,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "3-0"
   },
   "560611": {
     "timestamp": "2026-10-17T19:32:46.319244",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Brentford FC",
     "away": "Liverpool FC",
     "league": "Premier League",
@@ -185,11 +187,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "1-2"
   },
   "561881": {
     "timestamp": "2026-10-17T19:32:47.767023",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Norwich City FC",
     "away": "Portsmouth FC",
     "league": "Championship",
@@ -198,11 +201,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "0-1"
   },
   "561892": {
     "timestamp": "2026-10-17T19:32:49.027713",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Wrexham AFC",
     "away": "Preston North End FC",
     "league": "Championship",
@@ -211,11 +215,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "4-1"
   },
   "561888": {
     "timestamp": "2026-10-17T19:32:50.300560",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Derby County FC",
     "away": "Stoke City FC",
     "league": "Championship",
@@ -224,11 +229,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "0-1"
   },
   "561885": {
     "timestamp": "2026-10-17T19:32:51.805085",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Bristol City FC",
     "away": "Sheffield United FC",
     "league": "Championship",
@@ -237,11 +243,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "0-1"
   },
   "560610": {
     "timestamp": "2026-10-17T19:32:53.301400",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Manchester City FC",
     "away": "Ipswich Town FC",
     "league": "Premier League",
@@ -250,11 +257,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "3-2"
   },
   "561891": {
     "timestamp": "2026-10-17T19:32:54.607303",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "West Bromwich Albion FC",
     "away": "Blackburn Rovers FC",
     "league": "Championship",
@@ -263,11 +271,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "3-2"
   },
   "560602": {
     "timestamp": "2026-10-17T19:32:55.889259",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Fulham FC",
     "away": "Hull City AFC",
     "league": "Premier League",
@@ -276,11 +285,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "1-0"
   },
   "561882": {
     "timestamp": "2026-10-17T19:32:57.148895",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Southampton FC",
     "away": "Bolton Wanderers FC",
     "league": "Championship",
@@ -289,7 +299,8 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "0-0"
   },
   "564708": {
     "timestamp": "2026-10-17T19:32:58.558896",
