@@ -651,7 +651,7 @@
   },
   "559663": {
     "timestamp": "2026-10-17T19:33:31.638717",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Le Havre AC",
     "away": "AJ Auxerre",
     "league": "Ligue 1",
@@ -660,11 +660,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "1-3"
   },
   "565826": {
     "timestamp": "2026-10-17T19:33:32.860572",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Borussia M\u00f6nchengladbach",
     "away": "TSG 1899 Hoffenheim",
     "league": "Bundesliga",
@@ -673,11 +674,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "1-2"
   },
   "560608": {
     "timestamp": "2026-10-17T19:33:34.088290",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Nottingham Forest FC",
     "away": "Arsenal FC",
     "league": "Premier League",
@@ -686,11 +688,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "0-1"
   },
   "558569": {
     "timestamp": "2026-10-17T19:33:35.311550",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "AC Milan",
     "away": "Atalanta BC",
     "league": "Serie A",
@@ -699,7 +702,8 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "3-2"
   },
   "564714": {
     "timestamp": "2026-10-17T19:33:36.539857",
