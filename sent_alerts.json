@@ -514,7 +514,7 @@
   },
   "564715": {
     "timestamp": "2026-10-17T19:33:18.501080",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "CA Osasuna",
     "away": "Real Racing Club de Santander",
     "league": "Primera Division",
@@ -523,11 +523,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "2-0"
   },
   "560609": {
     "timestamp": "2026-10-17T19:33:19.792124",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Brighton & Hove Albion FC",
     "away": "Crystal Palace FC",
     "league": "Premier League",
@@ -536,11 +537,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "5-0"
   },
   "559664": {
     "timestamp": "2026-10-17T19:33:21.057834",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Angers SCO",
     "away": "Olympique de Marseille",
     "league": "Ligue 1",
@@ -549,11 +551,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "2-5"
   },
   "560605": {
     "timestamp": "2026-10-17T19:33:22.320260",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Leeds United FC",
     "away": "Manchester United FC",
     "league": "Premier League",
@@ -562,11 +565,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "1-1"
   },
   "560604": {
     "timestamp": "2026-10-17T19:33:23.705623",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "AFC Bournemouth",
     "away": "Sunderland AFC",
     "league": "Premier League",
@@ -575,11 +579,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "2-0"
   },
   "558577": {
     "timestamp": "2026-10-17T19:33:24.940568",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "ACF Fiorentina",
     "away": "Como 1907",
     "league": "Serie A",
@@ -588,11 +593,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "1-3"
   },
   "565827": {
     "timestamp": "2026-10-17T19:33:26.220898",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Bayer 04 Leverkusen",
     "away": "SC Freiburg",
     "league": "Bundesliga",
@@ -601,11 +607,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "2-1"
   },
   "564712": {
     "timestamp": "2026-10-17T19:33:27.805303",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "RC Celta de Vigo",
     "away": "Deportivo Alav\u00e9s",
     "league": "Primera Division",
@@ -613,22 +620,24 @@
       "1X",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "2-1"
   },
   "559657": {
     "timestamp": "2026-10-17T19:33:29.168227",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "FC Lorient",
     "away": "AS Monaco FC",
     "league": "Ligue 1",
     "picks": [
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "1-0"
   },
   "559658": {
     "timestamp": "2026-10-17T19:33:30.413523",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Paris FC",
     "away": "Stade Rennais FC 1901",
     "league": "Ligue 1",
@@ -637,7 +646,8 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "4-3"
   },
   "559663": {
     "timestamp": "2026-10-17T19:33:31.638717",
