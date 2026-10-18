@@ -360,7 +360,7 @@
   },
   "565825": {
     "timestamp": "2026-10-17T19:33:04.196020",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "FC Bayern M\u00fcnchen",
     "away": "RB Leipzig",
     "league": "Bundesliga",
@@ -369,7 +369,8 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "6-1"
   },
   "560607": {
     "timestamp": "2026-10-17T19:33:05.542171",
@@ -499,7 +500,7 @@
   },
   "558574": {
     "timestamp": "2026-10-17T19:33:17.218292",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Udinese Calcio",
     "away": "US Lecce",
     "league": "Serie A",
@@ -508,7 +509,8 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "0-3"
   },
   "564715": {
     "timestamp": "2026-10-17T19:33:18.501080",
