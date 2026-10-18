@@ -707,7 +707,7 @@
   },
   "564714": {
     "timestamp": "2026-10-17T19:33:36.539857",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "M\u00e1laga CF",
     "away": "Real Sociedad de F\u00fatbol",
     "league": "Primera Division",
@@ -716,11 +716,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "2-5"
   },
   "558570": {
     "timestamp": "2026-10-17T19:33:37.785280",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Juventus FC",
     "away": "SS Lazio",
     "league": "Serie A",
@@ -729,11 +730,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "0-3"
   },
   "559665": {
     "timestamp": "2026-10-17T19:33:39.002747",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Olympique Lyonnais",
     "away": "OGC Nice",
     "league": "Ligue 1",
@@ -742,11 +744,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "2-1"
   },
   "564709": {
     "timestamp": "2026-10-17T19:33:40.246631",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Real Madrid CF",
     "away": "Sevilla FC",
     "league": "Primera Division",
@@ -755,11 +758,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "4-1"
   },
   "555046": {
     "timestamp": "2026-10-17T19:33:41.470122",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Gr\u00eamio FBPA",
     "away": "Cruzeiro EC",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -768,11 +772,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "2-4"
   },
   "555045": {
     "timestamp": "2026-10-17T19:33:42.706985",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Fluminense FC",
     "away": "Santos FC",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -781,7 +786,8 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "1-2"
   },
   "555042": {
     "timestamp": "2026-10-17T19:33:43.946082",
