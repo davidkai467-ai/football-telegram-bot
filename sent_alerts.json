@@ -457,7 +457,7 @@
   },
   "555041": {
     "timestamp": "2026-10-17T19:33:13.179372",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "CA Mineiro",
     "away": "Coritiba FBC",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -466,11 +466,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "1-0"
   },
   "555040": {
     "timestamp": "2026-10-17T19:33:14.634562",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "CA Paranaense",
     "away": "SE Palmeiras",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -479,11 +480,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "0-2"
   },
   "555049": {
     "timestamp": "2026-10-17T19:33:15.937552",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "S\u00e3o Paulo FC",
     "away": "CR Vasco da Gama",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -492,7 +494,8 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "1-0"
   },
   "558574": {
     "timestamp": "2026-10-17T19:33:17.218292",
