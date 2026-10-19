@@ -819,7 +819,7 @@
   },
   "558576": {
     "timestamp": "2026-10-17T19:33:46.424650",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "AC Monza",
     "away": "Cagliari Calcio",
     "league": "Serie A",
@@ -828,11 +828,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "4-0"
   },
   "558578": {
     "timestamp": "2026-10-17T19:33:47.688179",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Parma Calcio 1913",
     "away": "Torino FC",
     "league": "Serie A",
@@ -841,11 +842,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "1-3"
   },
   "560606": {
     "timestamp": "2026-10-17T19:33:48.916058",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Tottenham Hotspur FC",
     "away": "Coventry City FC",
     "league": "Premier League",
@@ -854,11 +856,12 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "3-1"
   },
   "564717": {
     "timestamp": "2026-10-17T19:33:50.152266",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Getafe CF",
     "away": "Rayo Vallecano de Madrid",
     "league": "Primera Division",
@@ -867,7 +870,8 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "1-1"
   },
   "555044": {
     "timestamp": "2026-10-17T19:33:51.385373",
