@@ -35,6 +35,8 @@ def save_sent_alerts(alerts):
         json.dump(alerts, f, indent=2)
 
 def send_telegram_message(message):
+    if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
+        return False
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
     payload = {
         "chat_id": TELEGRAM_CHAT_ID,
@@ -89,9 +91,6 @@ def fetch_head_to_head(match_id):
     return None
 
 def fetch_team_form_multiplier(team_id):
-    """
-    Fetches a team's last 5 finished matches to compute actual form multiplier.
-    """
     if not FOOTBALL_DATA_API_KEY or not team_id:
         return 1.0
     headers = {"X-Auth-Token": FOOTBALL_DATA_API_KEY}
@@ -121,7 +120,7 @@ def fetch_team_form_multiplier(team_id):
 
     total_pts_possible = len(matches) * 3
     pts_pct = pts / total_pts_possible if total_pts_possible > 0 else 0.5
-    return round(0.85 + (pts_pct * 0.30), 2)  # Range 0.85x to 1.15x
+    return round(0.85 + (pts_pct * 0.30), 2)
 
 def negative_binomial_prob(mu, k, dispersion=0.2):
     if mu <= 0:
@@ -156,11 +155,9 @@ def calculate_dynamic_xg_with_h2h(match):
     away_id = away_team.get("id")
     match_id = match.get("id")
 
-    # Fetch real team form multipliers dynamically
     home_mult = fetch_team_form_multiplier(home_id)
     away_mult = fetch_team_form_multiplier(away_id)
 
-    # Fetch Head-to-Head
     h2h_data = fetch_head_to_head(match_id)
     h2h_home_boost = 1.0
     h2h_away_boost = 1.0
@@ -193,7 +190,6 @@ def generate_prediction_message(match):
     
     home_xg, away_xg = calculate_dynamic_xg_with_h2h(match)
 
-    # Negative Binomial Matrix
     prob_matrix = {}
     total_prob = 0.0
 
@@ -208,7 +204,6 @@ def generate_prediction_message(match):
     for key in prob_matrix:
         prob_matrix[key] /= total_prob
 
-    # Markets
     prob_home_win = sum(p for (h, a), p in prob_matrix.items() if h > a)
     prob_draw = sum(p for (h, a), p in prob_matrix.items() if h == a)
     prob_away_win = sum(p for (h, a), p in prob_matrix.items() if a > h)
@@ -228,25 +223,29 @@ def generate_prediction_message(match):
 
     candidates = []
 
-    if prob_home_or_draw >= 0.70:
+    # --- ADJUSTED THRESHOLDS FOR DIVERSE & ACCURATE PICKS ---
+    if prob_home_or_draw >= 0.68:
         candidates.append(("1X", prob_home_or_draw, f"1X ({prob_home_or_draw*100:.1f}%)"))
-    if prob_away_or_draw >= 0.70:
+    if prob_away_or_draw >= 0.68:
         candidates.append(("X2", prob_away_or_draw, f"X2 ({prob_away_or_draw*100:.1f}%)"))
-    if prob_over_15 >= 0.70:
+    if prob_over_15 >= 0.65:
         candidates.append(("Over 1.5 Goals", prob_over_15, f"Over 1.5 Goals ({prob_over_15*100:.1f}%)"))
-    if prob_under_35 >= 0.70:
+        
+    # STRICTER THRESHOLD FOR UNDER 3.5 GOALS (BUMPED FROM 0.70 TO 0.82)
+    if prob_under_35 >= 0.82:
         candidates.append(("Under 3.5 Goals", prob_under_35, f"Under 3.5 Goals ({prob_under_35*100:.1f}%)"))
-    if combo_12_over15 >= 0.55:
+
+    if combo_12_over15 >= 0.52:
         candidates.append(("12 & Over 1.5 Goals", combo_12_over15, f"{home}/{away} & Over 1.5 Goals ({combo_12_over15*100:.1f}%)"))
-    if combo_x2_over05 >= 0.55:
+    if combo_x2_over05 >= 0.52:
         candidates.append(("X2 & Over 0.5 Goals", combo_x2_over05, f"Draw/{away} & Over 0.5 Goals ({combo_x2_over05*100:.1f}%)"))
-    if combo_x2_over15 >= 0.55:
+    if combo_x2_over15 >= 0.52:
         candidates.append(("X2 & Over 1.5 Goals", combo_x2_over15, f"Draw/{away} & Over 1.5 Goals ({combo_x2_over15*100:.1f}%)"))
-    if combo_btts_x2 >= 0.55:
+    if combo_btts_x2 >= 0.52:
         candidates.append(("BTTS & X2", combo_btts_x2, f"BTTS Yes & Draw/{away} ({combo_btts_x2*100:.1f}%)"))
-    if combo_btts_12 >= 0.55:
+    if combo_btts_12 >= 0.52:
         candidates.append(("BTTS & 12", combo_btts_12, f"BTTS Yes & {home}/{away} ({combo_btts_12*100:.1f}%)"))
-    if combo_btts_over25 >= 0.55:
+    if combo_btts_over25 >= 0.52:
         candidates.append(("BTTS & Over 2.5 Goals", combo_btts_over25, f"BTTS Yes & Over 2.5 Goals ({combo_btts_over25*100:.1f}%)"))
 
     formatted_picks = [c[2] for c in candidates]
