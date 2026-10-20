@@ -1,18 +1,19 @@
 {
   "575360": {
     "timestamp": "2026-10-20T07:42:12.541932",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Fenerbah\u00e7e SK",
     "away": "SK Slavia Praha",
     "league": "UEFA Champions League",
     "picks": [
       "1X"
     ],
-    "best_pick": "1X"
+    "best_pick": "1X",
+    "score": "2-2"
   },
   "575359": {
     "timestamp": "2026-10-20T07:42:14.737197",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Sabah FK",
     "away": "Borussia Dortmund",
     "league": "UEFA Champions League",
@@ -21,7 +22,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-2"
   },
   "561826": {
     "timestamp": "2026-10-20T07:42:17.291872",
