@@ -875,7 +875,7 @@
   },
   "555044": {
     "timestamp": "2026-10-17T19:33:51.385373",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "SC Corinthians Paulista",
     "away": "EC Vit\u00f3ria",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -884,7 +884,8 @@
       "Over 1.5 Goals",
       "Under 3.5 Goals"
     ],
-    "best_pick": "Under 3.5 Goals"
+    "best_pick": "Under 3.5 Goals",
+    "score": "1-1"
   },
   "575359": {
     "timestamp": "2026-10-19T02:45:17.525231",
