@@ -139,7 +139,7 @@
   },
   "575368": {
     "timestamp": "2026-10-20T07:42:33.203124",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Como 1907",
     "away": "Manchester United FC",
     "league": "UEFA Champions League",
@@ -148,11 +148,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "4-1"
   },
   "575369": {
     "timestamp": "2026-10-20T07:42:35.358874",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Lille OSC",
     "away": "Galatasaray SK",
     "league": "UEFA Champions League",
@@ -161,7 +162,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-4"
   },
   "564685": {
     "timestamp": "2026-10-20T07:42:37.222082",
