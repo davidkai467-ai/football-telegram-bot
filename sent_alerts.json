@@ -41,7 +41,7 @@
   },
   "575364": {
     "timestamp": "2026-10-20T07:42:19.124139",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "AS Roma",
     "away": "\u0160K Slovan Bratislava",
     "league": "UEFA Champions League",
@@ -50,7 +50,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "4-0"
   },
   "575366": {
     "timestamp": "2026-10-20T07:42:21.282111",
