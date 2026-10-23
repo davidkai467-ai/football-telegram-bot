@@ -279,7 +279,7 @@
   },
   "565833": {
     "timestamp": "2026-10-21T23:52:05.606188",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "VfB Stuttgart",
     "away": "Borussia M\u00f6nchengladbach",
     "league": "Bundesliga",
@@ -288,11 +288,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-3"
   },
   "559654": {
     "timestamp": "2026-10-21T23:52:07.868183",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Stade Brestois 29",
     "away": "OGC Nice",
     "league": "Ligue 1",
@@ -301,11 +302,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-2"
   },
   "558567": {
     "timestamp": "2026-10-21T23:52:09.815879",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Torino FC",
     "away": "AC Monza",
     "league": "Serie A",
@@ -314,11 +316,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "3-2"
   },
   "560620": {
     "timestamp": "2026-10-21T23:52:12.115091",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Ipswich Town FC",
     "away": "Nottingham Forest FC",
     "league": "Premier League",
@@ -327,11 +330,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-1"
   },
   "564719": {
     "timestamp": "2026-10-21T23:52:13.847375",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Deportivo Alav\u00e9s",
     "away": "M\u00e1laga CF",
     "league": "Primera Division",
@@ -340,7 +344,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-1"
   },
   "561894": {
     "timestamp": "2026-10-21T23:52:15.551503",
