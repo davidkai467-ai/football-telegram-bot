@@ -349,7 +349,7 @@
   },
   "561894": {
     "timestamp": "2026-10-21T23:52:15.551503",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Bolton Wanderers FC",
     "away": "Middlesbrough FC",
     "league": "Championship",
@@ -358,11 +358,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-5"
   },
   "555052": {
     "timestamp": "2026-10-21T23:52:17.256495",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Cruzeiro EC",
     "away": "Clube do Remo",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -371,7 +372,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-0"
   },
   "561895": {
     "timestamp": "2026-10-22T02:49:38.344420",
