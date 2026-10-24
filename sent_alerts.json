@@ -64,7 +64,7 @@
   },
   "558560": {
     "timestamp": "2026-10-24T11:50:45.530855",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Cagliari Calcio",
     "away": "Bologna FC 1909",
     "league": "Serie A",
@@ -73,7 +73,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-2"
   },
   "558561": {
     "timestamp": "2026-10-24T11:50:47.457574",
