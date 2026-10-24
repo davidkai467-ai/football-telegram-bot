@@ -13,7 +13,7 @@
   },
   "560614": {
     "timestamp": "2026-10-24T11:50:36.585767",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Aston Villa FC",
     "away": "Manchester City FC",
     "league": "Premier League",
@@ -22,7 +22,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-1"
   },
   "561895": {
     "timestamp": "2026-10-24T11:50:38.945523",
