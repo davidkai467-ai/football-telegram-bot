@@ -1,7 +1,7 @@
 {
   "561904": {
     "timestamp": "2026-10-24T11:50:34.401385",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Portsmouth FC",
     "away": "Millwall FC",
     "league": "Championship",
@@ -9,7 +9,8 @@
       "1X",
       "Over 1.5 Goals"
     ],
-    "best_pick": "1X"
+    "best_pick": "1X",
+    "score": "2-1"
   },
   "560614": {
     "timestamp": "2026-10-24T11:50:36.585767",
