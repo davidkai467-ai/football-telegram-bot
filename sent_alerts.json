@@ -39,7 +39,7 @@
   },
   "561901": {
     "timestamp": "2026-10-24T11:50:41.234673",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Charlton Athletic FC",
     "away": "Norwich City FC",
     "league": "Championship",
@@ -48,11 +48,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-3"
   },
   "564718": {
     "timestamp": "2026-10-24T11:50:43.343726",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Rayo Vallecano de Madrid",
     "away": "Elche CF",
     "league": "Primera Division",
@@ -61,7 +62,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-3"
   },
   "558560": {
     "timestamp": "2026-10-24T11:50:45.530855",
@@ -144,7 +146,7 @@
   },
   "565834": {
     "timestamp": "2026-10-24T11:50:57.512217",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "SC Paderborn 07",
     "away": "Hamburger SV",
     "league": "Bundesliga",
@@ -153,7 +155,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-0"
   },
   "561898": {
     "timestamp": "2026-10-24T11:50:59.430610",
