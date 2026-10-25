@@ -28,14 +28,15 @@
   },
   "561895": {
     "timestamp": "2026-10-24T11:50:38.945523",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Sheffield United FC",
     "away": "Derby County FC",
     "league": "Championship",
     "picks": [
       "1X"
     ],
-    "best_pick": "1X"
+    "best_pick": "1X",
+    "score": "1-1"
   },
   "561901": {
     "timestamp": "2026-10-24T11:50:41.234673",
@@ -81,7 +82,7 @@
   },
   "558561": {
     "timestamp": "2026-10-24T11:50:47.457574",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Como 1907",
     "away": "US Sassuolo Calcio",
     "league": "Serie A",
@@ -90,11 +91,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-0"
   },
   "565830": {
     "timestamp": "2026-10-24T11:50:49.355459",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "1. FSV Mainz 05",
     "away": "SV Werder Bremen",
     "league": "Bundesliga",
@@ -103,11 +105,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-3"
   },
   "565832": {
     "timestamp": "2026-10-24T11:50:51.478254",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "RB Leipzig",
     "away": "SV 07 Elversberg",
     "league": "Bundesliga",
@@ -116,11 +119,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "4-0"
   },
   "565831": {
     "timestamp": "2026-10-24T11:50:53.428713",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "1. FC K\u00f6ln",
     "away": "FC Schalke 04",
     "league": "Bundesliga",
@@ -129,11 +133,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-0"
   },
   "565838": {
     "timestamp": "2026-10-24T11:50:55.356436",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "FC Augsburg",
     "away": "1. FC Union Berlin",
     "league": "Bundesliga",
@@ -142,7 +147,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-1"
   },
   "565834": {
     "timestamp": "2026-10-24T11:50:57.512217",
@@ -160,7 +166,7 @@
   },
   "561898": {
     "timestamp": "2026-10-24T11:50:59.430610",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Preston North End FC",
     "away": "West Bromwich Albion FC",
     "league": "Championship",
@@ -169,11 +175,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-1"
   },
   "560616": {
     "timestamp": "2026-10-24T11:51:01.359952",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Arsenal FC",
     "away": "Everton FC",
     "league": "Premier League",
@@ -182,11 +189,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-0"
   },
   "561893": {
     "timestamp": "2026-10-24T11:51:03.627036",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Cardiff City FC",
     "away": "Birmingham City FC",
     "league": "Championship",
@@ -195,11 +203,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-0"
   },
   "561900": {
     "timestamp": "2026-10-24T11:51:05.572920",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "West Ham United FC",
     "away": "Southampton FC",
     "league": "Championship",
@@ -208,7 +217,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-3"
   },
   "560618": {
     "timestamp": "2026-10-24T11:51:07.493130",
