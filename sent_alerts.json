@@ -485,7 +485,7 @@
   },
   "555050": {
     "timestamp": "2026-10-24T11:51:44.782639",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Chapecoense AF",
     "away": "Fluminense FC",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -494,11 +494,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-1"
   },
   "555057": {
     "timestamp": "2026-10-24T11:51:46.697557",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Santos FC",
     "away": "EC Bahia",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -507,11 +508,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-1"
   },
   "558563": {
     "timestamp": "2026-10-24T11:51:48.628761",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "FC Internazionale Milano",
     "away": "ACF Fiorentina",
     "league": "Serie A",
@@ -520,11 +522,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-1"
   },
   "564720": {
     "timestamp": "2026-10-24T11:51:50.551082",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Athletic Club",
     "away": "Getafe CF",
     "league": "Primera Division",
@@ -533,11 +536,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "4-0"
   },
   "559650": {
     "timestamp": "2026-10-24T11:51:52.449523",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "AS Monaco FC",
     "away": "Lille OSC",
     "league": "Ligue 1",
@@ -546,11 +550,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-1"
   },
   "560612": {
     "timestamp": "2026-10-24T11:51:54.328171",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Liverpool FC",
     "away": "Brighton & Hove Albion FC",
     "league": "Premier League",
@@ -559,11 +564,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-0"
   },
   "558562": {
     "timestamp": "2026-10-24T11:51:56.261228",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Atalanta BC",
     "away": "Frosinone Calcio",
     "league": "Serie A",
@@ -572,11 +578,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "4-4"
   },
   "560615": {
     "timestamp": "2026-10-24T11:51:58.175230",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Manchester United FC",
     "away": "AFC Bournemouth",
     "league": "Premier League",
@@ -585,11 +592,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-3"
   },
   "560613": {
     "timestamp": "2026-10-24T11:52:00.065759",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Crystal Palace FC",
     "away": "Newcastle United FC",
     "league": "Premier League",
@@ -598,11 +606,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-2"
   },
   "558568": {
     "timestamp": "2026-10-24T11:52:01.965198",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Genoa CFC",
     "away": "Venezia FC",
     "league": "Serie A",
@@ -611,7 +620,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-0"
   },
   "560619": {
     "timestamp": "2026-10-24T11:52:03.898837",
