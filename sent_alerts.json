@@ -874,7 +874,7 @@
   },
   "558556": {
     "timestamp": "2026-10-27T03:14:49.106277",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "US Sassuolo Calcio",
     "away": "SS Lazio",
     "league": "Serie A",
@@ -883,7 +883,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-6"
   },
   "558557": {
     "timestamp": "2026-10-27T03:14:50.419042",
