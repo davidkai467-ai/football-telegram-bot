@@ -916,7 +916,7 @@
   },
   "558550": {
     "timestamp": "2026-10-27T03:14:53.296347",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Venezia FC",
     "away": "FC Internazionale Milano",
     "league": "Serie A",
@@ -925,11 +925,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-2"
   },
   "558553": {
     "timestamp": "2026-10-27T03:14:54.886609",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Parma Calcio 1913",
     "away": "Udinese Calcio",
     "league": "Serie A",
@@ -938,11 +939,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-0"
   },
   "558549": {
     "timestamp": "2026-10-27T03:14:56.293157",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "AC Milan",
     "away": "Bologna FC 1909",
     "league": "Serie A",
@@ -951,11 +953,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-4"
   },
   "558552": {
     "timestamp": "2026-10-27T03:14:57.746246",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Genoa CFC",
     "away": "Juventus FC",
     "league": "Serie A",
@@ -964,11 +967,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-0"
   },
   "558554": {
     "timestamp": "2026-10-27T03:14:59.115683",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "AC Monza",
     "away": "SSC Napoli",
     "league": "Serie A",
@@ -977,7 +981,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-4"
   },
   "555062": {
     "timestamp": "2026-10-27T03:15:00.563722",
