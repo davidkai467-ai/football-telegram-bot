@@ -1070,7 +1070,7 @@
   },
   "558551": {
     "timestamp": "2026-10-27T03:15:09.058497",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "ACF Fiorentina",
     "away": "Atalanta BC",
     "league": "Serie A",
@@ -1079,7 +1079,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-2"
   },
   "555060": {
     "timestamp": "2026-10-27T03:15:10.321119",
