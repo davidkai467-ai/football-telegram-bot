@@ -1126,7 +1126,7 @@
   },
   "559644": {
     "timestamp": "2026-10-29T03:51:34.585881",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Le Havre AC",
     "away": "Paris Saint-Germain FC",
     "league": "Ligue 1",
@@ -1135,11 +1135,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-5"
   },
   "559646": {
     "timestamp": "2026-10-29T03:51:36.771342",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "OGC Nice",
     "away": "Stade Rennais FC 1901",
     "league": "Ligue 1",
@@ -1148,11 +1149,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "5-2"
   },
   "565846": {
     "timestamp": "2026-10-29T03:51:38.724783",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "SV 07 Elversberg",
     "away": "1. FSV Mainz 05",
     "league": "Bundesliga",
@@ -1161,7 +1163,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "4-1"
   },
   "561916": {
     "timestamp": "2026-10-29T03:51:40.638628",
