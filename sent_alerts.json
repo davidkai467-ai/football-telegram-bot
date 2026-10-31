@@ -1181,7 +1181,7 @@
   },
   "564737": {
     "timestamp": "2026-10-29T03:51:42.748446",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Villarreal CF",
     "away": "RCD Espanyol de Barcelona",
     "league": "Primera Division",
@@ -1190,11 +1190,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-1"
   },
   "559639": {
     "timestamp": "2026-10-29T03:51:45.051924",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Lille OSC",
     "away": "Racing Club de Lens",
     "league": "Ligue 1",
@@ -1203,11 +1204,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-0"
   },
   "555063": {
     "timestamp": "2026-10-29T03:51:47.014472",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "SC Corinthians Paulista",
     "away": "Mirassol FC",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -1216,7 +1218,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-0"
   },
   "561915": {
     "timestamp": "2026-10-29T03:51:49.801773",
