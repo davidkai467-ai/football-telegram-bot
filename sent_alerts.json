@@ -1223,7 +1223,7 @@
   },
   "561915": {
     "timestamp": "2026-10-29T03:51:49.801773",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Lincoln City FC",
     "away": "Birmingham City FC",
     "league": "Championship",
@@ -1232,11 +1232,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-3"
   },
   "560626": {
     "timestamp": "2026-10-29T03:51:52.114509",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Chelsea FC",
     "away": "Manchester United FC",
     "league": "Premier League",
@@ -1245,11 +1246,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-0"
   },
   "561908": {
     "timestamp": "2026-10-29T03:51:54.014408",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Stoke City FC",
     "away": "Preston North End FC",
     "league": "Championship",
@@ -1258,11 +1260,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-0"
   },
   "561910": {
     "timestamp": "2026-10-29T03:51:55.967175",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Norwich City FC",
     "away": "Watford FC",
     "league": "Championship",
@@ -1271,11 +1274,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "3-2"
   },
   "564730": {
     "timestamp": "2026-10-29T03:51:57.951334",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Levante UD",
     "away": "Club Atl\u00e9tico de Madrid",
     "league": "Primera Division",
@@ -1284,11 +1288,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-2"
   },
   "558539": {
     "timestamp": "2026-10-29T03:51:59.956502",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Bologna FC 1909",
     "away": "AC Monza",
     "league": "Serie A",
@@ -1297,7 +1302,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-1"
   },
   "565843": {
     "timestamp": "2026-10-29T03:52:01.925095",
@@ -1327,7 +1333,7 @@
   },
   "565839": {
     "timestamp": "2026-10-29T03:52:05.754429",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Borussia M\u00f6nchengladbach",
     "away": "SC Paderborn 07",
     "league": "Bundesliga",
@@ -1336,7 +1342,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-0"
   },
   "565847": {
     "timestamp": "2026-10-29T03:52:07.704980",
