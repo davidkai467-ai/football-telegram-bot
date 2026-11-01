@@ -1168,7 +1168,7 @@
   },
   "561916": {
     "timestamp": "2026-10-29T03:51:40.638628",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Sheffield United FC",
     "away": "Wrexham AFC",
     "league": "Championship",
@@ -1177,7 +1177,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-0"
   },
   "564737": {
     "timestamp": "2026-10-29T03:51:42.748446",
@@ -1474,7 +1475,7 @@
   },
   "561905": {
     "timestamp": "2026-10-29T03:52:25.647173",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Wolverhampton Wanderers FC",
     "away": "Cardiff City FC",
     "league": "Championship",
@@ -1483,7 +1484,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "1X"
+    "best_pick": "1X",
+    "score": "3-0"
   },
   "560630": {
     "timestamp": "2026-10-29T03:52:27.716457",
@@ -1570,7 +1572,7 @@
   },
   "558542": {
     "timestamp": "2026-10-29T03:52:39.777715",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Udinese Calcio",
     "away": "AS Roma",
     "league": "Serie A",
@@ -1579,11 +1581,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-5"
   },
   "560627": {
     "timestamp": "2026-10-29T03:52:41.704881",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Tottenham Hotspur FC",
     "away": "Crystal Palace FC",
     "league": "Premier League",
@@ -1592,11 +1595,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-0"
   },
   "564736": {
     "timestamp": "2026-10-29T03:52:43.713456",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Real Betis Balompi\u00e9",
     "away": "M\u00e1laga CF",
     "league": "Primera Division",
@@ -1605,11 +1609,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-1"
   },
   "565845": {
     "timestamp": "2026-10-29T03:52:45.709480",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "FC Bayern M\u00fcnchen",
     "away": "Borussia Dortmund",
     "league": "Bundesliga",
@@ -1618,11 +1623,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-2"
   },
   "555064": {
     "timestamp": "2026-10-29T03:52:47.626653",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Coritiba FBC",
     "away": "EC Vit\u00f3ria",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -1631,11 +1637,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-0"
   },
   "559643": {
     "timestamp": "2026-10-29T03:52:49.568150",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "ES Troyes AC",
     "away": "Le Mans FC",
     "league": "Ligue 1",
@@ -1644,11 +1651,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-0"
   },
   "558548": {
     "timestamp": "2026-10-29T03:52:51.500298",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "AC Milan",
     "away": "FC Internazionale Milano",
     "league": "Serie A",
@@ -1657,11 +1665,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "3-1"
   },
   "564732": {
     "timestamp": "2026-10-29T03:52:53.532072",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "FC Barcelona",
     "away": "Deportivo Alav\u00e9s",
     "league": "Primera Division",
@@ -1670,7 +1679,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "6-1"
   },
   "560628": {
     "timestamp": "2026-10-29T03:52:55.473588",
