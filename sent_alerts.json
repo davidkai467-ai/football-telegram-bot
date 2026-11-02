@@ -1921,7 +1921,7 @@
   },
   "558541": {
     "timestamp": "2026-11-01T12:28:53.475031",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "US Sassuolo Calcio",
     "away": "ACF Fiorentina",
     "league": "Serie A",
@@ -1930,7 +1930,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-4"
   },
   "559641": {
     "timestamp": "2026-11-01T12:28:54.875153",
