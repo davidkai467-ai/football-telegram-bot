@@ -1837,7 +1837,7 @@
   },
   "560631": {
     "timestamp": "2026-11-01T12:28:45.673355",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Liverpool FC",
     "away": "Arsenal FC",
     "league": "Premier League",
@@ -1846,11 +1846,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-1"
   },
   "558540": {
     "timestamp": "2026-11-01T12:28:47.096232",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "US Lecce",
     "away": "Genoa CFC",
     "league": "Serie A",
@@ -1859,11 +1860,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-2"
   },
   "564728": {
     "timestamp": "2026-11-01T12:28:48.504971",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Elche CF",
     "away": "Valencia CF",
     "league": "Primera Division",
@@ -1872,11 +1874,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-1"
   },
   "559645": {
     "timestamp": "2026-11-01T12:28:49.743666",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Olympique de Marseille",
     "away": "Toulouse FC",
     "league": "Ligue 1",
@@ -1885,11 +1888,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-0"
   },
   "558547": {
     "timestamp": "2026-11-01T12:28:51.036001",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Juventus FC",
     "away": "SSC Napoli",
     "league": "Serie A",
@@ -1898,11 +1902,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-0"
   },
   "564729": {
     "timestamp": "2026-11-01T12:28:52.260860",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Athletic Club",
     "away": "Real Sociedad de F\u00fatbol",
     "league": "Primera Division",
@@ -1911,7 +1916,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-1"
   },
   "558541": {
     "timestamp": "2026-11-01T12:28:53.475031",
