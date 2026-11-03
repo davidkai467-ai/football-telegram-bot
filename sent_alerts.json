@@ -1935,7 +1935,7 @@
   },
   "559641": {
     "timestamp": "2026-11-01T12:28:54.875153",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "FC Lorient",
     "away": "Stade Brestois 29",
     "league": "Ligue 1",
@@ -1944,11 +1944,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-2"
   },
   "558545": {
     "timestamp": "2026-11-01T12:28:56.235113",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Atalanta BC",
     "away": "Parma Calcio 1913",
     "league": "Serie A",
@@ -1957,11 +1958,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-3"
   },
   "564731": {
     "timestamp": "2026-11-01T12:28:57.472382",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "RC Deportivo La Coru\u00f1a",
     "away": "CA Osasuna",
     "league": "Primera Division",
@@ -1970,11 +1972,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-1"
   },
   "560622": {
     "timestamp": "2026-11-01T12:28:58.731567",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Newcastle United FC",
     "away": "Everton FC",
     "league": "Premier League",
@@ -1983,11 +1986,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-1"
   },
   "555072": {
     "timestamp": "2026-11-01T12:28:59.986722",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "RB Bragantino",
     "away": "Santos FC",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -1996,7 +2000,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-1"
   },
   "575377": {
     "timestamp": "2026-11-01T12:29:01.230349",
