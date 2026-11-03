@@ -2018,7 +2018,7 @@
   },
   "575378": {
     "timestamp": "2026-11-01T12:29:02.472471",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Galatasaray SK",
     "away": "VfB Stuttgart",
     "league": "UEFA Champions League",
@@ -2027,7 +2027,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-0"
   },
   "561928": {
     "timestamp": "2026-11-01T12:29:03.709551",
