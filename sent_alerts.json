@@ -2075,7 +2075,7 @@
   },
   "561920": {
     "timestamp": "2026-11-01T12:29:07.428739",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Queens Park Rangers FC",
     "away": "Burnley FC",
     "league": "Championship",
@@ -2084,7 +2084,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-1"
   },
   "561922": {
     "timestamp": "2026-11-01T12:29:08.671385",
@@ -2130,7 +2131,7 @@
   },
   "575385": {
     "timestamp": "2026-11-01T12:29:13.076556",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "LASK Linz",
     "away": "\u0160K Slovan Bratislava",
     "league": "UEFA Champions League",
@@ -2139,7 +2140,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "4-0"
   },
   "575381": {
     "timestamp": "2026-11-01T12:29:14.519518",
@@ -2171,7 +2173,7 @@
   },
   "575383": {
     "timestamp": "2026-11-01T12:29:17.531466",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Manchester United FC",
     "away": "AS Roma",
     "league": "UEFA Champions League",
@@ -2180,11 +2182,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "3-2"
   },
   "561923": {
     "timestamp": "2026-11-01T12:29:18.830825",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "West Bromwich Albion FC",
     "away": "Southampton FC",
     "league": "Championship",
@@ -2193,11 +2196,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-1"
   },
   "575379": {
     "timestamp": "2026-11-01T12:29:20.103640",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Feyenoord Rotterdam",
     "away": "FC Internazionale Milano",
     "league": "UEFA Champions League",
@@ -2206,11 +2210,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-3"
   },
   "575380": {
     "timestamp": "2026-11-01T12:29:21.664284",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "FC Barcelona",
     "away": "Aston Villa FC",
     "league": "UEFA Champions League",
@@ -2219,11 +2224,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "3-0"
   },
   "575382": {
     "timestamp": "2026-11-01T12:29:22.913680",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Villarreal CF",
     "away": "Paris Saint-Germain FC",
     "league": "UEFA Champions League",
@@ -2232,11 +2238,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-6"
   },
   "575384": {
     "timestamp": "2026-11-01T12:29:24.207935",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "FK Bod\u00f8/Glimt",
     "away": "Lille OSC",
     "league": "UEFA Champions League",
@@ -2245,13 +2252,353 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-0"
   },
   "555073": {
     "timestamp": "2026-11-01T12:29:25.445766",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Chapecoense AF",
     "away": "Mirassol FC",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-2"
+  },
+  "555076": {
+    "timestamp": "2026-11-04T19:13:27.133972",
+    "status": "SENT",
+    "home": "SC Internacional",
+    "away": "Coritiba FBC",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "575387": {
+    "timestamp": "2026-11-04T19:13:29.048816",
+    "status": "SENT",
+    "home": "Fenerbah\u00e7e SK",
+    "away": "Liverpool FC",
+    "league": "UEFA Champions League",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "575386": {
+    "timestamp": "2026-11-04T19:13:30.990921",
+    "status": "SENT",
+    "home": "PAE AEK",
+    "away": "Real Madrid CF",
+    "league": "UEFA Champions League",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "561925": {
+    "timestamp": "2026-11-04T19:13:32.558604",
+    "status": "SENT",
+    "home": "Cardiff City FC",
+    "away": "West Ham United FC",
+    "league": "Championship",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "561927": {
+    "timestamp": "2026-11-04T19:13:34.195857",
+    "status": "SENT",
+    "home": "Wrexham AFC",
+    "away": "Middlesbrough FC",
+    "league": "Championship",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "575389": {
+    "timestamp": "2026-11-04T19:13:35.743948",
+    "status": "SENT",
+    "home": "SK Slavia Praha",
+    "away": "Arsenal FC",
+    "league": "UEFA Champions League",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "575391": {
+    "timestamp": "2026-11-04T19:13:37.276932",
+    "status": "SENT",
+    "home": "Borussia Dortmund",
+    "away": "Real Betis Balompi\u00e9",
+    "league": "UEFA Champions League",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "561926": {
+    "timestamp": "2026-11-04T19:13:38.808356",
+    "status": "SENT",
+    "home": "Bristol City FC",
+    "away": "Wolverhampton Wanderers FC",
+    "league": "Championship",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "575393": {
+    "timestamp": "2026-11-04T19:13:40.897048",
+    "status": "SENT",
+    "home": "Racing Club de Lens",
+    "away": "Como 1907",
+    "league": "UEFA Champions League",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "575394": {
+    "timestamp": "2026-11-04T19:13:42.459698",
+    "status": "SENT",
+    "home": "Viking FK",
+    "away": "Sabah FK",
+    "league": "UEFA Champions League",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "575390": {
+    "timestamp": "2026-11-04T19:13:44.096801",
+    "status": "SENT",
+    "home": "PSV",
+    "away": "Club Brugge KV",
+    "league": "UEFA Champions League",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "575392": {
+    "timestamp": "2026-11-04T19:13:45.622537",
+    "status": "SENT",
+    "home": "FC Porto",
+    "away": "SSC Napoli",
+    "league": "UEFA Champions League",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "575388": {
+    "timestamp": "2026-11-04T19:13:47.181112",
+    "status": "SENT",
+    "home": "RB Leipzig",
+    "away": "Manchester City FC",
+    "league": "UEFA Champions League",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "555075": {
+    "timestamp": "2026-11-04T19:13:48.722025",
+    "status": "SENT",
+    "home": "CR Flamengo",
+    "away": "Gr\u00eamio FBPA",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "555070": {
+    "timestamp": "2026-11-04T19:13:50.270924",
+    "status": "SENT",
+    "home": "CA Paranaense",
+    "away": "CR Vasco da Gama",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "555071": {
+    "timestamp": "2026-11-04T19:13:51.918509",
+    "status": "SENT",
+    "home": "Botafogo FR",
+    "away": "CA Mineiro",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "555078": {
+    "timestamp": "2026-11-04T19:13:53.478802",
+    "status": "SENT",
+    "home": "S\u00e3o Paulo FC",
+    "away": "SC Corinthians Paulista",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "555077": {
+    "timestamp": "2026-11-04T19:13:55.026383",
+    "status": "SENT",
+    "home": "SE Palmeiras",
+    "away": "Clube do Remo",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "555074": {
+    "timestamp": "2026-11-04T19:13:56.556160",
+    "status": "SENT",
+    "home": "Cruzeiro EC",
+    "away": "EC Bahia",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "565852": {
+    "timestamp": "2026-11-04T19:13:58.180729",
+    "status": "SENT",
+    "home": "Hamburger SV",
+    "away": "Borussia M\u00f6nchengladbach",
+    "league": "Bundesliga",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "559638": {
+    "timestamp": "2026-11-04T19:13:59.770524",
+    "status": "SENT",
+    "home": "Toulouse FC",
+    "away": "RC Strasbourg Alsace",
+    "league": "Ligue 1",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "558537": {
+    "timestamp": "2026-11-04T19:14:01.410223",
+    "status": "SENT",
+    "home": "Venezia FC",
+    "away": "Udinese Calcio",
+    "league": "Serie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "561932": {
+    "timestamp": "2026-11-04T19:14:03.250075",
+    "status": "SENT",
+    "home": "Derby County FC",
+    "away": "Bolton Wanderers FC",
+    "league": "Championship",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "564740": {
+    "timestamp": "2026-11-04T19:14:04.851876",
+    "status": "SENT",
+    "home": "Sevilla FC",
+    "away": "Deportivo Alav\u00e9s",
+    "league": "Primera Division",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "560634": {
+    "timestamp": "2026-11-04T19:14:06.496318",
+    "status": "SENT",
+    "home": "Everton FC",
+    "away": "Coventry City FC",
+    "league": "Premier League",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "555079": {
+    "timestamp": "2026-11-04T19:14:08.072208",
+    "status": "SENT",
+    "home": "EC Vit\u00f3ria",
+    "away": "Fluminense FC",
     "league": "Campeonato Brasileiro S\u00e9rie A",
     "picks": [
       "1X",
