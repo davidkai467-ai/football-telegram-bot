@@ -2005,7 +2005,7 @@
   },
   "575377": {
     "timestamp": "2026-11-01T12:29:01.230349",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "FK Shakhtar Donetsk",
     "away": "Sporting Clube de Portugal",
     "league": "UEFA Champions League",
@@ -2014,7 +2014,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-1"
   },
   "575378": {
     "timestamp": "2026-11-01T12:29:02.472471",
@@ -2032,7 +2033,7 @@
   },
   "561928": {
     "timestamp": "2026-11-01T12:29:03.709551",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Charlton Athletic FC",
     "away": "Bolton Wanderers FC",
     "league": "Championship",
@@ -2041,11 +2042,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-1"
   },
   "561921": {
     "timestamp": "2026-11-01T12:29:04.930584",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Derby County FC",
     "away": "Norwich City FC",
     "league": "Championship",
@@ -2054,11 +2056,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-4"
   },
   "561919": {
     "timestamp": "2026-11-01T12:29:06.178641",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Preston North End FC",
     "away": "Sheffield United FC",
     "league": "Championship",
@@ -2067,7 +2070,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-3"
   },
   "561920": {
     "timestamp": "2026-11-01T12:29:07.428739",
@@ -2084,7 +2088,7 @@
   },
   "561922": {
     "timestamp": "2026-11-01T12:29:08.671385",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Blackburn Rovers FC",
     "away": "Stoke City FC",
     "league": "Championship",
@@ -2093,11 +2097,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-2"
   },
   "561918": {
     "timestamp": "2026-11-01T12:29:09.901234",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Portsmouth FC",
     "away": "Swansea City AFC",
     "league": "Championship",
@@ -2106,11 +2111,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "3-1"
   },
   "561924": {
     "timestamp": "2026-11-01T12:29:11.669811",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Watford FC",
     "away": "Lincoln City FC",
     "league": "Championship",
@@ -2119,7 +2125,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-0"
   },
   "575385": {
     "timestamp": "2026-11-01T12:29:13.076556",
@@ -2136,7 +2143,7 @@
   },
   "575381": {
     "timestamp": "2026-11-01T12:29:14.519518",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Club Atl\u00e9tico de Madrid",
     "away": "FC Bayern M\u00fcnchen",
     "league": "UEFA Champions League",
@@ -2145,11 +2152,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-2"
   },
   "561917": {
     "timestamp": "2026-11-01T12:29:15.939974",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Birmingham City FC",
     "away": "Millwall FC",
     "league": "Championship",
@@ -2158,7 +2166,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "3-0"
   },
   "575383": {
     "timestamp": "2026-11-01T12:29:17.531466",
