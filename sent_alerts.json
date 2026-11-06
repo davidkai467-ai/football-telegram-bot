@@ -2523,7 +2523,7 @@
   },
   "555074": {
     "timestamp": "2026-11-04T19:13:56.556160",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Cruzeiro EC",
     "away": "EC Bahia",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -2532,7 +2532,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "3-2"
   },
   "565852": {
     "timestamp": "2026-11-04T19:13:58.180729",
