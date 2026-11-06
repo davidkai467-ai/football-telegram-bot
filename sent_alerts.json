@@ -2509,7 +2509,7 @@
   },
   "555077": {
     "timestamp": "2026-11-04T19:13:55.026383",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "SE Palmeiras",
     "away": "Clube do Remo",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -2518,7 +2518,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "6-1"
   },
   "555074": {
     "timestamp": "2026-11-04T19:13:56.556160",
