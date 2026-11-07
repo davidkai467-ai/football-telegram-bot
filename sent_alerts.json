@@ -2635,7 +2635,7 @@
   },
   "561938": {
     "timestamp": "2026-11-05T19:19:30.115022",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Portsmouth FC",
     "away": "Stoke City FC",
     "league": "Championship",
@@ -2644,11 +2644,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-2"
   },
   "560632": {
     "timestamp": "2026-11-05T19:19:31.912359",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Leeds United FC",
     "away": "Tottenham Hotspur FC",
     "league": "Premier League",
@@ -2657,11 +2658,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-0"
   },
   "561933": {
     "timestamp": "2026-11-05T19:19:33.931754",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Wrexham AFC",
     "away": "Wolverhampton Wanderers FC",
     "league": "Championship",
@@ -2670,11 +2672,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-1"
   },
   "561939": {
     "timestamp": "2026-11-05T19:19:35.752058",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Bristol City FC",
     "away": "Norwich City FC",
     "league": "Championship",
@@ -2683,11 +2686,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-5"
   },
   "564744": {
     "timestamp": "2026-11-05T19:19:37.713656",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "M\u00e1laga CF",
     "away": "Real Racing Club de Santander",
     "league": "Primera Division",
@@ -2696,11 +2700,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-2"
   },
   "558532": {
     "timestamp": "2026-11-05T19:19:39.692597",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Torino FC",
     "away": "US Lecce",
     "league": "Serie A",
@@ -2709,11 +2714,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-1"
   },
   "558534": {
     "timestamp": "2026-11-05T19:19:41.556637",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Cagliari Calcio",
     "away": "Frosinone Calcio",
     "league": "Serie A",
@@ -2722,11 +2728,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-0"
   },
   "565850": {
     "timestamp": "2026-11-05T19:19:43.445402",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Borussia Dortmund",
     "away": "SV 07 Elversberg",
     "league": "Bundesliga",
@@ -2735,11 +2742,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-1"
   },
   "565848": {
     "timestamp": "2026-11-05T19:19:45.313807",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "RB Leipzig",
     "away": "FC Augsburg",
     "league": "Bundesliga",
@@ -2748,11 +2756,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "5-2"
   },
   "565851": {
     "timestamp": "2026-11-05T19:19:47.255987",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "1. FSV Mainz 05",
     "away": "FC Bayern M\u00fcnchen",
     "league": "Bundesliga",
@@ -2761,11 +2770,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-2"
   },
   "565853": {
     "timestamp": "2026-11-05T19:19:49.293527",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "SC Paderborn 07",
     "away": "Eintracht Frankfurt",
     "league": "Bundesliga",
@@ -2774,7 +2784,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-2"
   },
   "561930": {
     "timestamp": "2026-11-05T19:19:51.277490",
