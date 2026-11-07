@@ -2621,7 +2621,7 @@
   },
   "555079": {
     "timestamp": "2026-11-04T19:14:08.072208",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "EC Vit\u00f3ria",
     "away": "Fluminense FC",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -2630,7 +2630,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-3"
   },
   "561938": {
     "timestamp": "2026-11-05T19:19:30.115022",
