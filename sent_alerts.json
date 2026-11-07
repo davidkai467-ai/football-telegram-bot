@@ -2537,7 +2537,7 @@
   },
   "565852": {
     "timestamp": "2026-11-04T19:13:58.180729",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Hamburger SV",
     "away": "Borussia M\u00f6nchengladbach",
     "league": "Bundesliga",
@@ -2546,11 +2546,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "3-1"
   },
   "559638": {
     "timestamp": "2026-11-04T19:13:59.770524",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Toulouse FC",
     "away": "RC Strasbourg Alsace",
     "league": "Ligue 1",
@@ -2559,11 +2560,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "3-1"
   },
   "558537": {
     "timestamp": "2026-11-04T19:14:01.410223",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Venezia FC",
     "away": "Udinese Calcio",
     "league": "Serie A",
@@ -2572,11 +2574,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-1"
   },
   "561932": {
     "timestamp": "2026-11-04T19:14:03.250075",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Derby County FC",
     "away": "Bolton Wanderers FC",
     "league": "Championship",
@@ -2585,11 +2588,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "3-1"
   },
   "564740": {
     "timestamp": "2026-11-04T19:14:04.851876",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Sevilla FC",
     "away": "Deportivo Alav\u00e9s",
     "league": "Primera Division",
@@ -2598,11 +2602,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-0"
   },
   "560634": {
     "timestamp": "2026-11-04T19:14:06.496318",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Everton FC",
     "away": "Coventry City FC",
     "league": "Premier League",
@@ -2611,7 +2616,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "3-1"
   },
   "555079": {
     "timestamp": "2026-11-04T19:14:08.072208",
