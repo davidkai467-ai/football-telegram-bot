@@ -3138,7 +3138,7 @@
   },
   "558536": {
     "timestamp": "2026-11-08T03:48:52.289219",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Genoa CFC",
     "away": "AC Milan",
     "league": "Serie A",
@@ -3147,7 +3147,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-2"
   },
   "560638": {
     "timestamp": "2026-11-08T03:48:54.106314",
@@ -3165,7 +3166,7 @@
   },
   "560636": {
     "timestamp": "2026-11-08T03:48:55.930057",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Sunderland AFC",
     "away": "Chelsea FC",
     "league": "Premier League",
@@ -3174,7 +3175,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-0"
   },
   "565855": {
     "timestamp": "2026-11-08T03:48:57.749453",
@@ -3206,7 +3208,7 @@
   },
   "559632": {
     "timestamp": "2026-11-08T03:49:01.361820",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Stade Brestois 29",
     "away": "Olympique Lyonnais",
     "league": "Ligue 1",
@@ -3215,11 +3217,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-0"
   },
   "559634": {
     "timestamp": "2026-11-08T03:49:03.195263",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Angers SCO",
     "away": "OGC Nice",
     "league": "Ligue 1",
@@ -3228,7 +3231,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-2"
   },
   "559631": {
     "timestamp": "2026-11-08T03:49:05.048947",
@@ -3245,7 +3249,7 @@
   },
   "559633": {
     "timestamp": "2026-11-08T03:49:06.876782",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Le Havre AC",
     "away": "FC Lorient",
     "league": "Ligue 1",
@@ -3254,11 +3258,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-2"
   },
   "560639": {
     "timestamp": "2026-11-08T03:49:08.668908",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Manchester United FC",
     "away": "Aston Villa FC",
     "league": "Premier League",
@@ -3267,11 +3272,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "4-4"
   },
   "565854": {
     "timestamp": "2026-11-08T03:49:10.602789",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "SC Freiburg",
     "away": "1. FC Union Berlin",
     "league": "Bundesliga",
@@ -3280,11 +3286,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-0"
   },
   "558530": {
     "timestamp": "2026-11-08T03:49:12.424727",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "FC Internazionale Milano",
     "away": "Como 1907",
     "league": "Serie A",
@@ -3293,11 +3300,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-0"
   },
   "564742": {
     "timestamp": "2026-11-08T03:49:14.287340",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "RC Celta de Vigo",
     "away": "Levante UD",
     "league": "Primera Division",
@@ -3306,11 +3314,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-0"
   },
   "564747": {
     "timestamp": "2026-11-08T03:49:16.094055",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Villarreal CF",
     "away": "Getafe CF",
     "league": "Primera Division",
@@ -3319,7 +3328,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-0"
   },
   "565856": {
     "timestamp": "2026-11-08T03:49:18.053584",
