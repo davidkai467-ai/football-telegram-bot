@@ -3236,7 +3236,7 @@
   },
   "559631": {
     "timestamp": "2026-11-08T03:49:05.048947",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Le Mans FC",
     "away": "AS Monaco FC",
     "league": "Ligue 1",
@@ -3245,7 +3245,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-1"
   },
   "559633": {
     "timestamp": "2026-11-08T03:49:06.876782",
@@ -3333,7 +3334,7 @@
   },
   "565856": {
     "timestamp": "2026-11-08T03:49:18.053584",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "TSG 1899 Hoffenheim",
     "away": "FC Schalke 04",
     "league": "Bundesliga",
@@ -3342,11 +3343,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-1"
   },
   "559630": {
     "timestamp": "2026-11-08T03:49:19.890399",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Racing Club de Lens",
     "away": "Olympique de Marseille",
     "league": "Ligue 1",
@@ -3355,11 +3357,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-2"
   },
   "558529": {
     "timestamp": "2026-11-08T03:49:21.727328",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "ACF Fiorentina",
     "away": "Juventus FC",
     "league": "Serie A",
@@ -3368,11 +3371,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "2-2"
   },
   "564746": {
     "timestamp": "2026-11-08T03:49:23.520762",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Club Atl\u00e9tico de Madrid",
     "away": "FC Barcelona",
     "league": "Primera Division",
@@ -3381,6 +3385,7 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-2"
   }
 }
