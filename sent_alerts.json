@@ -3387,5 +3387,29 @@
     ],
     "best_pick": "Over 1.5 Goals",
     "score": "1-2"
+  },
+  "555085": {
+    "timestamp": "2026-11-12T05:17:42.754187",
+    "status": "SENT",
+    "home": "Mirassol FC",
+    "away": "CA Mineiro",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals"
+    ],
+    "best_pick": "1X"
+  },
+  "554942": {
+    "timestamp": "2026-11-12T05:17:44.578404",
+    "status": "SENT",
+    "home": "Chapecoense AF",
+    "away": "CR Vasco da Gama",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals"
+    ],
+    "best_pick": "1X"
   }
 }
