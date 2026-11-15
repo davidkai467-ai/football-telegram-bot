@@ -3403,7 +3403,7 @@
   },
   "554942": {
     "timestamp": "2026-11-12T05:17:44.578404",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Chapecoense AF",
     "away": "CR Vasco da Gama",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -3411,6 +3411,7 @@
       "1X",
       "Over 1.5 Goals"
     ],
-    "best_pick": "1X"
+    "best_pick": "1X",
+    "score": "0-2"
   }
 }
