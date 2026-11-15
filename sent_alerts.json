@@ -3390,7 +3390,7 @@
   },
   "555085": {
     "timestamp": "2026-11-12T05:17:42.754187",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Mirassol FC",
     "away": "CA Mineiro",
     "league": "Campeonato Brasileiro S\u00e9rie A",
@@ -3398,7 +3398,8 @@
       "1X",
       "Over 1.5 Goals"
     ],
-    "best_pick": "1X"
+    "best_pick": "1X",
+    "score": "0-0"
   },
   "554942": {
     "timestamp": "2026-11-12T05:17:44.578404",
