@@ -3413,5 +3413,53 @@
     ],
     "best_pick": "1X",
     "score": "0-2"
+  },
+  "555081": {
+    "timestamp": "2026-11-16T00:36:18.178792",
+    "status": "SENT",
+    "home": "Coritiba FBC",
+    "away": "Santos FC",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X"
+    ],
+    "best_pick": "1X"
+  },
+  "555086": {
+    "timestamp": "2026-11-16T00:36:20.751833",
+    "status": "SENT",
+    "home": "Clube do Remo",
+    "away": "Chapecoense AF",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X"
+    ],
+    "best_pick": "1X"
+  },
+  "555083": {
+    "timestamp": "2026-11-16T00:36:23.210911",
+    "status": "SENT",
+    "home": "CR Flamengo",
+    "away": "CA Paranaense",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "1X"
+  },
+  "555082": {
+    "timestamp": "2026-11-16T00:36:25.273246",
+    "status": "SENT",
+    "home": "Cruzeiro EC",
+    "away": "SE Palmeiras",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
   }
 }
