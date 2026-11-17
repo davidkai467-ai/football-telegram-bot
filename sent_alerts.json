@@ -3461,5 +3461,55 @@
       "12 & Over 1.5 Goals"
     ],
     "best_pick": "Over 1.5 Goals"
+  },
+  "555084": {
+    "timestamp": "2026-11-17T05:59:23.073538",
+    "status": "SENT",
+    "home": "Gr\u00eamio FBPA",
+    "away": "EC Bahia",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals"
+    ],
+    "best_pick": "1X"
+  },
+  "555080": {
+    "timestamp": "2026-11-17T05:59:24.870238",
+    "status": "SENT",
+    "home": "SC Corinthians Paulista",
+    "away": "Botafogo FR",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals"
+    ],
+    "best_pick": "1X"
+  },
+  "555089": {
+    "timestamp": "2026-11-17T05:59:27.004206",
+    "status": "SENT",
+    "home": "EC Vit\u00f3ria",
+    "away": "RB Bragantino",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
+  },
+  "555088": {
+    "timestamp": "2026-11-17T05:59:28.704885",
+    "status": "SENT",
+    "home": "CR Vasco da Gama",
+    "away": "SC Internacional",
+    "league": "Campeonato Brasileiro S\u00e9rie A",
+    "picks": [
+      "1X",
+      "Over 1.5 Goals",
+      "12 & Over 1.5 Goals"
+    ],
+    "best_pick": "Over 1.5 Goals"
   }
 }
