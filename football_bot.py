@@ -1,9 +1,50 @@
+"""
+Football prediction bot (v3)
+
+What changed compared with the old version:
+  1. Picks are now based on VALUE: model probability vs the bookmaker's no-vig
+     probability (needs ODDS_API_KEY). No odds = no value pick.
+  2. EVERY upcoming match is logged to predictions_log.csv before kickoff
+     (not only matches that pass a threshold), so calibration can be measured.
+  3. Results are written to results_log.csv, and `--report` shows live
+     log loss / Brier vs the market.
+  4. `--backtest` replays the model on past matches using only earlier data.
+  5. Correlated combo picks removed: at most one result-type pick and one
+     goals-type pick per match.
+  6. Rest days now use matches from ALL target competitions (league + Europe).
+  7. Teams with too little data are logged but never alerted.
+  8. Telegram messages use HTML mode (team names with _ or * no longer break).
+
+Usage:
+  python football_bot.py              # normal run (log, alert, verify)
+  python football_bot.py --backtest   # replay model on recent past matches
+  python football_bot.py --report     # live results from the logs
+
+Environment variables:
+  FOOTBALL_DATA_API_KEY   required (football-data.org)
+  TELEGRAM_BOT_TOKEN      required for alerts
+  TELEGRAM_CHAT_ID        required for alerts
+  ODDS_API_KEY            optional but strongly recommended (the-odds-api.com)
+"""
+
+import csv
+import difflib
+import html
 import json
 import math
 import os
+import sys
 import time
+import unicodedata
 from datetime import datetime, timedelta, timezone
+
 import requests
+
+# =============================================================================
+# SETTINGS
+# =============================================================================
+
+MODEL_VERSION = "v3-2026-11"
 
 TARGET_COMPETITIONS = [
     "PL",   # Premier League
@@ -13,29 +54,82 @@ TARGET_COMPETITIONS = [
     "BL1",  # Bundesliga
     "FL1",  # Ligue 1
     "CL",   # Champions League
-    "BSA",  # Brasileirão Serie A
+    "BSA",  # Brasileirao Serie A
 ]
 
+# The Odds API sport keys for the competitions above
+ODDS_SPORT_KEYS = {
+    "PL": "soccer_epl",
+    "ELC": "soccer_efl_champ",
+    "PD": "soccer_spain_la_liga",
+    "SA": "soccer_italy_serie_a",
+    "BL1": "soccer_germany_bundesliga",
+    "FL1": "soccer_france_ligue_one",
+    "CL": "soccer_uefa_champs_league",
+    "BSA": "soccer_brazil_campeonato",
+}
+
 API_BASE = "https://api.football-data.org/v4"
+ODDS_API_BASE = "https://api.the-odds-api.com/v4"
+ODDS_REGIONS = "eu,uk"
+
+# --- Model parameters (guesses for now; fit them with --backtest) ---
 HISTORY_DAYS = 365
 HALF_LIFE_DAYS = 120
 PRIOR_MATCHES = 6.0
 MAX_GOALS = 7
-ROLLING_WINDOW = 20
+DISPERSION = 0.2
+RHO = -0.11
 
-# Format: "Team Name": {"att_mult": 0.85, "def_mult": 1.10, "notes": "Missing key player"}
+# --- Data quality gates: below these the match is logged but never alerted ---
+MIN_LEAGUE_MATCHES = 20   # finished matches in the competition before kickoff
+MIN_TEAM_MATCHES = 8      # matches per team in that competition's history
+
+# --- Value rules ---
+MIN_EDGE = 0.04           # model prob minus market no-vig prob
+MIN_EV = 0.03             # expected value per 1 unit staked (when we have a price)
+MAX_ODDS = 5.0            # long shots are where model errors hide
+SUSPECT_EDGE = 0.12       # bigger gaps are flagged as probable model error
+
+# --- Fallback when no odds are available (informational only, NOT value) ---
+ALERT_WITHOUT_ODDS = False
+THRESHOLD_PICKS = {"1X": 0.68, "X2": 0.68, "OVER_1.5": 0.65, "UNDER_3.5": 0.82}
+
+# --- Reporting / backtest ---
+ROLLING_WINDOW = 20
+BACKTEST_DAYS = 150
+
+# Format: "Team Name": {"att_mult": 0.85, "def_mult": 1.10}
 INJURY_OVERRIDES = {}
 
+# --- Files ---
+SENT_ALERTS_FILE = "sent_alerts.json"
+PREDICTIONS_LOG = "predictions_log.csv"
+RESULTS_LOG = "results_log.csv"
+
+PREDICTION_FIELDS = [
+    "logged_at", "match_id", "league", "kickoff_utc", "home", "away",
+    "model_version", "method", "reliable", "home_xg", "away_xg",
+    "p_home", "p_draw", "p_away", "p_over15", "p_over25", "p_under35", "p_btts",
+    "mkt_home", "mkt_draw", "mkt_away", "mkt_over25",
+    "best_home", "best_draw", "best_away",
+]
+RESULT_FIELDS = ["match_id", "home_goals", "away_goals", "recorded_at"]
+
+# --- Credentials ---
 FOOTBALL_DATA_API_KEY = os.getenv("FOOTBALL_DATA_API_KEY", "").strip()
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "").strip()
-
-SENT_ALERTS_FILE = "sent_alerts.json"
+ODDS_API_KEY = os.getenv("ODDS_API_KEY", "").strip()
 
 session = requests.Session()
 if FOOTBALL_DATA_API_KEY:
     session.headers.update({"X-Auth-Token": FOOTBALL_DATA_API_KEY})
 
+
+# =============================================================================
+# SMALL HELPERS
+# =============================================================================
 
 def parse_utc_date(value):
     if not value:
@@ -44,6 +138,11 @@ def parse_utc_date(value):
         return datetime.fromisoformat(str(value).replace("Z", "+00:00"))
     except ValueError:
         return None
+
+
+def esc(text):
+    """Escape text for Telegram HTML mode."""
+    return html.escape(str(text), quote=False)
 
 
 def load_sent_alerts():
@@ -64,6 +163,23 @@ def save_sent_alerts(alerts):
     os.replace(tmp_path, SENT_ALERTS_FILE)
 
 
+def read_csv_rows(path):
+    if not os.path.exists(path):
+        return []
+    with open(path, "r", encoding="utf-8", newline="") as f:
+        return list(csv.DictReader(f))
+
+
+def append_csv_row(path, fields, row):
+    """Append only. Never rewrites old rows."""
+    is_new = not os.path.exists(path)
+    with open(path, "a", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fields)
+        if is_new:
+            writer.writeheader()
+        writer.writerow({k: row.get(k, "") for k in fields})
+
+
 def send_telegram_message(message):
     if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
         print("Telegram credentials missing; skipping message.")
@@ -72,7 +188,7 @@ def send_telegram_message(message):
     payload = {
         "chat_id": TELEGRAM_CHAT_ID,
         "text": message,
-        "parse_mode": "Markdown",
+        "parse_mode": "HTML",
         "disable_web_page_preview": True,
     }
     try:
@@ -101,6 +217,10 @@ def api_get(path, params=None):
                 time.sleep(2 ** attempt)
     return None
 
+
+# =============================================================================
+# FOOTBALL DATA (fixtures and history)
+# =============================================================================
 
 def fetch_upcoming_matches(days_ahead=5):
     today = datetime.now(timezone.utc).date()
@@ -164,10 +284,23 @@ def fetch_competition_history(code):
     return matches
 
 
-def calculate_rest_days(history, team_id, kickoff):
+def merge_histories(histories):
+    """One combined list of finished matches from all competitions (for rest days)."""
+    by_id = {}
+    for matches in histories.values():
+        for m in matches:
+            by_id[m["id"]] = m
+    return sorted(by_id.values(), key=lambda m: m["_kickoff"])
+
+
+# =============================================================================
+# MODEL: goal rates -> score matrix -> market probabilities
+# =============================================================================
+
+def calculate_rest_days(all_history, team_id, kickoff):
     prev_games = [
         m["_kickoff"]
-        for m in history
+        for m in all_history
         if m["_kickoff"] < kickoff
         and (
             m.get("homeTeam", {}).get("id") == team_id
@@ -215,15 +348,27 @@ def weighted_team_rate(matches, team_id, venue, metric, league_average, as_of):
     return (weighted_goals + PRIOR_MATCHES * league_average) / (total_weight + PRIOR_MATCHES)
 
 
-def estimate_goal_rates(history, home_name, away_name, home_id, away_id, kickoff):
+def estimate_goal_rates(history, home_name, away_name, home_id, away_id, kickoff, all_history=None):
+    """Expected goals for both teams, using ONLY matches played before kickoff."""
+    if all_history is None:
+        all_history = history
+
+    home_rest = calculate_rest_days(all_history, home_id, kickoff)
+    away_rest = calculate_rest_days(all_history, away_id, kickoff)
+
+    result = {
+        "home_xg": 1.48, "away_xg": 1.18, "method": "fallback",
+        "home_rest": home_rest, "away_rest": away_rest,
+        "home_n": 0, "away_n": 0,
+    }
+
     usable = [m for m in history if m["_kickoff"] < kickoff]
-    if len(usable) < 20:
-        return 1.48, 1.18, "fallback", len(usable), 7.0, 7.0
+    if len(usable) < MIN_LEAGUE_MATCHES:
+        return result
 
     total_weight = 0.0
     home_g_w = 0.0
     away_g_w = 0.0
-
     for match in usable:
         age_days = max(0.0, (kickoff - match["_kickoff"]).total_seconds() / 86400.0)
         weight = 0.5 ** (age_days / HALF_LIFE_DAYS)
@@ -232,7 +377,7 @@ def estimate_goal_rates(history, home_name, away_name, home_id, away_id, kickoff
         away_g_w += match["_away_goals"] * weight
 
     if total_weight <= 0:
-        return 1.48, 1.18, "fallback", len(usable), 7.0, 7.0
+        return result
 
     league_home_avg = home_g_w / total_weight
     league_away_avg = away_g_w / total_weight
@@ -242,13 +387,11 @@ def estimate_goal_rates(history, home_name, away_name, home_id, away_id, kickoff
     away_attack = weighted_team_rate(usable, away_id, "away", "scored", league_away_avg, kickoff)
     away_defence = weighted_team_rate(usable, away_id, "away", "conceded", league_home_avg, kickoff)
 
-    home_rest = calculate_rest_days(usable, home_id, kickoff)
-    away_rest = calculate_rest_days(usable, away_id, kickoff)
     home_att_mult, home_def_mult = get_fatigue_multiplier(home_rest)
     away_att_mult, away_def_mult = get_fatigue_multiplier(away_rest)
 
-    home_inj = INJURY_OVERRIDES.get(home_name, {"att_mult": 1.0, "def_mult": 1.0})
-    away_inj = INJURY_OVERRIDES.get(away_name, {"att_mult": 1.0, "def_mult": 1.0})
+    home_inj = INJURY_OVERRIDES.get(home_name, {})
+    away_inj = INJURY_OVERRIDES.get(away_name, {})
 
     eff_home_att = home_attack * home_att_mult * home_inj.get("att_mult", 1.0)
     eff_home_def = home_defence * home_def_mult * home_inj.get("def_mult", 1.0)
@@ -258,24 +401,34 @@ def estimate_goal_rates(history, home_name, away_name, home_id, away_id, kickoff
     expected_home = (eff_home_att * eff_away_def) / max(league_home_avg, 0.2)
     expected_away = (eff_away_att * eff_home_def) / max(league_away_avg, 0.2)
 
-    expected_home = min(3.5, max(0.3, expected_home))
-    expected_away = min(3.5, max(0.3, expected_away))
+    result["home_xg"] = round(min(3.5, max(0.3, expected_home)), 2)
+    result["away_xg"] = round(min(3.5, max(0.3, expected_away)), 2)
+    result["method"] = "attack-defense+rest"
+    result["home_n"] = sum(
+        1 for m in usable
+        if home_id in (m["homeTeam"].get("id"), m["awayTeam"].get("id"))
+    )
+    result["away_n"] = sum(
+        1 for m in usable
+        if away_id in (m["homeTeam"].get("id"), m["awayTeam"].get("id"))
+    )
+    return result
 
-    return round(expected_home, 2), round(expected_away, 2), "attack-defense+rest", len(usable), home_rest, away_rest
 
-
-def negative_binomial_prob(mu, k, dispersion=0.2):
+def negative_binomial_prob(mu, k, dispersion=DISPERSION):
+    """Negative binomial probability of k goals given mean mu (log-space for stability)."""
     if mu <= 0:
         return 1.0 if k == 0 else 0.0
     r = 1.0 / dispersion
-    try:
-        coef = math.gamma(k + r) / (math.factorial(k) * math.gamma(r))
-        return max(0.0, coef * ((r / (r + mu)) ** r) * ((mu / (r + mu)) ** k))
-    except (ValueError, OverflowError):
-        return (mu ** k) * math.exp(-mu) / math.factorial(k)
+    log_p = (
+        math.lgamma(k + r) - math.lgamma(r) - math.lgamma(k + 1)
+        + r * math.log(r / (r + mu))
+        + k * math.log(mu / (r + mu))
+    )
+    return math.exp(log_p)
 
 
-def dixon_coles_tau(x, y, home_xg, away_xg, rho=-0.11):
+def dixon_coles_tau(x, y, home_xg, away_xg, rho=RHO):
     if x == 0 and y == 0:
         return max(0.0, 1.0 - (home_xg * away_xg * rho))
     if x == 1 and y == 0:
@@ -287,275 +440,749 @@ def dixon_coles_tau(x, y, home_xg, away_xg, rho=-0.11):
     return 1.0
 
 
-def build_score_matrix(home_xg, away_xg):
+def build_score_matrix(home_xg, away_xg, dispersion=DISPERSION, rho=RHO):
     matrix = {}
     total = 0.0
     for h in range(MAX_GOALS + 1):
         for a in range(MAX_GOALS + 1):
-            p = negative_binomial_prob(home_xg, h) * negative_binomial_prob(away_xg, a)
-            p *= dixon_coles_tau(h, a, home_xg, away_xg)
+            p = negative_binomial_prob(home_xg, h, dispersion) * negative_binomial_prob(away_xg, a, dispersion)
+            p *= dixon_coles_tau(h, a, home_xg, away_xg, rho)
             p = max(0.0, p)
             matrix[(h, a)] = p
             total += p
-
     if total > 0:
         for key in matrix:
             matrix[key] /= total
     return matrix
 
 
-def generate_prediction_message(match, history):
-    league = match.get("competition", {}).get("name", "Unknown League")
-    home_data = match.get("homeTeam", {})
-    away_data = match.get("awayTeam", {})
-    home = home_data.get("name", "Home")
-    away = away_data.get("name", "Away")
+def market_probabilities(matrix):
+    """Model probability for every market we can compare against bookmaker prices."""
+    def s(cond):
+        return sum(p for (h, a), p in matrix.items() if cond(h, a))
 
-    kickoff = parse_utc_date(match.get("utcDate")) or datetime.now(timezone.utc)
-    kickoff_str = kickoff.strftime("%Y-%m-%d %H:%M UTC")
+    return {
+        "HOME": s(lambda h, a: h > a),
+        "DRAW": s(lambda h, a: h == a),
+        "AWAY": s(lambda h, a: a > h),
+        "1X": s(lambda h, a: h >= a),
+        "X2": s(lambda h, a: a >= h),
+        "OVER_1.5": s(lambda h, a: h + a >= 2),
+        "UNDER_1.5": s(lambda h, a: h + a <= 1),
+        "OVER_2.5": s(lambda h, a: h + a >= 3),
+        "UNDER_2.5": s(lambda h, a: h + a <= 2),
+        "OVER_3.5": s(lambda h, a: h + a >= 4),
+        "UNDER_3.5": s(lambda h, a: h + a <= 3),
+        "BTTS_YES": s(lambda h, a: h > 0 and a > 0),
+    }
 
-    home_xg, away_xg, _, _, home_rest, away_rest = estimate_goal_rates(
-        history, home, away, home_data.get("id"), away_data.get("id"), kickoff
+
+def predict_match(history, all_history, home_name, away_name, home_id, away_id, kickoff):
+    rates = estimate_goal_rates(history, home_name, away_name, home_id, away_id, kickoff, all_history)
+    matrix = build_score_matrix(rates["home_xg"], rates["away_xg"])
+    rates["probs"] = market_probabilities(matrix)
+    rates["reliable"] = (
+        rates["method"] != "fallback"
+        and rates["home_n"] >= MIN_TEAM_MATCHES
+        and rates["away_n"] >= MIN_TEAM_MATCHES
     )
+    return rates
 
-    prob_matrix = build_score_matrix(home_xg, away_xg)
 
-    prob_1x = sum(p for (h, a), p in prob_matrix.items() if h >= a)
-    prob_x2 = sum(p for (h, a), p in prob_matrix.items() if a >= h)
-    prob_over_15 = sum(p for (h, a), p in prob_matrix.items() if (h + a) >= 2)
-    prob_under_35 = sum(p for (h, a), p in prob_matrix.items() if (h + a) <= 3)
+# =============================================================================
+# ODDS (The Odds API): market probabilities with the bookmaker margin removed
+# =============================================================================
 
-    combo_12_over15 = sum(p for (h, a), p in prob_matrix.items() if (h != a) and ((h + a) >= 2))
-    combo_x2_over05 = sum(p for (h, a), p in prob_matrix.items() if (a >= h) and ((h + a) >= 1))
-    combo_x2_over15 = sum(p for (h, a), p in prob_matrix.items() if (a >= h) and ((h + a) >= 2))
-    combo_btts_x2 = sum(p for (h, a), p in prob_matrix.items() if (h > 0 and a > 0) and (a >= h))
-    combo_btts_12 = sum(p for (h, a), p in prob_matrix.items() if (h > 0 and a > 0) and (h != a))
-    combo_btts_over25 = sum(p for (h, a), p in prob_matrix.items() if (h > 0 and a > 0) and ((h + a) >= 3))
+NAME_NOISE = {"fc", "afc", "cf", "sc", "ac", "as", "ssc", "ud", "rcd", "cd", "fk", "sk", "the", "club"}
 
+
+def normalize_name(name):
+    text = unicodedata.normalize("NFKD", name or "").encode("ascii", "ignore").decode().lower()
+    text = "".join(ch if ch.isalnum() or ch == " " else " " for ch in text)
+    words = [w for w in text.split() if w not in NAME_NOISE and not w.isdigit()]
+    return " ".join(words)
+
+
+def name_similarity(a, b):
+    na, nb = normalize_name(a), normalize_name(b)
+    if not na or not nb:
+        return 0.0
+    if na in nb or nb in na:
+        return 0.9
+    return difflib.SequenceMatcher(None, na, nb).ratio()
+
+
+def remove_vig(decimal_odds):
+    inverse = [1.0 / o for o in decimal_odds]
+    total = sum(inverse)
+    return [x / total for x in inverse]
+
+
+def fetch_odds_events(code):
+    sport = ODDS_SPORT_KEYS.get(code)
+    if not sport or not ODDS_API_KEY:
+        return []
+    try:
+        res = requests.get(
+            f"{ODDS_API_BASE}/sports/{sport}/odds",
+            params={
+                "apiKey": ODDS_API_KEY,
+                "regions": ODDS_REGIONS,
+                "markets": "h2h,totals",
+                "oddsFormat": "decimal",
+                "dateFormat": "iso",
+            },
+            timeout=25,
+        )
+        if res.status_code != 200:
+            print(f"Odds API error for {code}: HTTP {res.status_code}")
+            return []
+        print(f"Odds API requests remaining: {res.headers.get('x-requests-remaining', '?')}")
+        return res.json()
+    except Exception as exc:
+        print(f"Odds API error for {code}: {exc}")
+        return []
+
+
+def find_odds_event(events, home, away, kickoff):
+    best_event, best_score = None, 0.0
+    for event in events:
+        commence = parse_utc_date(event.get("commence_time"))
+        if commence and abs((commence - kickoff).total_seconds()) > 18 * 3600:
+            continue
+        score = min(
+            name_similarity(home, event.get("home_team", "")),
+            name_similarity(away, event.get("away_team", "")),
+        )
+        if score > best_score:
+            best_event, best_score = event, score
+    return best_event if best_score >= 0.6 else None
+
+
+def extract_market_prices(event):
+    """
+    Returns {market_key: {"mkt_prob": average no-vig prob across bookmakers,
+                          "best_odds": best decimal price or None}}.
+    1X and X2 come from the no-vig 1X2 probabilities (no price, so best_odds is None).
+    """
+    h2h_probs = []
+    best = {}
+    totals = {}
+
+    for bookmaker in event.get("bookmakers", []):
+        for market in bookmaker.get("markets", []):
+            if market.get("key") == "h2h":
+                prices = {o.get("name"): o.get("price") for o in market.get("outcomes", [])}
+                hp = prices.get(event.get("home_team"))
+                ap = prices.get(event.get("away_team"))
+                dp = prices.get("Draw")
+                if hp and ap and dp:
+                    h2h_probs.append(remove_vig([hp, dp, ap]))
+                    for key, price in (("HOME", hp), ("DRAW", dp), ("AWAY", ap)):
+                        best[key] = max(best.get(key, 0.0), price)
+            elif market.get("key") == "totals":
+                by_point = {}
+                for outcome in market.get("outcomes", []):
+                    by_point.setdefault(outcome.get("point"), {})[outcome.get("name")] = outcome.get("price")
+                for point, pair in by_point.items():
+                    if point in (1.5, 2.5, 3.5) and pair.get("Over") and pair.get("Under"):
+                        over_p, under_p = remove_vig([pair["Over"], pair["Under"]])
+                        slot = totals.setdefault(point, {"over": [], "under": [], "best_over": 0.0, "best_under": 0.0})
+                        slot["over"].append(over_p)
+                        slot["under"].append(under_p)
+                        slot["best_over"] = max(slot["best_over"], pair["Over"])
+                        slot["best_under"] = max(slot["best_under"], pair["Under"])
+
+    prices = {}
+    if h2h_probs:
+        n = len(h2h_probs)
+        mh = sum(p[0] for p in h2h_probs) / n
+        md = sum(p[1] for p in h2h_probs) / n
+        ma = sum(p[2] for p in h2h_probs) / n
+        prices["HOME"] = {"mkt_prob": mh, "best_odds": best.get("HOME")}
+        prices["DRAW"] = {"mkt_prob": md, "best_odds": best.get("DRAW")}
+        prices["AWAY"] = {"mkt_prob": ma, "best_odds": best.get("AWAY")}
+        prices["1X"] = {"mkt_prob": mh + md, "best_odds": None}
+        prices["X2"] = {"mkt_prob": md + ma, "best_odds": None}
+
+    for point, slot in totals.items():
+        tag = f"{point:.1f}"
+        prices[f"OVER_{tag}"] = {
+            "mkt_prob": sum(slot["over"]) / len(slot["over"]),
+            "best_odds": slot["best_over"] or None,
+        }
+        prices[f"UNDER_{tag}"] = {
+            "mkt_prob": sum(slot["under"]) / len(slot["under"]),
+            "best_odds": slot["best_under"] or None,
+        }
+    return prices
+
+
+# =============================================================================
+# PICK SELECTION
+# =============================================================================
+
+def pick_label(key, home, away):
+    labels = {
+        "HOME": f"{home} to win",
+        "DRAW": "Draw",
+        "AWAY": f"{away} to win",
+        "1X": f"{home} or Draw (1X)",
+        "X2": f"Draw or {away} (X2)",
+    }
+    if key in labels:
+        return labels[key]
+    side, line = key.split("_")
+    return f"{side.title()} {line} Goals"
+
+
+def pick_family(key):
+    """Picks in the same family are correlated, so we keep only the best one."""
+    return "result" if key in {"HOME", "DRAW", "AWAY", "1X", "X2"} else "goals"
+
+
+def select_value_picks(probs, prices):
     candidates = []
-    if prob_1x >= 0.68:
-        candidates.append(("1X", prob_1x, f"1X ({prob_1x * 100:.1f}%)"))
-    if prob_x2 >= 0.68:
-        candidates.append(("X2", prob_x2, f"X2 ({prob_x2 * 100:.1f}%)"))
-    if prob_over_15 >= 0.65:
-        candidates.append(("Over 1.5 Goals", prob_over_15, f"Over 1.5 Goals ({prob_over_15 * 100:.1f}%)"))
-    if prob_under_35 >= 0.82:
-        candidates.append(("Under 3.5 Goals", prob_under_35, f"Under 3.5 Goals ({prob_under_35 * 100:.1f}%)"))
-    if combo_12_over15 >= 0.52:
-        candidates.append(("12 & Over 1.5 Goals", combo_12_over15, f"{home}/{away} & Over 1.5 Goals ({combo_12_over15 * 100:.1f}%)"))
-    if combo_x2_over05 >= 0.52:
-        candidates.append(("X2 & Over 0.5 Goals", combo_x2_over05, f"Draw/{away} & Over 0.5 Goals ({combo_x2_over05 * 100:.1f}%)"))
-    if combo_x2_over15 >= 0.52:
-        candidates.append(("X2 & Over 1.5 Goals", combo_x2_over15, f"Draw/{away} & Over 1.5 Goals ({combo_x2_over15 * 100:.1f}%)"))
-    if combo_btts_x2 >= 0.52:
-        candidates.append(("BTTS & X2", combo_btts_x2, f"BTTS Yes & Draw/{away} ({combo_btts_x2 * 100:.1f}%)"))
-    if combo_btts_12 >= 0.52:
-        candidates.append(("BTTS & 12", combo_btts_12, f"BTTS Yes & {home}/{away} ({combo_btts_12 * 100:.1f}%)"))
-    if combo_btts_over25 >= 0.52:
-        candidates.append(("BTTS & Over 2.5 Goals", combo_btts_over25, f"BTTS Yes & Over 2.5 Goals ({combo_btts_over25 * 100:.1f}%)"))
+    for key, info in prices.items():
+        if key not in probs:
+            continue
+        p = probs[key]
+        market_p = info["mkt_prob"]
+        odds = info.get("best_odds")
+        edge = p - market_p
+        if edge < MIN_EDGE:
+            continue
+        ev = None
+        if odds is not None:
+            ev = p * odds - 1.0
+            if ev < MIN_EV or odds > MAX_ODDS:
+                continue
+        candidates.append({
+            "key": key,
+            "prob": p,
+            "mkt_prob": market_p,
+            "odds": odds,
+            "edge": edge,
+            "ev": ev,
+            "min_odds": (1.0 + MIN_EV) / p,
+        })
 
-    verification_keys = [c[0] for c in candidates]
-    picks_str = ", ".join(c[2] for c in candidates) if candidates else "None"
+    candidates.sort(key=lambda c: c["edge"], reverse=True)
+    chosen, used = [], set()
+    for c in candidates:
+        family = pick_family(c["key"])
+        if family in used:
+            continue
+        used.add(family)
+        chosen.append(c)
+    return chosen
 
-    best_pick_key = None
-    if candidates:
-        top_pick = max(candidates, key=lambda x: x[1])
-        best_pick_key = top_pick[0]
-        best_pick_str = f"🎯 *BEST VALUE PICK:* {top_pick[2]}"
-    else:
-        best_pick_str = "🎯 *BEST VALUE PICK:* No high-confidence pick found"
 
-    extra_lines = ""
+def select_threshold_picks(probs):
+    """Only used when ALERT_WITHOUT_ODDS is True. This is NOT value betting."""
+    chosen = []
+    for key, threshold in THRESHOLD_PICKS.items():
+        if probs.get(key, 0.0) >= threshold:
+            chosen.append({
+                "key": key, "prob": probs[key], "mkt_prob": None, "odds": None,
+                "edge": None, "ev": None, "min_odds": (1.0 + MIN_EV) / probs[key],
+            })
+    chosen.sort(key=lambda c: c["prob"], reverse=True)
+    return chosen[:1]
+
+
+def generate_prediction_message(match, pred, picks, has_odds):
+    league = match.get("competition", {}).get("name", "Unknown League")
+    home = match.get("homeTeam", {}).get("name", "Home")
+    away = match.get("awayTeam", {}).get("name", "Away")
+    kickoff = parse_utc_date(match.get("utcDate")) or datetime.now(timezone.utc)
+
+    title = "VALUE PICKS" if has_odds else "PROBABILITY PICKS (no odds, NOT value)"
+    lines = [
+        f"⚽ <b>{title}</b> [{MODEL_VERSION}]",
+        "",
+        f"🏆 <b>League:</b> {esc(league)}",
+        f"⚔️ <b>Match:</b> {esc(home)} vs {esc(away)}",
+        f"🕒 <b>Kick-off:</b> {kickoff.strftime('%Y-%m-%d %H:%M UTC')}",
+        f"📊 <b>Model xG:</b> {pred['home_xg']:.2f} - {pred['away_xg']:.2f}",
+    ]
+    if pred["home_rest"] < 5.0 or pred["away_rest"] < 5.0:
+        lines.append(f"⚡ <b>Rest:</b> {pred['home_rest']:.1f}d vs {pred['away_rest']:.1f}d (fatigue applied)")
     if home in INJURY_OVERRIDES or away in INJURY_OVERRIDES:
-        extra_lines += "🚑 *Injury/Absence Adjustments Active*\n"
-    if home_rest < 5.0 or away_rest < 5.0:
-        extra_lines += f"⚡ *Rest:* {home_rest:.1f}d vs {away_rest:.1f}d (Fatigue Applied)\n"
+        lines.append("🚑 <b>Injury adjustments active</b>")
+    lines.append("")
 
-    msg = (
-        f"⚽ *MATCH ANALYSIS & VALUE PICKS [Step 2]*\n\n"
-        f"🏆 *League:* {league}\n"
-        f"⚔️ *Match:* {home} vs {away}\n"
-        f"🕒 *Kick-off:* {kickoff_str}\n"
-        f"{extra_lines}"
-        f"📊 *xG [Attack-Defense]:* {home_xg:.2f} - {away_xg:.2f}\n\n"
-        f"🔥 *HIGH-CONFIDENCE VALUE PICKS:*\n"
-        f"👉 {picks_str}\n\n"
-        f"{best_pick_str}\n"
-    )
-    return msg, verification_keys, best_pick_key, home, away, league
+    for i, p in enumerate(picks):
+        label = esc(pick_label(p["key"], home, away))
+        prefix = "🎯" if i == 0 else "👉"
+        if p["mkt_prob"] is None:
+            lines.append(f"{prefix} <b>{label}</b>: model {p['prob'] * 100:.1f}% | need odds ≥ {p['min_odds']:.2f}")
+            continue
+        text = (
+            f"{prefix} <b>{label}</b>: model {p['prob'] * 100:.1f}% vs market {p['mkt_prob'] * 100:.1f}% "
+            f"(edge {p['edge'] * 100:+.1f}%)"
+        )
+        if p["odds"] is not None:
+            text += f" | best odds {p['odds']:.2f} | EV {p['ev'] * 100:+.0f}%"
+        else:
+            text += f" | check your bookie's price, need odds ≥ {p['min_odds']:.2f}"
+        if p["edge"] > SUSPECT_EDGE:
+            text += " ⚠️ large gap, probable model error"
+        lines.append(text)
+
+    lines.append("")
+    lines.append("<i>Unvalidated model. Paper trade first.</i>")
+    return "\n".join(lines)
 
 
-def evaluate_single_pick(pick, home_goals, away_goals):
-    total = home_goals + away_goals
+# =============================================================================
+# VERIFICATION
+# =============================================================================
+
+def evaluate_single_pick(key, hg, ag):
+    total = hg + ag
     rules = {
-        "1X": home_goals >= away_goals,
-        "X2": away_goals >= home_goals,
+        "HOME": hg > ag, "DRAW": hg == ag, "AWAY": ag > hg,
+        "1X": hg >= ag, "X2": ag >= hg,
+        "OVER_1.5": total >= 2, "UNDER_1.5": total <= 1,
+        "OVER_2.5": total >= 3, "UNDER_2.5": total <= 2,
+        "OVER_3.5": total >= 4, "UNDER_3.5": total <= 3,
+        # Old v2 keys, so earlier alerts still get verified
         "Over 1.5 Goals": total >= 2,
         "Under 3.5 Goals": total <= 3,
-        "BTTS & X2": (home_goals > 0 and away_goals > 0) and (away_goals >= home_goals),
-        "BTTS & 12": (home_goals > 0 and away_goals > 0) and (home_goals != away_goals),
-        "12 & Over 1.5 Goals": (home_goals != away_goals) and (total >= 2),
-        "X2 & Over 0.5 Goals": (away_goals >= home_goals) and (total >= 1),
-        "X2 & Over 1.5 Goals": (away_goals >= home_goals) and (total >= 2),
-        "BTTS & Over 2.5 Goals": (home_goals > 0 and away_goals > 0) and (total >= 3),
+        "BTTS & X2": hg > 0 and ag > 0 and ag >= hg,
+        "BTTS & 12": hg > 0 and ag > 0 and hg != ag,
+        "12 & Over 1.5 Goals": hg != ag and total >= 2,
+        "X2 & Over 0.5 Goals": ag >= hg and total >= 1,
+        "X2 & Over 1.5 Goals": ag >= hg and total >= 2,
+        "BTTS & Over 2.5 Goals": hg > 0 and ag > 0 and total >= 3,
     }
-    return rules.get(pick, False)
+    return rules.get(key, False)
 
 
-def verify_predictions(picks, best_pick, home_goals, away_goals):
-    results = []
-    pick_outcomes = {}
-    best_line = None
-    best_pick_won = None
-
-    for pick in picks:
-        won = evaluate_single_pick(pick, home_goals, away_goals)
-        pick_outcomes[pick] = won
-        badge = "✅ WON" if won else "❌ LOST"
-        if best_pick and pick == best_pick:
-            best_pick_won = won
-            best_line = f"🎯 *BEST VALUE PICK ({pick}):* {badge}"
-            results.append(f"• *{pick} (Best Pick)*: {badge}")
+def normalized_picks(info):
+    """Old alerts stored picks as plain strings; new ones store dicts."""
+    picks = []
+    outcomes = info.get("pick_outcomes", {}) if isinstance(info.get("pick_outcomes"), dict) else {}
+    for p in info.get("picks", []):
+        if isinstance(p, dict):
+            picks.append(p)
         else:
-            results.append(f"• {pick}: {badge}")
-
-    body = "\n".join(results) if results else "• No active high-confidence picks."
-    header = f"{best_line}\n\n📋 *All High-Confidence Picks:*\n" if best_line else "📋 *High-Confidence Pick Verification:*\n"
-    return header + body, pick_outcomes, best_pick_won
+            picks.append({"key": p, "odds": None, "won": outcomes.get(p)})
+    return picks
 
 
-def compute_hit_rate_summary(sent_alerts, window=ROLLING_WINDOW):
-    """Calculate overall and rolling hit rates for Best Picks and All Picks."""
-    verified_entries = [
-        info for info in sent_alerts.values()
-        if info.get("status") == "VERIFIED" and isinstance(info.get("pick_outcomes"), dict)
-    ]
-    verified_entries.sort(key=lambda x: x.get("verified_at", x.get("timestamp", "")))
+def compute_track_record(sent_alerts, window=ROLLING_WINDOW):
+    verified = [i for i in sent_alerts.values() if i.get("status") == "VERIFIED"]
+    verified.sort(key=lambda x: x.get("verified_at", x.get("timestamp", "")))
 
-    def _calc_stats(entries):
-        all_wins = 0
-        all_total = 0
-        best_wins = 0
-        best_total = 0
+    def calc(entries):
+        n = wins = 0
+        staked = profit = 0.0
+        top_n = top_w = 0
+        for entry in entries:
+            picks = normalized_picks(entry)
+            for p in picks:
+                won = p.get("won")
+                if not isinstance(won, bool):
+                    continue
+                n += 1
+                wins += int(won)
+                if p.get("odds"):
+                    staked += 1.0
+                    profit += (p["odds"] - 1.0) if won else -1.0
+            top = next((p for p in picks if p.get("key") == entry.get("best_pick")), picks[0] if picks else None)
+            if top and isinstance(top.get("won"), bool):
+                top_n += 1
+                top_w += int(top["won"])
+        hit = wins / n * 100 if n else 0.0
+        top_hit = top_w / top_n * 100 if top_n else 0.0
+        roi = profit / staked * 100 if staked else None
+        return n, wins, hit, top_n, top_w, top_hit, staked, profit, roi
 
-        for item in entries:
-            outcomes = item.get("pick_outcomes", {})
-            for won in outcomes.values():
-                all_total += 1
-                if won is True:
-                    all_wins += 1
+    def fmt(stats):
+        n, wins, hit, top_n, top_w, top_hit, staked, profit, roi = stats
+        roi_text = f"{roi:+.1f}% on {int(staked)} priced picks ({profit:+.1f}u)" if roi is not None else "no priced picks yet"
+        return f"• Hit rate: <b>{hit:.1f}%</b> ({wins}/{n}) | Top pick: {top_hit:.1f}% ({top_w}/{top_n})\n• Flat ROI: {roi_text}"
 
-            bp = item.get("best_pick")
-            bp_won = item.get("best_pick_won")
-            if bp and isinstance(bp_won, bool):
-                best_total += 1
-                if bp_won:
-                    best_wins += 1
-
-        all_pct = (all_wins / all_total * 100.0) if all_total > 0 else 0.0
-        best_pct = (best_wins / best_total * 100.0) if best_total > 0 else 0.0
-        return best_wins, best_total, best_pct, all_wins, all_total, all_pct
-
-    ov_bw, ov_bt, ov_bpct, ov_aw, ov_at, ov_apct = _calc_stats(verified_entries)
-    recent_entries = verified_entries[-window:] if window > 0 else verified_entries
-    rc_bw, rc_bt, rc_bpct, rc_aw, rc_at, rc_apct = _calc_stats(recent_entries)
-
+    recent = verified[-window:] if window > 0 else verified
     return (
-        f"📈 *TRACK RECORD (Overall / Last {len(recent_entries)}):*\n"
-        f"• Best Picks: *{ov_bpct:.1f}%* ({ov_bw}/{ov_bt}) | Rolling: *{rc_bpct:.1f}%* ({rc_bw}/{rc_bt})\n"
-        f"• All Picks: *{ov_apct:.1f}%* ({ov_aw}/{ov_at}) | Rolling: *{rc_apct:.1f}%* ({rc_aw}/{rc_at})"
+        f"📈 <b>TRACK RECORD (Overall)</b>\n{fmt(calc(verified))}\n\n"
+        f"📉 <b>Last {len(recent)} alerts</b>\n{fmt(calc(recent))}"
     )
 
 
-def process_match_results(sent_alerts):
+def process_match_results(sent_alerts, results_by_id):
     updated = False
     for match_id, info in list(sent_alerts.items()):
         if info.get("status") != "SENT":
             continue
-        details = fetch_match_details(match_id)
-        if not details or details.get("status") != "FINISHED":
-            continue
 
-        full_time = details.get("score", {}).get("fullTime", {})
-        h_goals = full_time.get("home")
-        a_goals = full_time.get("away")
-        if h_goals is None or a_goals is None:
-            continue
+        goals = results_by_id.get(str(match_id))
+        league = info.get("league", "League")
+        home_team, away_team = info.get("home", "Home"), info.get("away", "Away")
 
-        h_goals, a_goals = int(h_goals), int(a_goals)
-        home_team = details.get("homeTeam", {}).get("name", "Home")
-        away_team = details.get("awayTeam", {}).get("name", "Away")
-        league = details.get("competition", {}).get("name", "League")
+        if goals is None:
+            details = fetch_match_details(match_id)
+            if not details or details.get("status") != "FINISHED":
+                continue
+            full_time = details.get("score", {}).get("fullTime", {})
+            if full_time.get("home") is None or full_time.get("away") is None:
+                continue
+            goals = (int(full_time["home"]), int(full_time["away"]))
 
-        summary, pick_outcomes, best_pick_won = verify_predictions(
-            info.get("picks", []), info.get("best_pick"), h_goals, a_goals
-        )
+        h_goals, a_goals = goals
+        picks = normalized_picks(info)
+        lines = []
+        for p in picks:
+            p["won"] = evaluate_single_pick(p["key"], h_goals, a_goals)
+            badge = "✅ WON" if p["won"] else "❌ LOST"
+            label = pick_label(p["key"], home_team, away_team) if "_" in p["key"] or p["key"] in {"HOME", "DRAW", "AWAY", "1X", "X2"} else p["key"]
+            lines.append(f"• {esc(label)}: {badge}")
 
-        # Temporarily store outcomes so compute_hit_rate_summary includes this match
-        sent_alerts[match_id]["status"] = "VERIFIED"
-        sent_alerts[match_id]["score"] = f"{h_goals}-{a_goals}"
-        sent_alerts[match_id]["pick_outcomes"] = pick_outcomes
-        sent_alerts[match_id]["best_pick_won"] = best_pick_won
-        sent_alerts[match_id]["verified_at"] = datetime.now(timezone.utc).isoformat()
-
-        stats_block = compute_hit_rate_summary(sent_alerts, window=ROLLING_WINDOW)
+        previous = {k: info.get(k) for k in ("status", "score", "picks", "verified_at")}
+        info["status"] = "VERIFIED"
+        info["score"] = f"{h_goals}-{a_goals}"
+        info["picks"] = picks
+        info["verified_at"] = datetime.now(timezone.utc).isoformat()
 
         msg = (
-            f"🏁 *MATCH RESULT & PICK VERIFICATION*\n\n"
-            f"🏆 *League:* {league}\n"
-            f"⚔️ *Match:* {home_team} {h_goals} - {a_goals} {away_team}\n"
-            f"📌 *Status:* FINISHED\n\n"
-            f"{summary}\n\n"
-            f"{stats_block}\n"
+            f"🏁 <b>MATCH RESULT & PICK VERIFICATION</b>\n\n"
+            f"🏆 <b>League:</b> {esc(league)}\n"
+            f"⚔️ <b>Match:</b> {esc(home_team)} {h_goals} - {a_goals} {esc(away_team)}\n\n"
+            + "\n".join(lines) + "\n\n"
+            + compute_track_record(sent_alerts) + "\n"
         )
         if send_telegram_message(msg):
             updated = True
         else:
-            # Revert status if notification failed so it can retry cleanly
-            sent_alerts[match_id]["status"] = "SENT"
-            sent_alerts[match_id].pop("score", None)
-            sent_alerts[match_id].pop("pick_outcomes", None)
-            sent_alerts[match_id].pop("best_pick_won", None)
-            sent_alerts[match_id].pop("verified_at", None)
+            # Roll back so it retries on the next run
+            for k, v in previous.items():
+                if v is None:
+                    info.pop(k, None)
+                else:
+                    info[k] = v
     return updated
 
 
+# =============================================================================
+# LOGGING (every prediction, every result)
+# =============================================================================
+
+def log_prediction(match, pred, prices):
+    home = match.get("homeTeam", {}).get("name", "")
+    away = match.get("awayTeam", {}).get("name", "")
+    probs = pred["probs"]
+
+    def price(key, field):
+        info = prices.get(key)
+        if not info or info.get(field) is None:
+            return ""
+        return round(info[field], 4)
+
+    row = {
+        "logged_at": datetime.now(timezone.utc).isoformat(),
+        "match_id": match.get("id"),
+        "league": match.get("competition", {}).get("name", ""),
+        "kickoff_utc": match.get("utcDate", ""),
+        "home": home,
+        "away": away,
+        "model_version": MODEL_VERSION,
+        "method": pred["method"],
+        "reliable": int(pred["reliable"]),
+        "home_xg": pred["home_xg"],
+        "away_xg": pred["away_xg"],
+        "p_home": round(probs["HOME"], 4),
+        "p_draw": round(probs["DRAW"], 4),
+        "p_away": round(probs["AWAY"], 4),
+        "p_over15": round(probs["OVER_1.5"], 4),
+        "p_over25": round(probs["OVER_2.5"], 4),
+        "p_under35": round(probs["UNDER_3.5"], 4),
+        "p_btts": round(probs["BTTS_YES"], 4),
+        "mkt_home": price("HOME", "mkt_prob"),
+        "mkt_draw": price("DRAW", "mkt_prob"),
+        "mkt_away": price("AWAY", "mkt_prob"),
+        "mkt_over25": price("OVER_2.5", "mkt_prob"),
+        "best_home": price("HOME", "best_odds"),
+        "best_draw": price("DRAW", "best_odds"),
+        "best_away": price("AWAY", "best_odds"),
+    }
+    append_csv_row(PREDICTIONS_LOG, PREDICTION_FIELDS, row)
+
+
+def update_results_log(results_by_id):
+    logged_ids = {r["match_id"] for r in read_csv_rows(PREDICTIONS_LOG)}
+    done_ids = {r["match_id"] for r in read_csv_rows(RESULTS_LOG)}
+    added = 0
+    for match_id in logged_ids - done_ids:
+        goals = results_by_id.get(str(match_id))
+        if goals is None:
+            continue
+        append_csv_row(RESULTS_LOG, RESULT_FIELDS, {
+            "match_id": match_id,
+            "home_goals": goals[0],
+            "away_goals": goals[1],
+            "recorded_at": datetime.now(timezone.utc).isoformat(),
+        })
+        added += 1
+    if added:
+        print(f"Recorded {added} new result(s).")
+
+
+# =============================================================================
+# EVALUATION METRICS (used by --backtest and --report)
+# =============================================================================
+
+EPS = 1e-9
+
+
+def log_loss_multiclass(probs, outcome_index):
+    return -math.log(max(EPS, probs[outcome_index]))
+
+
+def brier_multiclass(probs, outcome_index):
+    return sum((p - (1.0 if i == outcome_index else 0.0)) ** 2 for i, p in enumerate(probs))
+
+
+def log_loss_binary(p, happened):
+    p = min(1 - EPS, max(EPS, p))
+    return -math.log(p if happened else 1 - p)
+
+
+def calibration_table(pairs, title):
+    """pairs: list of (predicted_probability, happened_bool)."""
+    print(f"\nCalibration: {title}")
+    print(f"{'bin':<10}{'n':>6}{'avg pred':>11}{'actual':>9}")
+    for low in [i / 10 for i in range(10)]:
+        bucket = [(p, y) for p, y in pairs if low <= p < low + 0.1 or (low == 0.9 and p == 1.0)]
+        if len(bucket) < 5:
+            continue
+        avg_pred = sum(p for p, _ in bucket) / len(bucket)
+        actual = sum(1 for _, y in bucket if y) / len(bucket)
+        print(f"{low:.1f}-{low + 0.1:.1f}  {len(bucket):>6}{avg_pred:>10.1%}{actual:>9.1%}")
+
+
+def outcome_index(hg, ag):
+    return 0 if hg > ag else (1 if hg == ag else 2)
+
+
+def run_backtest(histories, all_history):
+    """Replay the model on recent finished matches using only data before each kickoff."""
+    cutoff = datetime.now(timezone.utc) - timedelta(days=BACKTEST_DAYS)
+    model_ll = base_ll = model_br = base_br = 0.0
+    correct = n = 0
+    ou_model_ll = ou_base_ll = 0.0
+    home_pairs, over_pairs, x2_pairs = [], [], []
+
+    for code, history in histories.items():
+        train = [m for m in history if m["_kickoff"] < cutoff]
+        test = [m for m in history if m["_kickoff"] >= cutoff]
+        if len(train) < 50 or not test:
+            print(f"{code}: not enough data, skipped.")
+            continue
+
+        total = len(train)
+        base = [
+            sum(1 for m in train if m["_home_goals"] > m["_away_goals"]) / total,
+            sum(1 for m in train if m["_home_goals"] == m["_away_goals"]) / total,
+            sum(1 for m in train if m["_home_goals"] < m["_away_goals"]) / total,
+        ]
+        base_over = sum(1 for m in train if m["_home_goals"] + m["_away_goals"] >= 3) / total
+
+        for m in test:
+            pred = predict_match(
+                history, all_history,
+                m["homeTeam"].get("name", ""), m["awayTeam"].get("name", ""),
+                m["homeTeam"]["id"], m["awayTeam"]["id"], m["_kickoff"],
+            )
+            if not pred["reliable"]:
+                continue
+            probs = pred["probs"]
+            vec = [probs["HOME"], probs["DRAW"], probs["AWAY"]]
+            hg, ag = m["_home_goals"], m["_away_goals"]
+            idx = outcome_index(hg, ag)
+
+            model_ll += log_loss_multiclass(vec, idx)
+            base_ll += log_loss_multiclass(base, idx)
+            model_br += brier_multiclass(vec, idx)
+            base_br += brier_multiclass(base, idx)
+            correct += int(vec.index(max(vec)) == idx)
+
+            over = hg + ag >= 3
+            ou_model_ll += log_loss_binary(probs["OVER_2.5"], over)
+            ou_base_ll += log_loss_binary(base_over, over)
+
+            home_pairs.append((probs["HOME"], idx == 0))
+            x2_pairs.append((probs["X2"], hg <= ag))
+            over_pairs.append((probs["OVER_2.5"], over))
+            n += 1
+
+    if n == 0:
+        print("No reliable matches to backtest.")
+        return
+
+    print(f"\nBACKTEST ({MODEL_VERSION}) on {n} matches, last {BACKTEST_DAYS} days, no odds used")
+    print(f"{'':<22}{'model':>10}{'baseline':>12}")
+    print(f"{'1X2 log loss':<22}{model_ll / n:>10.4f}{base_ll / n:>12.4f}")
+    print(f"{'1X2 Brier':<22}{model_br / n:>10.4f}{base_br / n:>12.4f}")
+    print(f"{'Over 2.5 log loss':<22}{ou_model_ll / n:>10.4f}{ou_base_ll / n:>12.4f}")
+    print(f"{'1X2 accuracy':<22}{correct / n:>10.1%}")
+    calibration_table(home_pairs, "home win")
+    calibration_table(x2_pairs, "X2 (draw or away)")
+    calibration_table(over_pairs, "over 2.5 goals")
+    print(
+        "\nBaseline = league home/draw/away rates from before the test window.\n"
+        "Bookmaker 1X2 log loss is usually about 0.96 to 0.99. This backtest cannot\n"
+        "show edge without historical odds; --report compares against live market odds."
+    )
+
+
+def run_report():
+    predictions = {r["match_id"]: r for r in read_csv_rows(PREDICTIONS_LOG)}
+    results = {r["match_id"]: r for r in read_csv_rows(RESULTS_LOG)}
+    joined = [(predictions[mid], results[mid]) for mid in predictions if mid in results]
+    joined = [(p, r) for p, r in joined if p.get("reliable") == "1"]
+
+    if not joined:
+        print("No finished, reliable predictions logged yet.")
+        return
+
+    n = 0
+    model_ll = model_br = 0.0
+    correct = 0
+    mkt_n = 0
+    mkt_ll = model_ll_on_mkt = 0.0
+    over_pairs = []
+
+    for p, r in joined:
+        hg, ag = int(r["home_goals"]), int(r["away_goals"])
+        idx = outcome_index(hg, ag)
+        vec = [float(p["p_home"]), float(p["p_draw"]), float(p["p_away"])]
+        model_ll += log_loss_multiclass(vec, idx)
+        model_br += brier_multiclass(vec, idx)
+        correct += int(vec.index(max(vec)) == idx)
+        over_pairs.append((float(p["p_over25"]), hg + ag >= 3))
+        n += 1
+
+        if p.get("mkt_home") and p.get("mkt_draw") and p.get("mkt_away"):
+            mvec = [float(p["mkt_home"]), float(p["mkt_draw"]), float(p["mkt_away"])]
+            mkt_ll += log_loss_multiclass(mvec, idx)
+            model_ll_on_mkt += log_loss_multiclass(vec, idx)
+            mkt_n += 1
+
+    print(f"\nLIVE REPORT: {n} finished predictions")
+    print(f"1X2 log loss: {model_ll / n:.4f} | Brier: {model_br / n:.4f} | accuracy: {correct / n:.1%}")
+    if mkt_n:
+        print(f"On the {mkt_n} matches with market odds logged:")
+        print(f"  model log loss  : {model_ll_on_mkt / mkt_n:.4f}")
+        print(f"  market log loss : {mkt_ll / mkt_n:.4f}   (lower is better; model must beat this)")
+    else:
+        print("No matches with market odds logged yet (set ODDS_API_KEY).")
+    calibration_table(over_pairs, "over 2.5 goals (live)")
+
+
+# =============================================================================
+# MAIN
+# =============================================================================
+
+def build_histories():
+    print("Fetching competition histories...")
+    histories = {code: fetch_competition_history(code) for code in TARGET_COMPETITIONS}
+    return histories, merge_histories(histories)
+
+
 def main():
+    mode = sys.argv[1] if len(sys.argv) > 1 else ""
+
+    if mode == "--report":
+        run_report()
+        return
+
     if not FOOTBALL_DATA_API_KEY:
         print("ERROR: Set FOOTBALL_DATA_API_KEY.")
         return
+
+    if mode == "--backtest":
+        histories, all_history = build_histories()
+        run_backtest(histories, all_history)
+        return
+
     if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
         print("ERROR: Set TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID.")
         return
+    if not ODDS_API_KEY:
+        print("WARNING: ODDS_API_KEY not set. Predictions are logged but no value picks can be made.")
+
+    histories, all_history = build_histories()
+    results_by_id = {
+        str(m["id"]): (m["_home_goals"], m["_away_goals"]) for m in all_history
+    }
 
     sent_alerts = load_sent_alerts()
-    if process_match_results(sent_alerts):
+    if process_match_results(sent_alerts, results_by_id):
         save_sent_alerts(sent_alerts)
-
-    print("Fetching competition histories...")
-    histories = {code: fetch_competition_history(code) for code in TARGET_COMPETITIONS}
+    update_results_log(results_by_id)
 
     matches = fetch_upcoming_matches()
+    now = datetime.now(timezone.utc)
+
+    # One odds request per competition that actually has upcoming matches
+    odds_events = {}
+    for code in {m.get("competition", {}).get("code") for m in matches}:
+        odds_events[code] = fetch_odds_events(code)
+
+    logged_ids = {r["match_id"] for r in read_csv_rows(PREDICTIONS_LOG)}
     sent_count = 0
 
     for match in matches:
         match_id = str(match.get("id"))
-        if match_id in sent_alerts:
+        code = match.get("competition", {}).get("code")
+        home_data, away_data = match.get("homeTeam", {}), match.get("awayTeam", {})
+        kickoff = parse_utc_date(match.get("utcDate"))
+        if kickoff is None or kickoff <= now:
             continue
 
-        code = match.get("competition", {}).get("code")
-        msg, picks, best_pick, home_name, away_name, league_name = generate_prediction_message(
-            match, histories.get(code, [])
+        pred = predict_match(
+            histories.get(code, []), all_history,
+            home_data.get("name", ""), away_data.get("name", ""),
+            home_data.get("id"), away_data.get("id"), kickoff,
         )
-        if picks and send_telegram_message(msg):
+
+        event = find_odds_event(odds_events.get(code, []), home_data.get("name", ""), away_data.get("name", ""), kickoff)
+        prices = extract_market_prices(event) if event else {}
+
+        # Log every match once, before kickoff, whether or not it becomes a pick
+        if match_id not in logged_ids:
+            log_prediction(match, pred, prices)
+            logged_ids.add(match_id)
+
+        if match_id in sent_alerts or not pred["reliable"]:
+            continue
+
+        if prices:
+            picks = select_value_picks(pred["probs"], prices)
+            has_odds = True
+        elif ALERT_WITHOUT_ODDS:
+            picks = select_threshold_picks(pred["probs"])
+            has_odds = False
+        else:
+            picks = []
+            has_odds = False
+
+        if not picks:
+            continue
+
+        msg = generate_prediction_message(match, pred, picks, has_odds)
+        if send_telegram_message(msg):
             sent_alerts[match_id] = {
                 "timestamp": datetime.now(timezone.utc).isoformat(),
                 "status": "SENT",
-                "home": home_name,
-                "away": away_name,
-                "league": league_name,
+                "home": home_data.get("name", ""),
+                "away": away_data.get("name", ""),
+                "league": match.get("competition", {}).get("name", ""),
+                "model_version": MODEL_VERSION,
                 "picks": picks,
-                "best_pick": best_pick,
+                "best_pick": picks[0]["key"],
             }
             save_sent_alerts(sent_alerts)
             sent_count += 1
