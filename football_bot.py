@@ -1187,7 +1187,14 @@ def main():
             save_sent_alerts(sent_alerts)
             sent_count += 1
 
-    print(f"Done. Sent {sent_count} new prediction(s).")
+    summary = (
+        f"🤖 Bot run finished\n"
+        f"Upcoming matches: {len(matches)}\n"
+        f"Odds events found: {sum(len(v) for v in odds_events.values())}\n"
+        f"New picks sent: {sent_count}"
+    )
+    print(summary)
+    send_telegram_message(summary)
 
 
 if __name__ == "__main__":
