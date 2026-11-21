@@ -3536,7 +3536,7 @@
   },
   "565859": {
     "timestamp": "2026-11-18T00:21:06.644889",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "FC Bayern M\u00fcnchen",
     "away": "1. FC K\u00f6ln",
     "league": "Bundesliga",
@@ -3545,11 +3545,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "1-1"
   },
   "559622": {
     "timestamp": "2026-11-18T00:21:08.286057",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "ES Troyes AC",
     "away": "Le Havre AC",
     "league": "Ligue 1",
@@ -3558,11 +3559,12 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "3-1"
   },
   "564748": {
     "timestamp": "2026-11-18T00:21:09.861477",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Athletic Club",
     "away": "RCD Espanyol de Barcelona",
     "league": "Primera Division",
@@ -3571,7 +3573,8 @@
       "Over 1.5 Goals",
       "12 & Over 1.5 Goals"
     ],
-    "best_pick": "Over 1.5 Goals"
+    "best_pick": "Over 1.5 Goals",
+    "score": "0-1"
   },
   "561944": {
     "timestamp": "2026-11-19T19:50:19.554578",
