@@ -121,6 +121,7 @@ FOOTBALL_DATA_API_KEY = os.getenv("FOOTBALL_DATA_API_KEY", "").strip()
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "").strip()
 ODDS_API_KEY = os.getenv("ODDS_API_KEY", "").strip()
+ODDS_ERRORS = []  # reasons odds could not be fetched; shown in the Telegram summary
 
 session = requests.Session()
 if FOOTBALL_DATA_API_KEY:
@@ -520,7 +521,10 @@ def remove_vig(decimal_odds):
 
 def fetch_odds_events(code):
     sport = ODDS_SPORT_KEYS.get(code)
-    if not sport or not ODDS_API_KEY:
+    if not ODDS_API_KEY:
+        ODDS_ERRORS.append("ODDS_API_KEY is empty (secret missing or misnamed)")
+        return []
+    if not sport:
         return []
     try:
         res = requests.get(
@@ -536,11 +540,13 @@ def fetch_odds_events(code):
         )
         if res.status_code != 200:
             print(f"Odds API error for {code}: HTTP {res.status_code}")
+            ODDS_ERRORS.append(f"{code}: HTTP {res.status_code} {res.text[:60].strip()}")
             return []
         print(f"Odds API requests remaining: {res.headers.get('x-requests-remaining', '?')}")
         return res.json()
     except Exception as exc:
         print(f"Odds API error for {code}: {exc}")
+        ODDS_ERRORS.append(f"{code}: {str(exc)[:60]}")
         return []
 
 
@@ -1193,6 +1199,8 @@ def main():
         f"Odds events found: {sum(len(v) for v in odds_events.values())}\n"
         f"New picks sent: {sent_count}"
     )
+    if ODDS_ERRORS:
+        summary += "\nOdds problems: " + "; ".join(sorted(set(ODDS_ERRORS))[:4])
     print(summary)
     send_telegram_message(summary)
 
