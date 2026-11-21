@@ -21,6 +21,7 @@ HISTORY_DAYS = 365
 HALF_LIFE_DAYS = 120
 PRIOR_MATCHES = 6.0
 MAX_GOALS = 7
+ROLLING_WINDOW = 20
 
 # Format: "Team Name": {"att_mult": 0.85, "def_mult": 1.10, "notes": "Missing key player"}
 INJURY_OVERRIDES = {}
@@ -371,7 +372,7 @@ def generate_prediction_message(match, history):
         extra_lines += f"⚡ *Rest:* {home_rest:.1f}d vs {away_rest:.1f}d (Fatigue Applied)\n"
 
     msg = (
-        f"⚽ *MATCH ANALYSIS & VALUE PICKS [Step 1]*\n\n"
+        f"⚽ *MATCH ANALYSIS & VALUE PICKS [Step 2]*\n\n"
         f"🏆 *League:* {league}\n"
         f"⚔️ *Match:* {home} vs {away}\n"
         f"🕒 *Kick-off:* {kickoff_str}\n"
@@ -403,11 +404,16 @@ def evaluate_single_pick(pick, home_goals, away_goals):
 
 def verify_predictions(picks, best_pick, home_goals, away_goals):
     results = []
+    pick_outcomes = {}
     best_line = None
+    best_pick_won = None
+
     for pick in picks:
         won = evaluate_single_pick(pick, home_goals, away_goals)
+        pick_outcomes[pick] = won
         badge = "✅ WON" if won else "❌ LOST"
         if best_pick and pick == best_pick:
+            best_pick_won = won
             best_line = f"🎯 *BEST VALUE PICK ({pick}):* {badge}"
             results.append(f"• *{pick} (Best Pick)*: {badge}")
         else:
@@ -415,7 +421,50 @@ def verify_predictions(picks, best_pick, home_goals, away_goals):
 
     body = "\n".join(results) if results else "• No active high-confidence picks."
     header = f"{best_line}\n\n📋 *All High-Confidence Picks:*\n" if best_line else "📋 *High-Confidence Pick Verification:*\n"
-    return header + body
+    return header + body, pick_outcomes, best_pick_won
+
+
+def compute_hit_rate_summary(sent_alerts, window=ROLLING_WINDOW):
+    """Calculate overall and rolling hit rates for Best Picks and All Picks."""
+    verified_entries = [
+        info for info in sent_alerts.values()
+        if info.get("status") == "VERIFIED" and isinstance(info.get("pick_outcomes"), dict)
+    ]
+    verified_entries.sort(key=lambda x: x.get("verified_at", x.get("timestamp", "")))
+
+    def _calc_stats(entries):
+        all_wins = 0
+        all_total = 0
+        best_wins = 0
+        best_total = 0
+
+        for item in entries:
+            outcomes = item.get("pick_outcomes", {})
+            for won in outcomes.values():
+                all_total += 1
+                if won is True:
+                    all_wins += 1
+
+            bp = item.get("best_pick")
+            bp_won = item.get("best_pick_won")
+            if bp and isinstance(bp_won, bool):
+                best_total += 1
+                if bp_won:
+                    best_wins += 1
+
+        all_pct = (all_wins / all_total * 100.0) if all_total > 0 else 0.0
+        best_pct = (best_wins / best_total * 100.0) if best_total > 0 else 0.0
+        return best_wins, best_total, best_pct, all_wins, all_total, all_pct
+
+    ov_bw, ov_bt, ov_bpct, ov_aw, ov_at, ov_apct = _calc_stats(verified_entries)
+    recent_entries = verified_entries[-window:] if window > 0 else verified_entries
+    rc_bw, rc_bt, rc_bpct, rc_aw, rc_at, rc_apct = _calc_stats(recent_entries)
+
+    return (
+        f"📈 *TRACK RECORD (Overall / Last {len(recent_entries)}):*\n"
+        f"• Best Picks: *{ov_bpct:.1f}%* ({ov_bw}/{ov_bt}) | Rolling: *{rc_bpct:.1f}%* ({rc_bw}/{rc_bt})\n"
+        f"• All Picks: *{ov_apct:.1f}%* ({ov_aw}/{ov_at}) | Rolling: *{rc_apct:.1f}%* ({rc_aw}/{rc_at})"
+    )
 
 
 def process_match_results(sent_alerts):
@@ -438,18 +487,36 @@ def process_match_results(sent_alerts):
         away_team = details.get("awayTeam", {}).get("name", "Away")
         league = details.get("competition", {}).get("name", "League")
 
-        summary = verify_predictions(info.get("picks", []), info.get("best_pick"), h_goals, a_goals)
+        summary, pick_outcomes, best_pick_won = verify_predictions(
+            info.get("picks", []), info.get("best_pick"), h_goals, a_goals
+        )
+
+        # Temporarily store outcomes so compute_hit_rate_summary includes this match
+        sent_alerts[match_id]["status"] = "VERIFIED"
+        sent_alerts[match_id]["score"] = f"{h_goals}-{a_goals}"
+        sent_alerts[match_id]["pick_outcomes"] = pick_outcomes
+        sent_alerts[match_id]["best_pick_won"] = best_pick_won
+        sent_alerts[match_id]["verified_at"] = datetime.now(timezone.utc).isoformat()
+
+        stats_block = compute_hit_rate_summary(sent_alerts, window=ROLLING_WINDOW)
+
         msg = (
             f"🏁 *MATCH RESULT & PICK VERIFICATION*\n\n"
             f"🏆 *League:* {league}\n"
             f"⚔️ *Match:* {home_team} {h_goals} - {a_goals} {away_team}\n"
             f"📌 *Status:* FINISHED\n\n"
-            f"{summary}\n"
+            f"{summary}\n\n"
+            f"{stats_block}\n"
         )
         if send_telegram_message(msg):
-            sent_alerts[match_id]["status"] = "VERIFIED"
-            sent_alerts[match_id]["score"] = f"{h_goals}-{a_goals}"
             updated = True
+        else:
+            # Revert status if notification failed so it can retry cleanly
+            sent_alerts[match_id]["status"] = "SENT"
+            sent_alerts[match_id].pop("score", None)
+            sent_alerts[match_id].pop("pick_outcomes", None)
+            sent_alerts[match_id].pop("best_pick_won", None)
+            sent_alerts[match_id].pop("verified_at", None)
     return updated
 
 
