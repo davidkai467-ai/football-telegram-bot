@@ -40,11 +40,17 @@ from datetime import datetime, timedelta, timezone
 
 import requests
 
+try:
+    import numpy as np
+    from scipy.optimize import minimize
+except ImportError:
+    raise SystemExit("Missing packages. In the workflow use: pip install requests numpy scipy")
+
 # =============================================================================
 # SETTINGS
 # =============================================================================
 
-MODEL_VERSION = "v3-2026-11"
+MODEL_VERSION = "v4-2026-11"
 
 TARGET_COMPETITIONS = [
     "PL",   # Premier League
@@ -73,10 +79,10 @@ API_BASE = "https://api.football-data.org/v4"
 ODDS_API_BASE = "https://api.the-odds-api.com/v4"
 ODDS_REGIONS = "eu,uk"
 
-# --- Model parameters (guesses for now; fit them with --backtest) ---
+# --- Model parameters (check them with --backtest) ---
 HISTORY_DAYS = 365
-HALF_LIFE_DAYS = 120
-PRIOR_MATCHES = 6.0
+HALF_LIFE_DAYS = 180      # how fast old matches lose weight
+RIDGE = 3.0               # shrinks teams with little data toward the league average
 MAX_GOALS = 7
 DISPERSION = 0.2
 RHO = -0.11
@@ -86,10 +92,11 @@ MIN_LEAGUE_MATCHES = 20   # finished matches in the competition before kickoff
 MIN_TEAM_MATCHES = 8      # matches per team in that competition's history
 
 # --- Value rules ---
-MIN_EDGE = 0.04           # model prob minus market no-vig prob
+W_MODEL = 0.35            # weight on the model when blended with the market (--report suggests a value)
+MIN_EDGE = 0.02           # blended probability minus market no-vig probability
 MIN_EV = 0.03             # expected value per 1 unit staked (when we have a price)
 MAX_ODDS = 5.0            # long shots are where model errors hide
-SUSPECT_EDGE = 0.12       # bigger gaps are flagged as probable model error
+SUSPECT_EDGE = 0.12       # raw model-vs-market gaps above this are flagged
 
 # --- Fallback when no odds are available (informational only, NOT value) ---
 ALERT_WITHOUT_ODDS = False
@@ -98,6 +105,8 @@ THRESHOLD_PICKS = {"1X": 0.68, "X2": 0.68, "OVER_1.5": 0.65, "UNDER_3.5": 0.82}
 # --- Reporting / backtest ---
 ROLLING_WINDOW = 20
 BACKTEST_DAYS = 150
+BACKTEST_GRID_HALF_LIFE = [90, 180, 365]
+BACKTEST_GRID_RIDGE = [1.0, 3.0, 8.0]
 
 # Format: "Team Name": {"att_mult": 0.85, "def_mult": 1.10}
 INJURY_OVERRIDES = {}
@@ -298,7 +307,13 @@ def merge_histories(histories):
 # MODEL: goal rates -> score matrix -> market probabilities
 # =============================================================================
 
+_REST_CACHE = {}
+
+
 def calculate_rest_days(all_history, team_id, kickoff):
+    key = (team_id, kickoff)
+    if key in _REST_CACHE:
+        return _REST_CACHE[key]
     prev_games = [
         m["_kickoff"]
         for m in all_history
@@ -309,9 +324,11 @@ def calculate_rest_days(all_history, team_id, kickoff):
         )
     ]
     if not prev_games:
+        _REST_CACHE[key] = 7.0
         return 7.0
     days = (kickoff - max(prev_games)).total_seconds() / 86400.0
-    return max(1.0, days)
+    _REST_CACHE[key] = max(1.0, days)
+    return _REST_CACHE[key]
 
 
 def get_fatigue_multiplier(rest_days):
@@ -322,38 +339,85 @@ def get_fatigue_multiplier(rest_days):
     return 1.00, 1.00
 
 
-def weighted_team_rate(matches, team_id, venue, metric, league_average, as_of):
-    weighted_goals = 0.0
-    total_weight = 0.0
+def fit_strengths(history, as_of, half_life=None, ridge=None):
+    """
+    Fit a whole league at once (Poisson regression with time decay):
+        log(home goals) = base + home_advantage + attack[home] + defence[away]
+        log(away goals) = base + attack[away] + defence[home]
+    Only matches played before `as_of` are used. The ridge penalty pulls teams
+    with little evidence back toward the league average.
+    Returns None when there is not enough data.
+    """
+    half_life = HALF_LIFE_DAYS if half_life is None else half_life
+    ridge = RIDGE if ridge is None else ridge
 
-    for match in matches:
-        kickoff = match["_kickoff"]
-        if kickoff >= as_of:
-            continue
+    usable = [m for m in history if m["_kickoff"] < as_of]
+    if len(usable) < MIN_LEAGUE_MATCHES:
+        return None
 
-        home_id = match.get("homeTeam", {}).get("id")
-        away_id = match.get("awayTeam", {}).get("id")
+    team_ids = sorted(
+        {m["homeTeam"]["id"] for m in usable} | {m["awayTeam"]["id"] for m in usable}
+    )
+    index = {team_id: i for i, team_id in enumerate(team_ids)}
+    n = len(team_ids)
 
-        if venue == "home" and home_id == team_id:
-            goals = match["_home_goals"] if metric == "scored" else match["_away_goals"]
-        elif venue == "away" and away_id == team_id:
-            goals = match["_away_goals"] if metric == "scored" else match["_home_goals"]
-        else:
-            continue
+    home_idx = np.array([index[m["homeTeam"]["id"]] for m in usable])
+    away_idx = np.array([index[m["awayTeam"]["id"]] for m in usable])
+    home_goals = np.array([m["_home_goals"] for m in usable], dtype=float)
+    away_goals = np.array([m["_away_goals"] for m in usable], dtype=float)
+    age_days = np.array([(as_of - m["_kickoff"]).total_seconds() / 86400.0 for m in usable])
+    weights = 0.5 ** (np.maximum(age_days, 0.0) / half_life)
 
-        age_days = max(0.0, (as_of - kickoff).total_seconds() / 86400.0)
-        weight = 0.5 ** (age_days / HALF_LIFE_DAYS)
-        weighted_goals += goals * weight
-        total_weight += weight
+    def negative_log_likelihood(theta):
+        base, home_adv = theta[0], theta[1]
+        attack = theta[2:2 + n]
+        defence = theta[2 + n:]
+        eta_home = base + home_adv + attack[home_idx] + defence[away_idx]
+        eta_away = base + attack[away_idx] + defence[home_idx]
+        lam_home = np.exp(eta_home)
+        lam_away = np.exp(eta_away)
 
-    return (weighted_goals + PRIOR_MATCHES * league_average) / (total_weight + PRIOR_MATCHES)
+        log_lik = np.sum(weights * (home_goals * eta_home - lam_home + away_goals * eta_away - lam_away))
+        log_lik -= ridge * (np.sum(attack ** 2) + np.sum(defence ** 2))
+
+        res_home = weights * (home_goals - lam_home)
+        res_away = weights * (away_goals - lam_away)
+        grad = np.zeros_like(theta)
+        grad[0] = np.sum(res_home) + np.sum(res_away)
+        grad[1] = np.sum(res_home)
+        grad[2:2 + n] = (
+            np.bincount(home_idx, res_home, n) + np.bincount(away_idx, res_away, n)
+            - 2.0 * ridge * attack
+        )
+        grad[2 + n:] = (
+            np.bincount(away_idx, res_home, n) + np.bincount(home_idx, res_away, n)
+            - 2.0 * ridge * defence
+        )
+        return -log_lik, -grad
+
+    theta0 = np.zeros(2 + 2 * n)
+    theta0[0] = math.log(max(0.5, (home_goals.mean() + away_goals.mean()) / 2.0))
+    result = minimize(negative_log_likelihood, theta0, jac=True, method="L-BFGS-B", options={"maxiter": 300})
+    if not np.all(np.isfinite(result.x)):
+        return None
+
+    counts = {}
+    for m in usable:
+        for team_id in (m["homeTeam"]["id"], m["awayTeam"]["id"]):
+            counts[team_id] = counts.get(team_id, 0) + 1
+
+    theta = result.x
+    return {
+        "base": float(theta[0]),
+        "home_adv": float(theta[1]),
+        "attack": {tid: float(theta[2 + i]) for tid, i in index.items()},
+        "defence": {tid: float(theta[2 + n + i]) for tid, i in index.items()},
+        "counts": counts,
+    }
 
 
-def estimate_goal_rates(history, home_name, away_name, home_id, away_id, kickoff, all_history=None):
-    """Expected goals for both teams, using ONLY matches played before kickoff."""
-    if all_history is None:
-        all_history = history
-
+def estimate_goal_rates(fit, home_name, away_name, home_id, away_id, kickoff, all_history):
+    """Expected goals for both teams from the fitted strengths, plus rest-day and injury tweaks."""
     home_rest = calculate_rest_days(all_history, home_id, kickoff)
     away_rest = calculate_rest_days(all_history, away_id, kickoff)
 
@@ -362,57 +426,25 @@ def estimate_goal_rates(history, home_name, away_name, home_id, away_id, kickoff
         "home_rest": home_rest, "away_rest": away_rest,
         "home_n": 0, "away_n": 0,
     }
-
-    usable = [m for m in history if m["_kickoff"] < kickoff]
-    if len(usable) < MIN_LEAGUE_MATCHES:
+    if fit is None or home_id not in fit["attack"] or away_id not in fit["attack"]:
         return result
 
-    total_weight = 0.0
-    home_g_w = 0.0
-    away_g_w = 0.0
-    for match in usable:
-        age_days = max(0.0, (kickoff - match["_kickoff"]).total_seconds() / 86400.0)
-        weight = 0.5 ** (age_days / HALF_LIFE_DAYS)
-        total_weight += weight
-        home_g_w += match["_home_goals"] * weight
-        away_g_w += match["_away_goals"] * weight
-
-    if total_weight <= 0:
-        return result
-
-    league_home_avg = home_g_w / total_weight
-    league_away_avg = away_g_w / total_weight
-
-    home_attack = weighted_team_rate(usable, home_id, "home", "scored", league_home_avg, kickoff)
-    home_defence = weighted_team_rate(usable, home_id, "home", "conceded", league_away_avg, kickoff)
-    away_attack = weighted_team_rate(usable, away_id, "away", "scored", league_away_avg, kickoff)
-    away_defence = weighted_team_rate(usable, away_id, "away", "conceded", league_home_avg, kickoff)
+    lam_home = math.exp(fit["base"] + fit["home_adv"] + fit["attack"][home_id] + fit["defence"][away_id])
+    lam_away = math.exp(fit["base"] + fit["attack"][away_id] + fit["defence"][home_id])
 
     home_att_mult, home_def_mult = get_fatigue_multiplier(home_rest)
     away_att_mult, away_def_mult = get_fatigue_multiplier(away_rest)
-
     home_inj = INJURY_OVERRIDES.get(home_name, {})
     away_inj = INJURY_OVERRIDES.get(away_name, {})
 
-    eff_home_att = home_attack * home_att_mult * home_inj.get("att_mult", 1.0)
-    eff_home_def = home_defence * home_def_mult * home_inj.get("def_mult", 1.0)
-    eff_away_att = away_attack * away_att_mult * away_inj.get("att_mult", 1.0)
-    eff_away_def = away_defence * away_def_mult * away_inj.get("def_mult", 1.0)
+    lam_home *= home_att_mult * home_inj.get("att_mult", 1.0) * away_def_mult * away_inj.get("def_mult", 1.0)
+    lam_away *= away_att_mult * away_inj.get("att_mult", 1.0) * home_def_mult * home_inj.get("def_mult", 1.0)
 
-    expected_home = (eff_home_att * eff_away_def) / max(league_home_avg, 0.2)
-    expected_away = (eff_away_att * eff_home_def) / max(league_away_avg, 0.2)
-
-    result["home_xg"] = round(min(3.5, max(0.3, expected_home)), 2)
-    result["away_xg"] = round(min(3.5, max(0.3, expected_away)), 2)
-    result["method"] = "attack-defense+rest"
-    result["home_n"] = sum(
-        1 for m in usable
-        if home_id in (m["homeTeam"].get("id"), m["awayTeam"].get("id"))
-    )
-    result["away_n"] = sum(
-        1 for m in usable
-        if away_id in (m["homeTeam"].get("id"), m["awayTeam"].get("id"))
-    )
+    result["home_xg"] = round(min(3.5, max(0.3, lam_home)), 2)
+    result["away_xg"] = round(min(3.5, max(0.3, lam_away)), 2)
+    result["method"] = "poisson-fit+rest"
+    result["home_n"] = fit["counts"].get(home_id, 0)
+    result["away_n"] = fit["counts"].get(away_id, 0)
     return result
 
 
@@ -478,8 +510,8 @@ def market_probabilities(matrix):
     }
 
 
-def predict_match(history, all_history, home_name, away_name, home_id, away_id, kickoff):
-    rates = estimate_goal_rates(history, home_name, away_name, home_id, away_id, kickoff, all_history)
+def predict_match(fit, all_history, home_name, away_name, home_id, away_id, kickoff):
+    rates = estimate_goal_rates(fit, home_name, away_name, home_id, away_id, kickoff, all_history)
     matrix = build_score_matrix(rates["home_xg"], rates["away_xg"])
     rates["probs"] = market_probabilities(matrix)
     rates["reliable"] = (
@@ -648,29 +680,37 @@ def pick_family(key):
 
 
 def select_value_picks(probs, prices):
+    """
+    The model is blended with the market before picking:
+        blended = W_MODEL * model + (1 - W_MODEL) * market
+    so only a model view that is strong AND consistent moves the number enough to pass.
+    """
     candidates = []
     for key, info in prices.items():
         if key not in probs:
             continue
-        p = probs[key]
+        raw_p = probs[key]
         market_p = info["mkt_prob"]
+        blended = W_MODEL * raw_p + (1.0 - W_MODEL) * market_p
         odds = info.get("best_odds")
-        edge = p - market_p
+        edge = blended - market_p
         if edge < MIN_EDGE:
             continue
         ev = None
         if odds is not None:
-            ev = p * odds - 1.0
+            ev = blended * odds - 1.0
             if ev < MIN_EV or odds > MAX_ODDS:
                 continue
         candidates.append({
             "key": key,
-            "prob": p,
+            "raw_prob": raw_p,
+            "prob": blended,
             "mkt_prob": market_p,
             "odds": odds,
             "edge": edge,
+            "raw_edge": raw_p - market_p,
             "ev": ev,
-            "min_odds": (1.0 + MIN_EV) / p,
+            "min_odds": (1.0 + MIN_EV) / blended,
         })
 
     candidates.sort(key=lambda c: c["edge"], reverse=True)
@@ -725,20 +765,19 @@ def generate_prediction_message(match, pred, picks, has_odds):
             lines.append(f"{prefix} <b>{label}</b>: model {p['prob'] * 100:.1f}% | need odds ≥ {p['min_odds']:.2f}")
             continue
         text = (
-            f"{prefix} <b>{label}</b>: model {p['prob'] * 100:.1f}% vs market {p['mkt_prob'] * 100:.1f}% "
-            f"(edge {p['edge'] * 100:+.1f}%)"
+            f"{prefix} <b>{label}</b>: model {p['raw_prob'] * 100:.1f}% | blended {p['prob'] * 100:.1f}% "
+            f"vs market {p['mkt_prob'] * 100:.1f}% (edge {p['edge'] * 100:+.1f}%)"
         )
         if p["odds"] is not None:
             text += f" | best odds {p['odds']:.2f} | EV {p['ev'] * 100:+.0f}%"
         else:
             text += f" | check your bookie's price, need odds ≥ {p['min_odds']:.2f}"
-        if p["edge"] > SUSPECT_EDGE:
+        if p.get("raw_edge", 0.0) > SUSPECT_EDGE:
             text += " ⚠️ large gap, probable model error"
         lines.append(text)
 
     lines.append("")
     lines.append("<i>Unvalidated model. Paper trade first.</i>")
-    return "\n".join(lines)
 
 
 # =============================================================================
@@ -972,19 +1011,17 @@ def outcome_index(hg, ag):
     return 0 if hg > ag else (1 if hg == ag else 2)
 
 
-def run_backtest(histories, all_history):
-    """Replay the model on recent finished matches using only data before each kickoff."""
-    cutoff = datetime.now(timezone.utc) - timedelta(days=BACKTEST_DAYS)
-    model_ll = base_ll = model_br = base_br = 0.0
-    correct = n = 0
-    ou_model_ll = ou_base_ll = 0.0
-    home_pairs, over_pairs, x2_pairs = [], [], []
-
+def evaluate_config(histories, all_history, cutoff, half_life, ridge):
+    """Replay one parameter setting. Strengths are refitted weekly using only earlier matches."""
+    stats = {
+        "n": 0, "ll": 0.0, "br": 0.0, "base_ll": 0.0, "base_br": 0.0,
+        "ou_ll": 0.0, "ou_base_ll": 0.0, "correct": 0,
+        "home_pairs": [], "x2_pairs": [], "over_pairs": [],
+    }
     for code, history in histories.items():
         train = [m for m in history if m["_kickoff"] < cutoff]
         test = [m for m in history if m["_kickoff"] >= cutoff]
         if len(train) < 50 or not test:
-            print(f"{code}: not enough data, skipped.")
             continue
 
         total = len(train)
@@ -995,52 +1032,122 @@ def run_backtest(histories, all_history):
         ]
         base_over = sum(1 for m in train if m["_home_goals"] + m["_away_goals"] >= 3) / total
 
+        fit_cache = {}
         for m in test:
+            week = int((m["_kickoff"] - cutoff).total_seconds() // (7 * 86400))
+            if week not in fit_cache:
+                as_of = cutoff + timedelta(days=7 * week)
+                fit_cache[week] = fit_strengths(history, as_of, half_life, ridge)
             pred = predict_match(
-                history, all_history,
+                fit_cache[week], all_history,
                 m["homeTeam"].get("name", ""), m["awayTeam"].get("name", ""),
                 m["homeTeam"]["id"], m["awayTeam"]["id"], m["_kickoff"],
             )
             if not pred["reliable"]:
                 continue
+
             probs = pred["probs"]
             vec = [probs["HOME"], probs["DRAW"], probs["AWAY"]]
             hg, ag = m["_home_goals"], m["_away_goals"]
             idx = outcome_index(hg, ag)
-
-            model_ll += log_loss_multiclass(vec, idx)
-            base_ll += log_loss_multiclass(base, idx)
-            model_br += brier_multiclass(vec, idx)
-            base_br += brier_multiclass(base, idx)
-            correct += int(vec.index(max(vec)) == idx)
-
             over = hg + ag >= 3
-            ou_model_ll += log_loss_binary(probs["OVER_2.5"], over)
-            ou_base_ll += log_loss_binary(base_over, over)
 
-            home_pairs.append((probs["HOME"], idx == 0))
-            x2_pairs.append((probs["X2"], hg <= ag))
-            over_pairs.append((probs["OVER_2.5"], over))
-            n += 1
+            stats["ll"] += log_loss_multiclass(vec, idx)
+            stats["base_ll"] += log_loss_multiclass(base, idx)
+            stats["br"] += brier_multiclass(vec, idx)
+            stats["base_br"] += brier_multiclass(base, idx)
+            stats["correct"] += int(vec.index(max(vec)) == idx)
+            stats["ou_ll"] += log_loss_binary(probs["OVER_2.5"], over)
+            stats["ou_base_ll"] += log_loss_binary(base_over, over)
+            stats["home_pairs"].append((probs["HOME"], idx == 0))
+            stats["x2_pairs"].append((probs["X2"], hg <= ag))
+            stats["over_pairs"].append((probs["OVER_2.5"], over))
+            stats["n"] += 1
+    return stats
 
-    if n == 0:
+
+def run_backtest(histories, all_history):
+    """Try a small grid of settings on recent past matches (no look-ahead, no odds)."""
+    cutoff = datetime.now(timezone.utc) - timedelta(days=BACKTEST_DAYS)
+    print(f"\nBACKTEST ({MODEL_VERSION}), last {BACKTEST_DAYS} days, strengths refitted weekly")
+    print(f"{'half-life':>10}{'ridge':>8}{'n':>6}{'1X2 LL':>10}{'Brier':>9}{'O2.5 LL':>10}")
+
+    results = []
+    for half_life in BACKTEST_GRID_HALF_LIFE:
+        for ridge in BACKTEST_GRID_RIDGE:
+            s = evaluate_config(histories, all_history, cutoff, half_life, ridge)
+            if s["n"] == 0:
+                continue
+            results.append((half_life, ridge, s))
+            print(f"{half_life:>10}{ridge:>8}{s['n']:>6}{s['ll'] / s['n']:>10.4f}{s['br'] / s['n']:>9.4f}{s['ou_ll'] / s['n']:>10.4f}")
+
+    if not results:
         print("No reliable matches to backtest.")
         return
 
-    print(f"\nBACKTEST ({MODEL_VERSION}) on {n} matches, last {BACKTEST_DAYS} days, no odds used")
+    best_half, best_ridge, best = min(results, key=lambda r: r[2]["ll"])
+    n = best["n"]
+    print(f"\nBest 1X2 log loss: half-life {best_half}, ridge {best_ridge} (current: {HALF_LIFE_DAYS}, {RIDGE})")
     print(f"{'':<22}{'model':>10}{'baseline':>12}")
-    print(f"{'1X2 log loss':<22}{model_ll / n:>10.4f}{base_ll / n:>12.4f}")
-    print(f"{'1X2 Brier':<22}{model_br / n:>10.4f}{base_br / n:>12.4f}")
-    print(f"{'Over 2.5 log loss':<22}{ou_model_ll / n:>10.4f}{ou_base_ll / n:>12.4f}")
-    print(f"{'1X2 accuracy':<22}{correct / n:>10.1%}")
-    calibration_table(home_pairs, "home win")
-    calibration_table(x2_pairs, "X2 (draw or away)")
-    calibration_table(over_pairs, "over 2.5 goals")
+    print(f"{'1X2 log loss':<22}{best['ll'] / n:>10.4f}{best['base_ll'] / n:>12.4f}")
+    print(f"{'1X2 Brier':<22}{best['br'] / n:>10.4f}{best['base_br'] / n:>12.4f}")
+    print(f"{'Over 2.5 log loss':<22}{best['ou_ll'] / n:>10.4f}{best['ou_base_ll'] / n:>12.4f}")
+    print(f"{'1X2 accuracy':<22}{best['correct'] / n:>10.1%}")
+    calibration_table(best["home_pairs"], "home win")
+    calibration_table(best["x2_pairs"], "X2 (draw or away)")
+    calibration_table(best["over_pairs"], "over 2.5 goals")
     print(
         "\nBaseline = league home/draw/away rates from before the test window.\n"
-        "Bookmaker 1X2 log loss is usually about 0.96 to 0.99. This backtest cannot\n"
-        "show edge without historical odds; --report compares against live market odds."
+        "Bookmaker 1X2 log loss is usually about 0.96 to 0.99.\n"
+        "The best row is picked on the same data it is scored on, so only change the\n"
+        "settings if it beats the current ones clearly (about 0.005 log loss or more)."
     )
+
+
+def report_for_rows(label, rows):
+    n = 0
+    model_ll = model_br = 0.0
+    correct = 0
+    market_rows = []
+    over_pairs = []
+
+    for p, r in rows:
+        hg, ag = int(r["home_goals"]), int(r["away_goals"])
+        idx = outcome_index(hg, ag)
+        vec = [float(p["p_home"]), float(p["p_draw"]), float(p["p_away"])]
+        model_ll += log_loss_multiclass(vec, idx)
+        model_br += brier_multiclass(vec, idx)
+        correct += int(vec.index(max(vec)) == idx)
+        over_pairs.append((float(p["p_over25"]), hg + ag >= 3))
+        n += 1
+        if p.get("mkt_home") and p.get("mkt_draw") and p.get("mkt_away"):
+            mvec = [float(p["mkt_home"]), float(p["mkt_draw"]), float(p["mkt_away"])]
+            market_rows.append((vec, mvec, idx))
+
+    print(f"\n=== {label}: {n} finished predictions ===")
+    print(f"1X2 log loss: {model_ll / n:.4f} | Brier: {model_br / n:.4f} | accuracy: {correct / n:.1%}")
+
+    if market_rows:
+        m = len(market_rows)
+        print(f"On the {m} matches with market odds logged (lower is better):")
+        print(f"  model only  : {sum(log_loss_multiclass(v, i) for v, _, i in market_rows) / m:.4f}")
+        print(f"  market only : {sum(log_loss_multiclass(mv, i) for _, mv, i in market_rows) / m:.4f}")
+        print("  Blend (w = weight on the model):")
+        best_w, best_ll = None, None
+        for w in (0.0, 0.25, 0.35, 0.5, 0.75, 1.0):
+            ll = sum(
+                log_loss_multiclass([w * a + (1 - w) * b for a, b in zip(v, mv)], i)
+                for v, mv, i in market_rows
+            ) / m
+            if best_ll is None or ll < best_ll:
+                best_w, best_ll = w, ll
+            print(f"    w = {w:.2f}: {ll:.4f}")
+        print(f"  Best weight on the model so far: {best_w:.2f} (current W_MODEL = {W_MODEL})")
+        if best_w == 0.0:
+            print("  The market alone beat every blend: the model adds nothing yet.")
+    else:
+        print("No matches with market odds logged yet.")
+    calibration_table(over_pairs, "over 2.5 goals")
 
 
 def run_report():
@@ -1053,38 +1160,10 @@ def run_report():
         print("No finished, reliable predictions logged yet.")
         return
 
-    n = 0
-    model_ll = model_br = 0.0
-    correct = 0
-    mkt_n = 0
-    mkt_ll = model_ll_on_mkt = 0.0
-    over_pairs = []
-
-    for p, r in joined:
-        hg, ag = int(r["home_goals"]), int(r["away_goals"])
-        idx = outcome_index(hg, ag)
-        vec = [float(p["p_home"]), float(p["p_draw"]), float(p["p_away"])]
-        model_ll += log_loss_multiclass(vec, idx)
-        model_br += brier_multiclass(vec, idx)
-        correct += int(vec.index(max(vec)) == idx)
-        over_pairs.append((float(p["p_over25"]), hg + ag >= 3))
-        n += 1
-
-        if p.get("mkt_home") and p.get("mkt_draw") and p.get("mkt_away"):
-            mvec = [float(p["mkt_home"]), float(p["mkt_draw"]), float(p["mkt_away"])]
-            mkt_ll += log_loss_multiclass(mvec, idx)
-            model_ll_on_mkt += log_loss_multiclass(vec, idx)
-            mkt_n += 1
-
-    print(f"\nLIVE REPORT: {n} finished predictions")
-    print(f"1X2 log loss: {model_ll / n:.4f} | Brier: {model_br / n:.4f} | accuracy: {correct / n:.1%}")
-    if mkt_n:
-        print(f"On the {mkt_n} matches with market odds logged:")
-        print(f"  model log loss  : {model_ll_on_mkt / mkt_n:.4f}")
-        print(f"  market log loss : {mkt_ll / mkt_n:.4f}   (lower is better; model must beat this)")
-    else:
-        print("No matches with market odds logged yet (set ODDS_API_KEY).")
-    calibration_table(over_pairs, "over 2.5 goals (live)")
+    versions = sorted({p.get("model_version", "?") for p, _ in joined})
+    for version in versions:
+        rows = [(p, r) for p, r in joined if p.get("model_version", "?") == version]
+        report_for_rows(f"model {version}", rows)
 
 
 # =============================================================================
@@ -1131,14 +1210,16 @@ def main():
 
     matches = fetch_upcoming_matches()
     now = datetime.now(timezone.utc)
+    upcoming_codes = {m.get("competition", {}).get("code") for m in matches}
 
-    # One odds request per competition that actually has upcoming matches
-    odds_events = {}
-    for code in {m.get("competition", {}).get("code") for m in matches}:
-        odds_events[code] = fetch_odds_events(code)
+    # One odds request and one strength fit per competition that has upcoming matches
+    odds_events = {code: fetch_odds_events(code) for code in upcoming_codes}
+    fits = {code: fit_strengths(histories.get(code, []), now) for code in upcoming_codes}
 
     logged_ids = {r["match_id"] for r in read_csv_rows(PREDICTIONS_LOG)}
     sent_count = 0
+    reliable_count = 0
+    checked_count = 0
 
     for match in matches:
         match_id = str(match.get("id"))
@@ -1149,10 +1230,12 @@ def main():
             continue
 
         pred = predict_match(
-            histories.get(code, []), all_history,
+            fits.get(code), all_history,
             home_data.get("name", ""), away_data.get("name", ""),
             home_data.get("id"), away_data.get("id"), kickoff,
         )
+        checked_count += 1
+        reliable_count += int(pred["reliable"])
 
         event = find_odds_event(odds_events.get(code, []), home_data.get("name", ""), away_data.get("name", ""), kickoff)
         prices = extract_market_prices(event) if event else {}
@@ -1194,8 +1277,9 @@ def main():
             sent_count += 1
 
     summary = (
-        f"🤖 Bot run finished\n"
+        f"🤖 Bot run finished [{MODEL_VERSION}]\n"
         f"Upcoming matches: {len(matches)}\n"
+        f"Reliable predictions: {reliable_count}/{checked_count}\n"
         f"Odds events found: {sum(len(v) for v in odds_events.values())}\n"
         f"New picks sent: {sent_count}"
     )
