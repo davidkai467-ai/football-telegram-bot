@@ -93,9 +93,10 @@ MIN_TEAM_MATCHES = 8      # matches per team in that competition's history
 
 # --- Value rules ---
 W_MODEL = 0.35            # weight on the model when blended with the market (--report suggests a value)
-MIN_EDGE = 0.02           # blended probability minus market no-vig probability
+MIN_EDGE = 0.03           # blended probability minus market no-vig probability
 MIN_EV = 0.03             # expected value per 1 unit staked (when we have a price)
 MAX_ODDS = 5.0            # long shots are where model errors hide
+MAX_PICKS_PER_RUN = 5     # only the strongest few are sent each run; the rest wait for a later run
 SUSPECT_EDGE = 0.12       # raw model-vs-market gaps above this are flagged
 
 # --- Fallback when no odds are available (informational only, NOT value) ---
@@ -778,6 +779,7 @@ def generate_prediction_message(match, pred, picks, has_odds):
 
     lines.append("")
     lines.append("<i>Unvalidated model. Paper trade first.</i>")
+    return "\n".join(lines)
 
 
 # =============================================================================
@@ -1218,6 +1220,7 @@ def main():
 
     logged_ids = {r["match_id"] for r in read_csv_rows(PREDICTIONS_LOG)}
     sent_count = 0
+    pending = []
     reliable_count = 0
     checked_count = 0
 
@@ -1261,13 +1264,21 @@ def main():
         if not picks:
             continue
 
+        strength = picks[0]["edge"] if picks[0].get("edge") is not None else picks[0]["prob"]
+        pending.append((strength, match, match_id, pred, picks, has_odds))
+
+    # Send only the strongest few; the others stay unsent and are re-checked next run
+    pending.sort(key=lambda item: item[0], reverse=True)
+    for strength, match, match_id, pred, picks, has_odds in pending[:MAX_PICKS_PER_RUN]:
         msg = generate_prediction_message(match, pred, picks, has_odds)
+        if not msg:
+            continue
         if send_telegram_message(msg):
             sent_alerts[match_id] = {
                 "timestamp": datetime.now(timezone.utc).isoformat(),
                 "status": "SENT",
-                "home": home_data.get("name", ""),
-                "away": away_data.get("name", ""),
+                "home": match.get("homeTeam", {}).get("name", ""),
+                "away": match.get("awayTeam", {}).get("name", ""),
                 "league": match.get("competition", {}).get("name", ""),
                 "model_version": MODEL_VERSION,
                 "picks": picks,
@@ -1281,6 +1292,7 @@ def main():
         f"Upcoming matches: {len(matches)}\n"
         f"Reliable predictions: {reliable_count}/{checked_count}\n"
         f"Odds events found: {sum(len(v) for v in odds_events.values())}\n"
+        f"Picks passing the filters: {len(pending)}\n"
         f"New picks sent: {sent_count}"
     )
     if ODDS_ERRORS:
