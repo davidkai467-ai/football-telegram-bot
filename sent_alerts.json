@@ -1,7 +1,7 @@
 {
   "559625": {
     "timestamp": "2026-11-22T13:00:55.632238+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Paris FC",
     "away": "Angers SCO",
     "league": "Ligue 1",
@@ -16,7 +16,8 @@
         "edge": 0.05737409660916326,
         "raw_edge": 0.16392599031189514,
         "ev": 0.15899392932261347,
-        "min_odds": 2.5150261155411267
+        "min_odds": 2.5150261155411267,
+        "won": false
       },
       {
         "key": "X2",
@@ -27,14 +28,17 @@
         "edge": 0.03960943300685088,
         "raw_edge": 0.11316980859100245,
         "ev": null,
-        "min_odds": 3.422204320680237
+        "min_odds": 3.422204320680237,
+        "won": false
       }
     ],
-    "best_pick": "UNDER_2.5"
+    "best_pick": "UNDER_2.5",
+    "score": "4-0",
+    "verified_at": "2026-11-22T22:59:43.350278+00:00"
   },
   "560646": {
     "timestamp": "2026-11-22T13:00:56.112452+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Hull City AFC",
     "away": "Brighton & Hove Albion FC",
     "league": "Premier League",
@@ -49,7 +53,8 @@
         "edge": 0.06572972658545351,
         "raw_edge": 0.18779921881558137,
         "ev": null,
-        "min_odds": 2.3877504416640374
+        "min_odds": 2.3877504416640374,
+        "won": true
       },
       {
         "key": "UNDER_2.5",
@@ -60,14 +65,17 @@
         "edge": 0.05942980687570382,
         "raw_edge": 0.16979944821629672,
         "ev": 0.15435730493111866,
-        "min_odds": 2.087915058625473
+        "min_odds": 2.087915058625473,
+        "won": true
       }
     ],
-    "best_pick": "1X"
+    "best_pick": "1X",
+    "score": "2-0",
+    "verified_at": "2026-11-22T22:59:43.943034+00:00"
   },
   "558522": {
     "timestamp": "2026-11-22T13:00:56.596941+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Bologna FC 1909",
     "away": "Udinese Calcio",
     "league": "Serie A",
@@ -82,14 +90,17 @@
         "edge": 0.0328457358800171,
         "raw_edge": 0.0938449596571918,
         "ev": null,
-        "min_odds": 2.1429575599439095
+        "min_odds": 2.1429575599439095,
+        "won": true
       }
     ],
-    "best_pick": "X2"
+    "best_pick": "X2",
+    "score": "1-1",
+    "verified_at": "2026-11-22T22:59:44.470806+00:00"
   },
   "565864": {
     "timestamp": "2026-11-22T13:00:57.119169+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "FC Augsburg",
     "away": "1. FSV Mainz 05",
     "league": "Bundesliga",
@@ -104,14 +115,17 @@
         "edge": 0.04831481972607671,
         "raw_edge": 0.13804234207450483,
         "ev": 0.15599014158993119,
-        "min_odds": 2.6195725128201004
+        "min_odds": 2.6195725128201004,
+        "won": true
       }
     ],
-    "best_pick": "HOME"
+    "best_pick": "HOME",
+    "score": "3-1",
+    "verified_at": "2026-11-22T22:59:45.017833+00:00"
   },
   "564750": {
     "timestamp": "2026-11-22T13:00:57.626815+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Real Racing Club de Santander",
     "away": "Real Sociedad de Fútbol",
     "league": "Primera Division",
@@ -126,14 +140,17 @@
         "edge": 0.02931969379175864,
         "raw_edge": 0.08377055369073877,
         "ev": 0.06006261894157938,
-        "min_odds": 2.001579870931128
+        "min_odds": 2.001579870931128,
+        "won": true
       }
     ],
-    "best_pick": "OVER_3.5"
+    "best_pick": "OVER_3.5",
+    "score": "3-2",
+    "verified_at": "2026-11-22T22:59:45.495187+00:00"
   },
   "560645": {
     "timestamp": "2026-11-22T13:00:58.137421+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Liverpool FC",
     "away": "Manchester United FC",
     "league": "Premier League",
@@ -148,14 +165,17 @@
         "edge": 0.022993541004751428,
         "raw_edge": 0.06569583144214691,
         "ev": null,
-        "min_odds": 2.172871854654861
+        "min_odds": 2.172871854654861,
+        "won": false
       }
     ],
-    "best_pick": "X2"
+    "best_pick": "X2",
+    "score": "4-0",
+    "verified_at": "2026-11-22T22:59:45.988847+00:00"
   },
   "565863": {
     "timestamp": "2026-11-22T13:00:58.614605+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "SV Werder Bremen",
     "away": "Hamburger SV",
     "league": "Bundesliga",
@@ -170,14 +190,17 @@
         "edge": 0.030871941967862082,
         "raw_edge": 0.08820554847960604,
         "ev": null,
-        "min_odds": 2.3706827248288334
+        "min_odds": 2.3706827248288334,
+        "won": false
       }
     ],
-    "best_pick": "X2"
+    "best_pick": "X2",
+    "score": "4-0",
+    "verified_at": "2026-11-22T22:59:46.561327+00:00"
   },
   "558523": {
     "timestamp": "2026-11-22T13:00:59.135376+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "AC Milan",
     "away": "Frosinone Calcio",
     "league": "Serie A",
@@ -192,14 +215,17 @@
         "edge": 0.06388370077122668,
         "raw_edge": 0.18252485934636203,
         "ev": null,
-        "min_odds": 2.163622998641921
+        "min_odds": 2.163622998641921,
+        "won": false
       }
     ],
-    "best_pick": "X2"
+    "best_pick": "X2",
+    "score": "5-1",
+    "verified_at": "2026-11-22T22:59:47.112017+00:00"
   },
   "559629": {
     "timestamp": "2026-11-22T13:00:59.661013+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Olympique de Marseille",
     "away": "Le Mans FC",
     "league": "Ligue 1",
@@ -214,14 +240,17 @@
         "edge": 0.02892670406992126,
         "raw_edge": 0.08264772591406083,
         "ev": null,
-        "min_odds": 2.7502073555627504
+        "min_odds": 2.7502073555627504,
+        "won": true
       }
     ],
-    "best_pick": "X2"
+    "best_pick": "X2",
+    "score": "2-3",
+    "verified_at": "2026-11-22T22:59:47.703872+00:00"
   },
   "558520": {
     "timestamp": "2026-11-22T13:01:00.155045+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Atalanta BC",
     "away": "FC Internazionale Milano",
     "league": "Serie A",
@@ -236,7 +265,8 @@
         "edge": 0.02350309648869736,
         "raw_edge": 0.06715170425342099,
         "ev": null,
-        "min_odds": 2.5160688124186312
+        "min_odds": 2.5160688124186312,
+        "won": true
       },
       {
         "key": "UNDER_3.5",
@@ -247,14 +277,17 @@
         "edge": 0.022206178646114405,
         "raw_edge": 0.06344622470318406,
         "ev": 0.0418218328054627,
-        "min_odds": 1.8883267158093338
+        "min_odds": 1.8883267158093338,
+        "won": false
       }
     ],
-    "best_pick": "1X"
+    "best_pick": "1X",
+    "score": "4-4",
+    "verified_at": "2026-11-22T22:59:48.259931+00:00"
   },
   "564753": {
     "timestamp": "2026-11-22T13:01:00.655953+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Getafe CF",
     "away": "Club Atlético de Madrid",
     "league": "Primera Division",
@@ -269,7 +302,8 @@
         "edge": 0.06390134804009967,
         "raw_edge": 0.18257528011457047,
         "ev": null,
-        "min_odds": 2.311086178809845
+        "min_odds": 2.311086178809845,
+        "won": false
       },
       {
         "key": "UNDER_2.5",
@@ -280,10 +314,13 @@
         "edge": 0.047266223692521314,
         "raw_edge": 0.13504635340720383,
         "ev": 0.09069295239465336,
-        "min_odds": 1.7376109342588346
+        "min_odds": 1.7376109342588346,
+        "won": false
       }
     ],
-    "best_pick": "1X"
+    "best_pick": "1X",
+    "score": "0-3",
+    "verified_at": "2026-11-22T22:59:48.816416+00:00"
   },
   "555096": {
     "timestamp": "2026-11-22T13:01:01.172806+00:00",
