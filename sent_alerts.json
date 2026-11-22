@@ -225,7 +225,7 @@
   },
   "555095": {
     "timestamp": "2026-11-21T19:14:49.835665+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Chapecoense AF",
     "away": "Cruzeiro EC",
     "league": "Campeonato Brasileiro Série A",
@@ -238,10 +238,13 @@
         "odds": null,
         "edge": 0.10824387127183549,
         "ev": null,
-        "min_odds": 2.17511990322544
+        "min_odds": 2.17511990322544,
+        "won": false
       }
     ],
-    "best_pick": "1X"
+    "best_pick": "1X",
+    "score": "1-2",
+    "verified_at": "2026-11-22T04:10:46.793089+00:00"
   },
   "558521": {
     "timestamp": "2026-11-21T19:14:50.212311+00:00",
@@ -1189,5 +1192,34 @@
       }
     ],
     "best_pick": "HOME"
+  },
+  "555108": {
+    "timestamp": "2026-11-22T04:13:58.667336+00:00",
+    "status": "SENT",
+    "home": "São Paulo FC",
+    "away": "Clube do Remo",
+    "league": "Campeonato Brasileiro Série A",
+    "model_version": "v3-2026-11",
+    "picks": [
+      {
+        "key": "UNDER_2.5",
+        "prob": 0.5892944214384416,
+        "mkt_prob": 0.4948376415218057,
+        "odds": 1.89,
+        "edge": 0.09445677991663587,
+        "ev": 0.11376645651865447,
+        "min_odds": 1.747852961997868
+      },
+      {
+        "key": "X2",
+        "prob": 0.4553804721864958,
+        "mkt_prob": 0.38834042694796317,
+        "odds": null,
+        "edge": 0.06704004523853263,
+        "ev": null,
+        "min_odds": 2.2618449031300916
+      }
+    ],
+    "best_pick": "UNDER_2.5"
   }
 }
