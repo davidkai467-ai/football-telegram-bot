@@ -324,7 +324,7 @@
   },
   "555096": {
     "timestamp": "2026-11-22T13:01:01.172806+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Fluminense FC",
     "away": "Mirassol FC",
     "league": "Campeonato Brasileiro Série A",
@@ -339,7 +339,8 @@
         "edge": 0.03034371392571128,
         "raw_edge": 0.08669632550203221,
         "ev": null,
-        "min_odds": 2.3436888680064176
+        "min_odds": 2.3436888680064176,
+        "won": false
       },
       {
         "key": "UNDER_2.5",
@@ -350,14 +351,17 @@
         "edge": 0.02796709996977703,
         "raw_edge": 0.0799059999136485,
         "ev": 0.07105648952241683,
-        "min_odds": 2.077201363106475
+        "min_odds": 2.077201363106475,
+        "won": true
       }
     ],
-    "best_pick": "X2"
+    "best_pick": "X2",
+    "score": "1-0",
+    "verified_at": "2026-11-23T04:51:39.851065+00:00"
   },
   "555094": {
     "timestamp": "2026-11-22T13:01:01.690824+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "RB Bragantino",
     "away": "CR Vasco da Gama",
     "league": "Campeonato Brasileiro Série A",
@@ -372,7 +376,8 @@
         "edge": 0.040054136537188145,
         "raw_edge": 0.11444039010625184,
         "ev": null,
-        "min_odds": 1.5326139966516819
+        "min_odds": 1.5326139966516819,
+        "won": true
       },
       {
         "key": "UNDER_2.5",
@@ -383,10 +388,13 @@
         "edge": 0.03436072486152808,
         "raw_edge": 0.09817349960436594,
         "ev": 0.11065788376916408,
-        "min_odds": 2.15151761394839
+        "min_odds": 2.15151761394839,
+        "won": true
       }
     ],
-    "best_pick": "1X"
+    "best_pick": "1X",
+    "score": "1-0",
+    "verified_at": "2026-11-23T04:51:40.290152+00:00"
   },
   "558519": {
     "timestamp": "2026-11-22T13:01:02.278650+00:00",
@@ -871,5 +879,82 @@
       }
     ],
     "best_pick": "X2"
+  },
+  "561968": {
+    "timestamp": "2026-11-23T04:53:47.637649+00:00",
+    "status": "SENT",
+    "home": "Southampton FC",
+    "away": "Middlesbrough FC",
+    "league": "Championship",
+    "model_version": "v4-2026-11",
+    "picks": [
+      {
+        "key": "1X",
+        "raw_prob": 0.7342015059135356,
+        "prob": 0.6472031415080659,
+        "mkt_prob": 0.600357868366659,
+        "odds": null,
+        "edge": 0.04684527314140685,
+        "raw_edge": 0.13384363754687656,
+        "ev": null,
+        "min_odds": 1.5914632268316384
+      },
+      {
+        "key": "UNDER_2.5",
+        "raw_prob": 0.5080362939576311,
+        "prob": 0.4236541007346333,
+        "mkt_prob": 0.37821753515301904,
+        "odds": 2.5,
+        "edge": 0.04543656558161424,
+        "raw_edge": 0.12981875880461202,
+        "ev": 0.05913525183658308,
+        "min_odds": 2.4312286797506233
+      }
+    ],
+    "best_pick": "1X"
+  },
+  "564765": {
+    "timestamp": "2026-11-23T04:53:48.042747+00:00",
+    "status": "SENT",
+    "home": "Levante UD",
+    "away": "Real Racing Club de Santander",
+    "league": "Primera Division",
+    "model_version": "v4-2026-11",
+    "picks": [
+      {
+        "key": "HOME",
+        "raw_prob": 0.5539789373320076,
+        "prob": 0.4883860733546444,
+        "mkt_prob": 0.4530668389052949,
+        "odds": 2.19,
+        "edge": 0.03531923444934948,
+        "raw_edge": 0.10091209842671273,
+        "ev": 0.06956550064667111,
+        "min_odds": 2.1089872463502037
+      }
+    ],
+    "best_pick": "HOME"
+  },
+  "560658": {
+    "timestamp": "2026-11-23T04:53:48.452176+00:00",
+    "status": "SENT",
+    "home": "Nottingham Forest FC",
+    "away": "Chelsea FC",
+    "league": "Premier League",
+    "model_version": "v4-2026-11",
+    "picks": [
+      {
+        "key": "HOME",
+        "raw_prob": 0.43448354689616314,
+        "prob": 0.37568025314678044,
+        "mkt_prob": 0.34401694112788206,
+        "odds": 2.85,
+        "edge": 0.03166331201889838,
+        "raw_edge": 0.09046660576828108,
+        "ev": 0.07068872146832428,
+        "min_odds": 2.7416932121731006
+      }
+    ],
+    "best_pick": "HOME"
   }
 }
