@@ -398,7 +398,7 @@
   },
   "558519": {
     "timestamp": "2026-11-22T13:01:02.278650+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "AC Monza",
     "away": "ACF Fiorentina",
     "league": "Serie A",
@@ -413,7 +413,8 @@
         "edge": 0.029705422300387196,
         "raw_edge": 0.08487263514396348,
         "ev": 0.1303470196693115,
-        "min_odds": 3.5537759025322972
+        "min_odds": 3.5537759025322972,
+        "won": true
       },
       {
         "key": "OVER_2.5",
@@ -424,14 +425,17 @@
         "edge": 0.023054364446243314,
         "raw_edge": 0.0658696127035524,
         "ev": 0.0310201216214252,
-        "min_odds": 1.668347652900216
+        "min_odds": 1.668347652900216,
+        "won": true
       }
     ],
-    "best_pick": "HOME"
+    "best_pick": "HOME",
+    "score": "3-0",
+    "verified_at": "2026-11-24T03:39:26.372931+00:00"
   },
   "560649": {
     "timestamp": "2026-11-22T13:01:02.845645+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Brentford FC",
     "away": "Everton FC",
     "league": "Premier League",
@@ -446,7 +450,8 @@
         "edge": 0.030414655938978075,
         "raw_edge": 0.08689901696850882,
         "ev": 0.03850379311832186,
-        "min_odds": 2.0629679103694
+        "min_odds": 2.0629679103694,
+        "won": false
       },
       {
         "key": "1X",
@@ -457,14 +462,17 @@
         "edge": 0.020196505961937672,
         "raw_edge": 0.05770430274839322,
         "ev": null,
-        "min_odds": 1.4537050080123437
+        "min_odds": 1.4537050080123437,
+        "won": true
       }
     ],
-    "best_pick": "UNDER_2.5"
+    "best_pick": "UNDER_2.5",
+    "score": "4-0",
+    "verified_at": "2026-11-24T03:39:26.825236+00:00"
   },
   "555097": {
     "timestamp": "2026-11-22T13:01:03.423151+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "SC Internacional",
     "away": "EC Vitória",
     "league": "Campeonato Brasileiro Série A",
@@ -479,7 +487,8 @@
         "edge": 0.03864343392932712,
         "raw_edge": 0.11040981122664906,
         "ev": 0.06277441692288899,
-        "min_odds": 1.9867809822836584
+        "min_odds": 1.9867809822836584,
+        "won": false
       },
       {
         "key": "X2",
@@ -490,14 +499,17 @@
         "edge": 0.032801658720899074,
         "raw_edge": 0.09371902491685441,
         "ev": null,
-        "min_odds": 2.2391770445915644
+        "min_odds": 2.2391770445915644,
+        "won": true
       }
     ],
-    "best_pick": "UNDER_2.5"
+    "best_pick": "UNDER_2.5",
+    "score": "2-5",
+    "verified_at": "2026-11-24T03:39:27.238439+00:00"
   },
   "555093": {
     "timestamp": "2026-11-22T13:01:04.028342+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Botafogo FR",
     "away": "São Paulo FC",
     "league": "Campeonato Brasileiro Série A",
@@ -512,14 +524,17 @@
         "edge": 0.031310871744747115,
         "raw_edge": 0.0894596335564205,
         "ev": 0.032564792544157894,
-        "min_odds": 1.9052557420176304
+        "min_odds": 1.9052557420176304,
+        "won": true
       }
     ],
-    "best_pick": "UNDER_2.5"
+    "best_pick": "UNDER_2.5",
+    "score": "1-1",
+    "verified_at": "2026-11-24T03:39:27.620160+00:00"
   },
   "555099": {
     "timestamp": "2026-11-22T13:01:04.589828+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Santos FC",
     "away": "Grêmio FBPA",
     "league": "Campeonato Brasileiro Série A",
@@ -534,10 +549,13 @@
         "edge": 0.03821830455190284,
         "raw_edge": 0.1091951558625795,
         "ev": 0.1266812058765152,
-        "min_odds": 2.285473465403861
+        "min_odds": 2.285473465403861,
+        "won": true
       }
     ],
-    "best_pick": "UNDER_2.5"
+    "best_pick": "UNDER_2.5",
+    "score": "0-2",
+    "verified_at": "2026-11-24T03:39:28.147726+00:00"
   },
   "561959": {
     "timestamp": "2026-11-22T13:01:05.128114+00:00",
