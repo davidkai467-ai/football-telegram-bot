@@ -559,7 +559,7 @@
   },
   "561959": {
     "timestamp": "2026-11-22T13:01:05.128114+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Bristol City FC",
     "away": "Wrexham AFC",
     "league": "Championship",
@@ -574,14 +574,17 @@
         "edge": 0.033241835746383175,
         "raw_edge": 0.09497667356109468,
         "ev": 0.13664477810151898,
-        "min_odds": 2.8544537946315347
+        "min_odds": 2.8544537946315347,
+        "won": false
       }
     ],
-    "best_pick": "AWAY"
+    "best_pick": "AWAY",
+    "score": "1-1",
+    "verified_at": "2026-11-25T01:47:04.546416+00:00"
   },
   "561954": {
     "timestamp": "2026-11-22T13:01:05.663259+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Middlesbrough FC",
     "away": "Swansea City AFC",
     "league": "Championship",
@@ -596,7 +599,8 @@
         "edge": 0.04030332721648816,
         "raw_edge": 0.11515236347568047,
         "ev": 0.06198919015764859,
-        "min_odds": 2.4246951135328887
+        "min_odds": 2.4246951135328887,
+        "won": false
       },
       {
         "key": "X2",
@@ -607,14 +611,17 @@
         "edge": 0.03821252635403999,
         "raw_edge": 0.10917864672582855,
         "ev": null,
-        "min_odds": 2.613216626889314
+        "min_odds": 2.613216626889314,
+        "won": false
       }
     ],
-    "best_pick": "UNDER_2.5"
+    "best_pick": "UNDER_2.5",
+    "score": "2-1",
+    "verified_at": "2026-11-25T01:47:04.904512+00:00"
   },
   "561960": {
     "timestamp": "2026-11-22T13:01:06.260755+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Norwich City FC",
     "away": "Queens Park Rangers FC",
     "league": "Championship",
@@ -629,14 +636,17 @@
         "edge": 0.035833726993370174,
         "raw_edge": 0.10238207712391478,
         "ev": 0.07123082571786643,
-        "min_odds": 2.019172663884559
+        "min_odds": 2.019172663884559,
+        "won": false
       }
     ],
-    "best_pick": "HOME"
+    "best_pick": "HOME",
+    "score": "1-1",
+    "verified_at": "2026-11-25T01:47:05.178562+00:00"
   },
   "575398": {
     "timestamp": "2026-11-22T13:01:06.808450+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Manchester City FC",
     "away": "SSC Napoli",
     "league": "UEFA Champions League",
@@ -651,14 +661,17 @@
         "edge": 0.03562892071879048,
         "raw_edge": 0.10179691633940136,
         "ev": null,
-        "min_odds": 3.7035460304442736
+        "min_odds": 3.7035460304442736,
+        "won": true
       }
     ],
-    "best_pick": "X2"
+    "best_pick": "X2",
+    "score": "2-2",
+    "verified_at": "2026-11-25T01:47:05.457537+00:00"
   },
   "575399": {
     "timestamp": "2026-11-22T13:01:07.322374+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Arsenal FC",
     "away": "Borussia Dortmund",
     "league": "UEFA Champions League",
@@ -673,7 +686,8 @@
         "edge": 0.02621032586992761,
         "raw_edge": 0.07488664534265033,
         "ev": null,
-        "min_odds": 2.99428990935872
+        "min_odds": 2.99428990935872,
+        "won": true
       },
       {
         "key": "UNDER_2.5",
@@ -684,14 +698,17 @@
         "edge": 0.026195106162083925,
         "raw_edge": 0.07484316046309697,
         "ev": 0.062241895046257545,
-        "min_odds": 2.2883676602626806
+        "min_odds": 2.2883676602626806,
+        "won": true
       }
     ],
-    "best_pick": "X2"
+    "best_pick": "X2",
+    "score": "1-1",
+    "verified_at": "2026-11-25T01:47:05.744820+00:00"
   },
   "575397": {
     "timestamp": "2026-11-22T13:01:07.915952+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Real Madrid CF",
     "away": "PSV",
     "league": "UEFA Champions League",
@@ -706,14 +723,17 @@
         "edge": 0.08492566557733955,
         "raw_edge": 0.24264475879239877,
         "ev": null,
-        "min_odds": 3.6556730434124605
+        "min_odds": 3.6556730434124605,
+        "won": false
       }
     ],
-    "best_pick": "X2"
+    "best_pick": "X2",
+    "score": "5-1",
+    "verified_at": "2026-11-25T01:47:06.017307+00:00"
   },
   "555102": {
     "timestamp": "2026-11-22T13:01:08.431899+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Chapecoense AF",
     "away": "SE Palmeiras",
     "league": "Campeonato Brasileiro Série A",
@@ -728,7 +748,8 @@
         "edge": 0.03721172298919395,
         "raw_edge": 0.1063192085405541,
         "ev": 0.058414974836429545,
-        "min_odds": 2.2479840672773017
+        "min_odds": 2.2479840672773017,
+        "won": false
       },
       {
         "key": "X2",
@@ -739,10 +760,13 @@
         "edge": 0.03235998469771606,
         "raw_edge": 0.09245709913633171,
         "ev": null,
-        "min_odds": 1.307345319266063
+        "min_odds": 1.307345319266063,
+        "won": false
       }
     ],
-    "best_pick": "UNDER_2.5"
+    "best_pick": "UNDER_2.5",
+    "score": "3-0",
+    "verified_at": "2026-11-25T01:47:06.353964+00:00"
   },
   "575405": {
     "timestamp": "2026-11-22T13:01:08.980596+00:00",
@@ -971,6 +995,149 @@
         "raw_edge": 0.09046660576828108,
         "ev": 0.07068872146832428,
         "min_odds": 2.7416932121731006
+      }
+    ],
+    "best_pick": "HOME"
+  },
+  "565868": {
+    "timestamp": "2026-11-25T01:48:10.583532+00:00",
+    "status": "SENT",
+    "home": "SC Paderborn 07",
+    "away": "FC Schalke 04",
+    "league": "Bundesliga",
+    "model_version": "v4-2026-11",
+    "picks": [
+      {
+        "key": "UNDER_2.5",
+        "raw_prob": 0.7717228771273816,
+        "prob": 0.5673044316976319,
+        "mkt_prob": 0.4572329610816128,
+        "odds": 2.16,
+        "edge": 0.11007147061601907,
+        "raw_edge": 0.3144899160457688,
+        "ev": 0.22537757246688495,
+        "min_odds": 1.8156036555501134
+      },
+      {
+        "key": "DRAW",
+        "raw_prob": 0.3775136789006249,
+        "prob": 0.30869881679369715,
+        "mkt_prob": 0.27164466027458223,
+        "odds": 3.73,
+        "edge": 0.03705415651911492,
+        "raw_edge": 0.1058690186260427,
+        "ev": 0.15144658664049038,
+        "min_odds": 3.3365855130191417
+      }
+    ],
+    "best_pick": "UNDER_2.5"
+  },
+  "560661": {
+    "timestamp": "2026-11-25T01:48:10.907139+00:00",
+    "status": "SENT",
+    "home": "Crystal Palace FC",
+    "away": "Hull City AFC",
+    "league": "Premier League",
+    "model_version": "v4-2026-11",
+    "picks": [
+      {
+        "key": "X2",
+        "raw_prob": 0.7420053415090049,
+        "prob": 0.5778326890820871,
+        "mkt_prob": 0.48943203008297753,
+        "odds": null,
+        "edge": 0.08840065899910954,
+        "raw_edge": 0.25257331142602735,
+        "ev": null,
+        "min_odds": 1.7825228988623
+      },
+      {
+        "key": "UNDER_2.5",
+        "raw_prob": 0.5623842923965505,
+        "prob": 0.4888091451389952,
+        "mkt_prob": 0.44919175815415774,
+        "odds": 2.19,
+        "edge": 0.039617386984837466,
+        "raw_edge": 0.11319253424239278,
+        "ev": 0.07049202785439945,
+        "min_odds": 2.107161885662173
+      }
+    ],
+    "best_pick": "X2"
+  },
+  "559614": {
+    "timestamp": "2026-11-25T01:48:11.208768+00:00",
+    "status": "SENT",
+    "home": "Paris Saint-Germain FC",
+    "away": "FC Lorient",
+    "league": "Ligue 1",
+    "model_version": "v4-2026-11",
+    "picks": [
+      {
+        "key": "X2",
+        "raw_prob": 0.4443181750765758,
+        "prob": 0.2988811640484075,
+        "mkt_prob": 0.22056892734093225,
+        "odds": null,
+        "edge": 0.07831223670747522,
+        "raw_edge": 0.22374924773564353,
+        "ev": null,
+        "min_odds": 3.4461857216039844
+      },
+      {
+        "key": "UNDER_2.5",
+        "raw_prob": 0.5449297470342602,
+        "prob": 0.4104803126244351,
+        "mkt_prob": 0.33808446332683695,
+        "odds": 2.83,
+        "edge": 0.07239584929759812,
+        "raw_edge": 0.20684528370742328,
+        "ev": 0.1616592847271512,
+        "min_odds": 2.509255543620647
+      }
+    ],
+    "best_pick": "X2"
+  },
+  "555103": {
+    "timestamp": "2026-11-25T01:48:11.518756+00:00",
+    "status": "SENT",
+    "home": "SC Corinthians Paulista",
+    "away": "Grêmio FBPA",
+    "league": "Campeonato Brasileiro Série A",
+    "model_version": "v4-2026-11",
+    "picks": [
+      {
+        "key": "X2",
+        "raw_prob": 0.5671092655920423,
+        "prob": 0.4636221138844996,
+        "mkt_prob": 0.40789826296505355,
+        "odds": null,
+        "edge": 0.05572385091944604,
+        "raw_edge": 0.15921100262698878,
+        "ev": null,
+        "min_odds": 2.2216369089257895
+      }
+    ],
+    "best_pick": "X2"
+  },
+  "560653": {
+    "timestamp": "2026-11-25T01:48:11.999550+00:00",
+    "status": "SENT",
+    "home": "Ipswich Town FC",
+    "away": "Aston Villa FC",
+    "league": "Premier League",
+    "model_version": "v4-2026-11",
+    "picks": [
+      {
+        "key": "HOME",
+        "raw_prob": 0.4262985788572271,
+        "prob": 0.32293072142366797,
+        "mkt_prob": 0.2672711058825208,
+        "odds": 3.85,
+        "edge": 0.05565961554114718,
+        "raw_edge": 0.15902747297470632,
+        "ev": 0.24328327748112177,
+        "min_odds": 3.1895385965731475
       }
     ],
     "best_pick": "HOME"
