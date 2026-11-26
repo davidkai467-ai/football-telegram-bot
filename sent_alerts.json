@@ -1433,5 +1433,148 @@
       }
     ],
     "best_pick": "X2"
+  },
+  "565870": {
+    "timestamp": "2026-11-26T16:06:12.899923+00:00",
+    "status": "SENT",
+    "home": "VfB Stuttgart",
+    "away": "Eintracht Frankfurt",
+    "league": "Bundesliga",
+    "model_version": "v4-2026-11",
+    "picks": [
+      {
+        "key": "UNDER_3.5",
+        "raw_prob": 0.5793036184138516,
+        "prob": 0.4886326578109865,
+        "mkt_prob": 0.43980983287098224,
+        "odds": 2.22,
+        "edge": 0.048822824940004284,
+        "raw_edge": 0.13949378554286934,
+        "ev": 0.08476450034039029,
+        "min_odds": 2.107922963262979
+      }
+    ],
+    "best_pick": "UNDER_3.5"
+  },
+  "564758": {
+    "timestamp": "2026-11-26T16:06:13.211958+00:00",
+    "status": "SENT",
+    "home": "RC Celta de Vigo",
+    "away": "Villarreal CF",
+    "league": "Primera Division",
+    "model_version": "v4-2026-11",
+    "picks": [
+      {
+        "key": "UNDER_2.5",
+        "raw_prob": 0.596361285513333,
+        "prob": 0.5087393784143673,
+        "mkt_prob": 0.4615583515149243,
+        "odds": 2.2,
+        "edge": 0.047181026899443035,
+        "raw_edge": 0.1348029339984087,
+        "ev": 0.11922663251160825,
+        "min_odds": 2.024612294040008
+      },
+      {
+        "key": "1X",
+        "raw_prob": 0.720596732030477,
+        "prob": 0.6553496888688748,
+        "mkt_prob": 0.6202166656280121,
+        "odds": null,
+        "edge": 0.03513302324086265,
+        "raw_edge": 0.10038006640246488,
+        "ev": null,
+        "min_odds": 1.5716800015237162
+      }
+    ],
+    "best_pick": "UNDER_2.5"
+  },
+  "561969": {
+    "timestamp": "2026-11-26T16:06:13.497555+00:00",
+    "status": "SENT",
+    "home": "Blackburn Rovers FC",
+    "away": "Charlton Athletic FC",
+    "league": "Championship",
+    "model_version": "v4-2026-11",
+    "picks": [
+      {
+        "key": "UNDER_2.5",
+        "raw_prob": 0.6413857709831159,
+        "prob": 0.5551226889495643,
+        "mkt_prob": 0.5086733370853441,
+        "odds": 1.91,
+        "edge": 0.04644935186422017,
+        "raw_edge": 0.13271243389777176,
+        "ev": 0.06028433589366777,
+        "min_odds": 1.8554456888602886
+      }
+    ],
+    "best_pick": "UNDER_2.5"
+  },
+  "564760": {
+    "timestamp": "2026-11-26T16:06:13.804915+00:00",
+    "status": "SENT",
+    "home": "Real Betis Balompié",
+    "away": "Rayo Vallecano de Madrid",
+    "league": "Primera Division",
+    "model_version": "v4-2026-11",
+    "picks": [
+      {
+        "key": "UNDER_2.5",
+        "raw_prob": 0.5255065600322675,
+        "prob": 0.43954878290472615,
+        "mkt_prob": 0.39326382598989623,
+        "odds": 2.56,
+        "edge": 0.04628495691482992,
+        "raw_edge": 0.13224273404237125,
+        "ev": 0.12524488423609892,
+        "min_odds": 2.3433121420410266
+      },
+      {
+        "key": "X2",
+        "raw_prob": 0.516854755544834,
+        "prob": 0.44179154314912705,
+        "mkt_prob": 0.4013728903206695,
+        "odds": null,
+        "edge": 0.04041865282845758,
+        "raw_edge": 0.11548186522416448,
+        "ev": null,
+        "min_odds": 2.331416288908733
+      }
+    ],
+    "best_pick": "UNDER_2.5"
+  },
+  "564767": {
+    "timestamp": "2026-11-26T16:06:14.101462+00:00",
+    "status": "SENT",
+    "home": "Málaga CF",
+    "away": "Athletic Club",
+    "league": "Primera Division",
+    "model_version": "v4-2026-11",
+    "picks": [
+      {
+        "key": "1X",
+        "raw_prob": 0.5802657055289591,
+        "prob": 0.4948349813005405,
+        "mkt_prob": 0.4488338221006228,
+        "odds": null,
+        "edge": 0.04600115919991771,
+        "raw_edge": 0.13143188342833628,
+        "ev": null,
+        "min_odds": 2.0815019934381405
+      },
+      {
+        "key": "UNDER_2.5",
+        "raw_prob": 0.5987159115056541,
+        "prob": 0.526406217904593,
+        "mkt_prob": 0.4874702290424831,
+        "odds": 2.1,
+        "edge": 0.03893598886210986,
+        "raw_edge": 0.11124568246317096,
+        "ev": 0.1054530575996453,
+        "min_odds": 1.9566638177261795
+      }
+    ],
+    "best_pick": "1X"
   }
 }
