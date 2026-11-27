@@ -1711,5 +1711,148 @@
       }
     ],
     "best_pick": "UNDER_2.5"
+  },
+  "555106": {
+    "timestamp": "2026-11-27T20:47:23.157539+00:00",
+    "status": "SENT",
+    "home": "SC Internacional",
+    "away": "RB Bragantino",
+    "league": "Campeonato Brasileiro Série A",
+    "model_version": "v4-2026-11",
+    "picks": [
+      {
+        "key": "X2",
+        "raw_prob": 0.6399015845936482,
+        "prob": 0.5636363052558576,
+        "mkt_prob": 0.522570385612432,
+        "odds": null,
+        "edge": 0.04106591964342565,
+        "raw_edge": 0.11733119898121624,
+        "ev": null,
+        "min_odds": 1.8274195441197507
+      },
+      {
+        "key": "UNDER_2.5",
+        "raw_prob": 0.5683782089513124,
+        "prob": 0.49351390199158796,
+        "mkt_prob": 0.4532023520901978,
+        "odds": 2.1,
+        "edge": 0.04031154990139013,
+        "raw_edge": 0.11517585686111459,
+        "ev": 0.03637919418233482,
+        "min_odds": 2.0870739321494467
+      }
+    ],
+    "best_pick": "X2"
+  },
+  "555100": {
+    "timestamp": "2026-11-27T20:47:23.555406+00:00",
+    "status": "SENT",
+    "home": "CA Mineiro",
+    "away": "CR Vasco da Gama",
+    "league": "Campeonato Brasileiro Série A",
+    "model_version": "v4-2026-11",
+    "picks": [
+      {
+        "key": "UNDER_2.5",
+        "raw_prob": 0.5893274368099441,
+        "prob": 0.5152175963925065,
+        "mkt_prob": 0.4753122977061939,
+        "odds": 2.06,
+        "edge": 0.03990529868631265,
+        "raw_edge": 0.11401513910375027,
+        "ev": 0.06134824856856347,
+        "min_odds": 1.9991553223568834
+      }
+    ],
+    "best_pick": "UNDER_2.5"
+  },
+  "559620": {
+    "timestamp": "2026-11-27T20:47:23.933782+00:00",
+    "status": "SENT",
+    "home": "OGC Nice",
+    "away": "ES Troyes AC",
+    "league": "Ligue 1",
+    "model_version": "v4-2026-11",
+    "picks": [
+      {
+        "key": "UNDER_2.5",
+        "raw_prob": 0.546875610340722,
+        "prob": 0.4753177203374345,
+        "mkt_prob": 0.43678654879720286,
+        "odds": 2.25,
+        "edge": 0.03853117154023167,
+        "raw_edge": 0.1100890615435191,
+        "ev": 0.06946487075922758,
+        "min_odds": 2.1669715980056226
+      },
+      {
+        "key": "X2",
+        "raw_prob": 0.5389556790119576,
+        "prob": 0.47004957407146547,
+        "mkt_prob": 0.4329462867958158,
+        "odds": null,
+        "edge": 0.037103287275649655,
+        "raw_edge": 0.1060093922161418,
+        "ev": null,
+        "min_odds": 2.191258234909922
+      }
+    ],
+    "best_pick": "UNDER_2.5"
+  },
+  "560654": {
+    "timestamp": "2026-11-27T20:47:24.308376+00:00",
+    "status": "SENT",
+    "home": "Arsenal FC",
+    "away": "Manchester City FC",
+    "league": "Premier League",
+    "model_version": "v4-2026-11",
+    "picks": [
+      {
+        "key": "UNDER_2.5",
+        "raw_prob": 0.5582795141417624,
+        "prob": 0.48799250483765977,
+        "mkt_prob": 0.4501456536739121,
+        "odds": 2.21,
+        "edge": 0.03784685116374764,
+        "raw_edge": 0.10813386046785023,
+        "ev": 0.07846343569122816,
+        "min_odds": 2.1106881556360166
+      }
+    ],
+    "best_pick": "UNDER_2.5"
+  },
+  "559617": {
+    "timestamp": "2026-11-27T20:47:24.683484+00:00",
+    "status": "SENT",
+    "home": "Le Mans FC",
+    "away": "Lille OSC",
+    "league": "Ligue 1",
+    "model_version": "v4-2026-11",
+    "picks": [
+      {
+        "key": "1X",
+        "raw_prob": 0.6446005587110248,
+        "prob": 0.574458639948975,
+        "mkt_prob": 0.5366899144617173,
+        "odds": null,
+        "edge": 0.037768725487257626,
+        "raw_edge": 0.10791064424930752,
+        "ev": null,
+        "min_odds": 1.79299244257426
+      },
+      {
+        "key": "UNDER_2.5",
+        "raw_prob": 0.6244022385786149,
+        "prob": 0.5685568893406427,
+        "mkt_prob": 0.5384863166740423,
+        "odds": 1.84,
+        "edge": 0.030070572666600404,
+        "raw_edge": 0.08591592190457253,
+        "ev": 0.04614467638678277,
+        "min_odds": 1.8116041144000459
+      }
+    ],
+    "best_pick": "1X"
   }
 }
