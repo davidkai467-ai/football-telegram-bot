@@ -944,7 +944,7 @@
   },
   "561968": {
     "timestamp": "2026-11-23T04:53:47.637649+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Southampton FC",
     "away": "Middlesbrough FC",
     "league": "Championship",
@@ -959,7 +959,8 @@
         "edge": 0.04684527314140685,
         "raw_edge": 0.13384363754687656,
         "ev": null,
-        "min_odds": 1.5914632268316384
+        "min_odds": 1.5914632268316384,
+        "won": true
       },
       {
         "key": "UNDER_2.5",
@@ -970,14 +971,17 @@
         "edge": 0.04543656558161424,
         "raw_edge": 0.12981875880461202,
         "ev": 0.05913525183658308,
-        "min_odds": 2.4312286797506233
+        "min_odds": 2.4312286797506233,
+        "won": true
       }
     ],
-    "best_pick": "1X"
+    "best_pick": "1X",
+    "score": "2-0",
+    "verified_at": "2026-11-28T06:37:29.265687+00:00"
   },
   "564765": {
     "timestamp": "2026-11-23T04:53:48.042747+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Levante UD",
     "away": "Real Racing Club de Santander",
     "league": "Primera Division",
@@ -992,14 +996,17 @@
         "edge": 0.03531923444934948,
         "raw_edge": 0.10091209842671273,
         "ev": 0.06956550064667111,
-        "min_odds": 2.1089872463502037
+        "min_odds": 2.1089872463502037,
+        "won": false
       }
     ],
-    "best_pick": "HOME"
+    "best_pick": "HOME",
+    "score": "1-3",
+    "verified_at": "2026-11-28T06:37:29.628419+00:00"
   },
   "560658": {
     "timestamp": "2026-11-23T04:53:48.452176+00:00",
-    "status": "SENT",
+    "status": "VERIFIED",
     "home": "Nottingham Forest FC",
     "away": "Chelsea FC",
     "league": "Premier League",
@@ -1014,10 +1021,13 @@
         "edge": 0.03166331201889838,
         "raw_edge": 0.09046660576828108,
         "ev": 0.07068872146832428,
-        "min_odds": 2.7416932121731006
+        "min_odds": 2.7416932121731006,
+        "won": true
       }
     ],
-    "best_pick": "HOME"
+    "best_pick": "HOME",
+    "score": "3-2",
+    "verified_at": "2026-11-28T06:37:29.917615+00:00"
   },
   "565868": {
     "timestamp": "2026-11-25T01:48:10.583532+00:00",
